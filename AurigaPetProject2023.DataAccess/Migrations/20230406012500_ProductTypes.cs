@@ -9,7 +9,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         public override void Up()
         {
             Create.Table("ProductTypes")
-                .WithColumn("Product_Type_ID").AsInt64().PrimaryKey().Identity().NotNullable()
+                .WithColumn("ProductType_ID").AsInt32().PrimaryKey().Identity().NotNullable()
                 .WithColumn("Name").AsString(50).NotNullable()
                 .WithColumn("Unique").AsBoolean();
 
