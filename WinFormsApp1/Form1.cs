@@ -58,18 +58,25 @@ namespace WinFormsApp1
                     Debug.WriteLine($"{item.ProductTypeID} - {item.Name} - {item.IsUnique}");
                 }
 
-                ProductType type1 = new ProductType() { Name = "Маска", IsUnique = false };
-                ProductType type2 = new ProductType() { ProductTypeID = 10, Name = "Стул", IsUnique = false };
+                Debug.WriteLine("!!!!!!!!!!!!!!!!!");
 
-                var task1 = repository.CreateAsync(type1);
-                Task.WaitAll(task1);
+                var list2 = await repository.GetByPredicateAsync(pt=> pt.Name.Contains("ак") && pt.ProductTypeID > 5);
+                foreach (var item in list2)
+                {
+                    Debug.WriteLine($"{item.ProductTypeID} - {item.Name} - {item.IsUnique}");
+                }
 
-                var task2 = repository.CreateAsync(type2);
-                Task.WaitAll(task2);
+
+                //ProductType type1 = new ProductType() { Name = "Маска", IsUnique = false };
+                //ProductType type2 = new ProductType() { ProductTypeID = 10, Name = "Стул", IsUnique = false };
+
+                //var task1 = repository.CreateAsync(type1);
+                //Task.WaitAll(task1);
+
+                //var task2 = repository.CreateAsync(type2);
+                //Task.WaitAll(task2);
             }
 
         }
-
-
     }
 }

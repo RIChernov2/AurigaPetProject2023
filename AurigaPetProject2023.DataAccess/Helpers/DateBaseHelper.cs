@@ -11,7 +11,7 @@ namespace AurigaPetProject2023.DataAccess.Helpers
     {
         internal static string GetConnectionString()
         {
-
+            #region OLD CODE
             //var builder = new ConfigurationBuilder();
             //// установка пути к текущему каталогу
             //builder.SetBasePath(Directory.GetCurrentDirectory());
@@ -23,6 +23,7 @@ namespace AurigaPetProject2023.DataAccess.Helpers
             //string connectionString = config.GetConnectionString("Default"); ;
 
             //return connectionString;
+            #endregion
 
             // Создаем конфигурацию
             var configuration = new ConfigurationBuilder()
@@ -41,10 +42,9 @@ namespace AurigaPetProject2023.DataAccess.Helpers
                 {
                     // Put the database update into a scope to ensure
                     // that all resources will be disposed.
-                    UpdateDatabase(scope.ServiceProvider);
+                    UpdateDatabaseMigrationUp(scope.ServiceProvider);
                 }
-            }
-            
+            }            
         }
 
         private static ServiceProvider CreateServices()
@@ -66,14 +66,14 @@ namespace AurigaPetProject2023.DataAccess.Helpers
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        private static void UpdateDatabaseMigrationUp(IServiceProvider serviceProvider)
         {
             //Initialize the in-process migration builder
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             //Execute migration script
             runner.MigrateUp();
+            //runner.Up(new AddProductTypes());
         }
-
     }
 }

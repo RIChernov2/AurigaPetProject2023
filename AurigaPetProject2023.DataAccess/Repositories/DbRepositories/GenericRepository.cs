@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
@@ -44,15 +45,15 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         }
 
-        //public virtual async Task<IReadOnlyList<TEntity>> GetAsync(IEnumerable<Targ> ids)
-        //{
-        //    return await _dbSet.Where(x => ids.Contains((TArg)x. .GetType().GetProperty("Id").GetValue(x))).ToListAsync();
-        //    //return await _dbSet.Where(x => ids.Contains((TArg)x.GetType().GetProperty("Id").GetValue(x))).ToListAsync();
-        //}
 
         public virtual async Task<TEntity> GetAsync(Targ id)
         {
             return await _dbSet.FindAsync(id);
+        }
+
+        public virtual async  Task<IReadOnlyList<TEntity>> GetByPredicateAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
 
@@ -73,5 +74,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             }
             else return 0;
         }
+
+        
     }
 }
