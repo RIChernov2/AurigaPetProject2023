@@ -50,7 +50,7 @@ namespace AurigaPetProject2023.UI
             this.loginTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.loginTextBox.Location = new System.Drawing.Point(127, 13);
             this.loginTextBox.Name = "loginTextBox";
-            this.loginTextBox.PlaceholderText = "login / email";
+            this.loginTextBox.PlaceholderText = "login / phone";
             this.loginTextBox.Size = new System.Drawing.Size(202, 35);
             this.loginTextBox.TabIndex = 0;
             // 

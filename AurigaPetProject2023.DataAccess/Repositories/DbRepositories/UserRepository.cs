@@ -1,4 +1,5 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.DataAccess.Helpers;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
@@ -20,6 +22,16 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
         {
             _context = context;
             _dbSet = context.Set<User>();
+        }
+
+        public virtual async Task<User> GetUserForLoginAsync(IUserLoginInfo info)
+        {
+            var user = await GetByPredicateAsync(
+                u => (u.LoginName == info.LoginOrPhone || u.Phone == info.LoginOrPhone) &&
+                u.Password == HashHelper.GetHash(info.Password)
+                );
+
+            return user.FirstOrDefault();                
         }
 
         public virtual async Task<int> CreateAsync(User entity)
@@ -42,15 +54,20 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
         public virtual async Task<User> GetAsync(int id)
         {
             var user = await _dbSet.FindAsync(id);
-            var roles = await _context.Set<Role>().Where(r => r.UserID == id).Select(r=> r.RoleType).ToListAsync();
-            user.Roles = roles;
+            user.Roles  = await _context.Set<Role>().Where(r => r.UserID == id).Select(r => r.RoleType).ToListAsync();
             return user;
+            //var roles = await _context.Set<Role>().Where(r => r.UserID == id).Select(r=> r.RoleType).ToListAsync();
+            //user.Roles = roles;
         }
 
         public virtual async Task<IReadOnlyList<User>> GetByPredicateAsync(Expression<Func<User, bool>> predicate)
         {
-            //return await _dbSet.Where(predicate).ToListAsync();
-            throw new NotImplementedException();
+            var users = await _dbSet.Where(predicate).ToListAsync();
+            foreach (var user in users)
+            {
+                user.Roles = await _context.Set<Role>().Where(r => r.UserID == user.UserID).Select(r => r.RoleType).ToListAsync();
+            }
+            return users;
         }
 
 
