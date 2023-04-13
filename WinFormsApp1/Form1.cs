@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using AurigaPetProject2023.DataAccess.Entities;
 using System.Diagnostics;
+using AurigaPetProject2023.DataAccess.Managers;
 
 namespace WinFormsApp1
 {
@@ -77,6 +78,15 @@ namespace WinFormsApp1
                 //Task.WaitAll(task2);
             }
 
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            using(UnitOfWork unit = new UnitOfWork())
+            {
+                var manager = new UsersStorageManager(unit);
+                var user = await manager.GetAsync(2);
+            }
         }
     }
 }

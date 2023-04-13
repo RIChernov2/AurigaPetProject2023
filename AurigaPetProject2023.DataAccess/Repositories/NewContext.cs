@@ -9,10 +9,19 @@ namespace AurigaPetProject2023.DataAccess.Repositories
     public class NewContext : DbContext
     {
         public DbSet<ProductType> ProductTypes { get; set; } = null;
+        public DbSet<Role> Roles { get; set; } = null;
+        public DbSet<User> Users { get; set; } = null;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString = DateBaseHelper.GetConnectionString();
             optionsBuilder.UseSqlServer(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasNoKey();
+            modelBuilder.Entity<User>().Ignore(u => u.Roles);
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

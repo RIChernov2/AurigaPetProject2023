@@ -33,11 +33,12 @@ namespace WinFormsApp1
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnMigrationDown = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnMigrationDown = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,7 +56,7 @@ namespace WinFormsApp1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(756, 283);
+            this.button1.Location = new System.Drawing.Point(742, 222);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 60);
             this.button1.TabIndex = 1;
@@ -83,25 +84,6 @@ namespace WinFormsApp1
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(716, 489);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnMigrationDown
-            // 
-            this.btnMigrationDown.Location = new System.Drawing.Point(742, 127);
-            this.btnMigrationDown.Name = "btnMigrationDown";
-            this.btnMigrationDown.Size = new System.Drawing.Size(112, 81);
-            this.btnMigrationDown.TabIndex = 3;
-            this.btnMigrationDown.Text = "MigrationDown";
-            this.btnMigrationDown.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -140,11 +122,41 @@ namespace WinFormsApp1
             this.radioButton2.Text = "radioButton2";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(716, 489);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnMigrationDown
+            // 
+            this.btnMigrationDown.Location = new System.Drawing.Point(742, 127);
+            this.btnMigrationDown.Name = "btnMigrationDown";
+            this.btnMigrationDown.Size = new System.Drawing.Size(112, 81);
+            this.btnMigrationDown.TabIndex = 3;
+            this.btnMigrationDown.Text = "MigrationDown";
+            this.btnMigrationDown.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(743, 307);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(97, 33);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "User Storage";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(879, 541);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnMigrationDown);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
@@ -171,6 +183,7 @@ namespace WinFormsApp1
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Button button2;
     }
 }
 

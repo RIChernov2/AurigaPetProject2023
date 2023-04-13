@@ -47,7 +47,8 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .Row(new { User_ID = "2", RoleType_ID = "3" })
                 .Row(new { User_ID = "3", RoleType_ID = "3" })
                 .Row(new { User_ID = "4", RoleType_ID = "3" })
-                .Row(new { User_ID = "5", RoleType_ID = "1" });
+                .Row(new { User_ID = "5", RoleType_ID = "1" })
+                .Row(new { User_ID = "5", RoleType_ID = "2" });
         }
     }
 }
