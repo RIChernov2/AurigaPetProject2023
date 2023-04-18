@@ -1,3 +1,4 @@
+using AurigaPetProject2023.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace AurigaPetProject2023.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartWindow());
+            //Application.Run(new ManagerWindow());
+            //Application.Run(new UserWindow());
         }
     }
 }

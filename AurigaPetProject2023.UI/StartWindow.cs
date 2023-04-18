@@ -2,6 +2,7 @@
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.DataAccess.Repositories.DbRepositories;
 using AurigaPetProject2023.UI.Entities;
+using AurigaPetProject2023.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +21,26 @@ namespace AurigaPetProject2023.UI
         public StartWindow()
         {
             InitializeComponent();
+
+            statusLabel.Visible = false;
+            statusLabel.Text = "Пользователя не найдено, проверьте верность введенных данных";
+            statusLabel.ForeColor = System.Drawing.Color.Red;
+
         }
+
+        // автоматический ввод логина пароля
+        private void StartWindow_Shown(object sender, EventArgs e)
+        {
+            // автоматический ввод логина пароля
+            loginTextBox.Text = "manager";
+            passwordTextBox.Text = "123";
+            loginButton.PerformClick();
+        }
+
         private async void loginButton_Click(object sender, EventArgs e)
         {
+            statusLabel.Visible = false;
+
             User user;
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
@@ -31,27 +49,42 @@ namespace AurigaPetProject2023.UI
                 user = await repository.GetUserForLoginAsync(loginInfo);
 
             }
-            
-            //for (int i = 0; i < 15; i++)
-            //{
-            //    Debug.WriteLine(HashHelper.GetHash("123")); 
-            //}
-            //return;
-            
-            //User user = HashHelper.GetUser(loginTextBox.Text, passwordTextBox.Text);
+
             if(user == null)
             {
-                statusLabel.Text = "Пользователя не найдено";
-                statusLabel.ForeColor = System.Drawing.Color.Red;
+                statusLabel.Visible = true;
             }
             else
             {
-                statusLabel.ForeColor = System.Drawing.Color.Green;
-                if (user.Roles.Contains(2) || user.Roles.Contains(1))
+                statusLabel.Visible = false;
+                RunForm(user);
+            }
+
+            this.ActiveControl = null;
+        }
+        private void RunForm(User user)
+        {
+            if(user.Roles.Contains(1) || user.Roles.Contains(2))
+            {
+                using (ManagerWindow form = new ManagerWindow())
                 {
-                    statusLabel.Text = "Пользователь - менеджер";
+                    this.Hide();
+                    form.ShowDialog();
+                    this.Close();
                 }
-                else statusLabel.Text = "Пользователя - обычный пользователь";
+            }
+            else if (user.Roles.Contains(3))
+            {
+                using (UserWindow form = new UserWindow())
+                {
+                    this.Hide();
+                    form.ShowDialog();
+                    this.Close();
+                }
+            }
+            else
+            {
+                throw new Exception("Ошибка определения ролей");
             }
         }
         private void showPasswordLabel_MouseDown(object sender, MouseEventArgs e)
@@ -63,29 +96,7 @@ namespace AurigaPetProject2023.UI
             passwordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void loginButton_ClickOLD(object sender, EventArgs e)
-        {
-            //for (int i = 0; i < 15; i++)
-            //{
-            //    Debug.WriteLine(HashHelper.GetHash("123")); 
-            //}
-            //return;
 
-            //User user = HashHelper.GetUser(loginTextBox.Text, passwordTextBox.Text);
-            //if (user == null)
-            //{
-            //    statusLabel.Text = "Пользователя не найдено";
-            //    statusLabel.ForeColor = System.Drawing.Color.Red;
-            //}
-            //else
-            //{
-            //    statusLabel.ForeColor = System.Drawing.Color.Green;
-            //    if (user.IsManager)
-            //    {
-            //        statusLabel.Text = "Пользователь - менеджер";
-            //    }
-            //    else statusLabel.Text = "Пользователя - обычный пользователь";
-            //}
-        }
     }
 }
+

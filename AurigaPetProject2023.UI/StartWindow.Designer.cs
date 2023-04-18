@@ -61,7 +61,7 @@ namespace AurigaPetProject2023.UI
             this.passwordTextBox.Location = new System.Drawing.Point(127, 73);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(202, 35);
-            this.passwordTextBox.TabIndex = 0;
+            this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // tableLayoutPanel1
@@ -168,7 +168,7 @@ namespace AurigaPetProject2023.UI
             this.loginButton.Location = new System.Drawing.Point(84, 3);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(244, 28);
-            this.loginButton.TabIndex = 0;
+            this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Войти";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
@@ -184,6 +184,7 @@ namespace AurigaPetProject2023.UI
             this.statusLabel.TabIndex = 2;
             this.statusLabel.Text = "Статус";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statusLabel.Visible = false;
             // 
             // StartWindow
             // 
@@ -194,6 +195,7 @@ namespace AurigaPetProject2023.UI
             this.Name = "StartWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Shown += new System.EventHandler(this.StartWindow_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
