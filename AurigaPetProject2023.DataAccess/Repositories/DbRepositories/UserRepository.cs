@@ -24,15 +24,28 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             _dbSet = context.Set<User>();
         }
 
-        public virtual async Task<User> GetUserForLoginAsync(IUserLoginInfo info)
+        public virtual async Task<IUserLoginResponseInfo> GetUserForLoginAsync(IUserLoginInfo info)
         {
-            var user = await GetByPredicateAsync(
+            var user = (await GetByPredicateAsync(
                 u => (u.LoginName == info.LoginOrPhone || u.Phone == info.LoginOrPhone) &&
                 u.Password == HashHelper.GetHash(info.Password)
-                );
+                )).FirstOrDefault();
 
-            return user.FirstOrDefault();                
+            if (user == null) return null;
+
+            UserLoginResponseInfo userResponseInfo = new UserLoginResponseInfo(user);
+            return userResponseInfo;                
         }
+
+        //public virtual async Task<User> GetUserForLoginAsync(IUserLoginInfo info)
+        //{
+        //    var user = await GetByPredicateAsync(
+        //        u => (u.LoginName == info.LoginOrPhone || u.Phone == info.LoginOrPhone) &&
+        //        u.Password == HashHelper.GetHash(info.Password)
+        //        );
+
+        //    return user.FirstOrDefault();
+        //}
 
         public virtual async Task<int> CreateAsync(User entity)
         {

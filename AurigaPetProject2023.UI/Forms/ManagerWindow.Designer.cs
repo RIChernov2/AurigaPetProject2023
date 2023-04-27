@@ -1,7 +1,7 @@
 ﻿
 namespace AurigaPetProject2023.UI
 {
-    partial class ManagerWindow
+    partial class ManagerWindowWF
     {
         /// <summary>
         /// Required designer variable.

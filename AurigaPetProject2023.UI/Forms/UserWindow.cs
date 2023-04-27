@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AurigaPetProject2023.UI.Forms
 {
-    public partial class UserWindow : Form
+    public partial class UserWindowWF : Form
     {
-        public UserWindow()
+        public UserWindowWF()
         {
             InitializeComponent();
         }

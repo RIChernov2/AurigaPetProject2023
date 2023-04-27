@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace AurigaPetProject2023.UI
 {
-    public partial class ManagerWindow : Form
+    public partial class ManagerWindowWF : Form
     {
-        public ManagerWindow()
+        public ManagerWindowWF()
         {
             InitializeComponent();
         }

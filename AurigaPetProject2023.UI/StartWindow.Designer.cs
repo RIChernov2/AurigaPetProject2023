@@ -119,6 +119,7 @@ namespace AurigaPetProject2023.UI
             this.showPasswordLabel.Name = "showPasswordLabel";
             this.showPasswordLabel.Size = new System.Drawing.Size(40, 30);
             this.showPasswordLabel.TabIndex = 2;
+            this.showPasswordLabel.Click += new System.EventHandler(this.showPasswordLabel_Click);
             this.showPasswordLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.showPasswordLabel_MouseDown);
             this.showPasswordLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.showPasswordLabel_MouseUp);
             // 

@@ -5,7 +5,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
     public interface IUserRepository : IGenericRepository<User, int>
     {
-        Task<User> GetUserForLoginAsync(IUserLoginInfo info);
+        Task<IUserLoginResponseInfo> GetUserForLoginAsync(IUserLoginInfo info);
+        //Task<User> GetUserForLoginAsync(IUserLoginInfo info);
     }
 }
 

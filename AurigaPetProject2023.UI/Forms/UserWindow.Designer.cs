@@ -1,7 +1,7 @@
 ﻿
 namespace AurigaPetProject2023.UI.Forms
 {
-    partial class UserWindow
+    partial class UserWindowWF
     {
         /// <summary>
         /// Required designer variable.

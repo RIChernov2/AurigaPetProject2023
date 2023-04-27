@@ -1,16 +1,10 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.DataAccess.Repositories.DbRepositories;
+using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UI.Entities;
 using AurigaPetProject2023.UI.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,20 +28,23 @@ namespace AurigaPetProject2023.UI
             // автоматический ввод логина пароля
             loginTextBox.Text = "manager";
             passwordTextBox.Text = "123";
-            loginButton.PerformClick();
+            //loginButton.PerformClick();
         }
 
-        private async void loginButton_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
             statusLabel.Visible = false;
 
-            User user;
+            IUserLoginResponseInfo user;
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 UsersStorageManager repository = new UsersStorageManager(unitOfWork);
                 UserLoginInfo loginInfo = new UserLoginInfo(loginTextBox.Text, passwordTextBox.Text);
-                user = await repository.GetUserForLoginAsync(loginInfo);
+                //user = await repository.GetUserForLoginAsync(loginInfo)
 
+                var task = Task.Run(async () => await repository.GetUserForLoginAsync(loginInfo)) ;
+                task.Wait();
+                user = task.Result;
             }
 
             if(user == null)
@@ -57,25 +54,31 @@ namespace AurigaPetProject2023.UI
             else
             {
                 statusLabel.Visible = false;
-                RunForm(user);
+                RunApplicationWindow(user);
             }
 
             this.ActiveControl = null;
         }
-        private void RunForm(User user)
+        private void RunApplicationWindow(IUserLoginResponseInfo user)
         {
             if(user.Roles.Contains(1) || user.Roles.Contains(2))
             {
-                using (ManagerWindow form = new ManagerWindow())
-                {
-                    this.Hide();
-                    form.ShowDialog();
-                    this.Close();
-                }
+                //using (ManagerWindowWF form = new ManagerWindowWF())
+                //{
+                //    this.Hide();
+                //    form.ShowDialog();
+                //    this.Close();
+                //}
+
+                ManagerWindow managerWindow = new ManagerWindow();
+
+                managerWindow.Closed += (sender, e) => this.Close();
+                this.Hide();
+                managerWindow.Show();
             }
             else if (user.Roles.Contains(3))
             {
-                using (UserWindow form = new UserWindow())
+                using (UserWindowWF form = new UserWindowWF())
                 {
                     this.Hide();
                     form.ShowDialog();
@@ -96,7 +99,10 @@ namespace AurigaPetProject2023.UI
             passwordTextBox.UseSystemPasswordChar = true;
         }
 
+        private void showPasswordLabel_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 
