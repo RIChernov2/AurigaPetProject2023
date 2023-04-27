@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IGenericRepository<TEntity, Targ> where TEntity : class
+    public interface IGenericRepository<TEntity, TArg> where TEntity : class
     {
         Task <int> CreateAsync(TEntity entity);
         Task <IReadOnlyList<TEntity>> GetAsync();
-        Task<TEntity> GetAsync(Targ id);
+        Task<TEntity> GetAsync(TArg id);
         Task<IReadOnlyList<TEntity>> GetByPredicateAsync(Expression<Func<TEntity, bool>> predicate);
-        //Task <IReadOnlyList<TEntity>> GetAsync(IEnumerable<Targ> ids);
+        //// ТЕСТ
+        //Task <IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids);
         Task <int> UpdateAsync(TEntity entity);
-        Task <int> DeleteAsync(Targ id);
+        Task <int> DeleteAsync(TArg id);
     }
 }

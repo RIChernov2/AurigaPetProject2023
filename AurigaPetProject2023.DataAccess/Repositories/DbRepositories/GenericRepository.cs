@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
-    public class GenericRepository<TEntity, Targ> : IGenericRepository<TEntity, Targ> where TEntity: class
+    public class GenericRepository<TEntity, TArg> : IGenericRepository<TEntity, TArg> where TEntity: class
     {
         private DbContext _context;
         private DbSet<TEntity> _dbSet;
@@ -45,8 +45,34 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         }
 
+        //// ТЕСТ
+        //public async Task<IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids)
+        //{
+        //    return await _dbSet.Where(x => ids.Contains(GetID(x))).ToListAsync();
+        //    //return await _dbSet.Where(x => ids.Contains(
+        //    //    (TArg)Activator.CreateInstance(typeof(TArg), x).GetType().GetProperty("Id").GetValue(x)
+        //    //    //(TArg)Activator.CreateInstance(typeof(TArg), x.GetType().GetProperty("Id").GetValue(x))
 
-        public virtual async Task<TEntity> GetAsync(Targ id)
+        //    //    )).ToListAsync();
+        //    //return await _dbSet.Where(x => ids.Contains((TArg)(Activator.CreateInstance(typeof(TEntity), x).GetType().GetProperty("Id").GetValue(x))).ToListAsync();
+        //    //(TEntity)Activator.CreateInstance(typeof(TEntity), x);
+        //}
+
+        //private TArg GetID(TEntity entity)
+        //{
+        //    return (TArg)entity.GetType().GetProperty("RoleID").GetValue(entity);
+        //}
+
+
+        // от GPT
+        //public async Task<IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids)
+        //{
+        //    return await _dbSet.Where(x => ids.Contains((TArg)x.GetType().GetProperty("Id").GetValue(x))).ToListAsync();
+        //}
+
+
+
+        public virtual async Task<TEntity> GetAsync(TArg id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -64,7 +90,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             return await _context.SaveChangesAsync();
         }
 
-        public virtual async Task<int> DeleteAsync(Targ id)
+        public virtual async Task<int> DeleteAsync(TArg id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)

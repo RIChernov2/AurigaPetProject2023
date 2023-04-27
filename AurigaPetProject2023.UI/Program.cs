@@ -18,8 +18,8 @@ namespace AurigaPetProject2023.UI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartWindow());
-            //Application.Run(new ManagerWindow());
+            //Application.Run(new StartWindow());
+            Application.Run(new ManagerWindow());
             //Application.Run(new UserWindow());
         }
     }
