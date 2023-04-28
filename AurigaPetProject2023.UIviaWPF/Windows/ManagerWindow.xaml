@@ -1,0 +1,63 @@
+﻿<Window x:Class="AurigaPetProject2023.UIviaWPF.Windows.ManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AurigaPetProject2023.UIviaWPF.Windows"
+        xmlns:viewModels="clr-namespace:AurigaPetProject2023.UIviaWPF.ViewModels"
+        xmlns:controls="clr-namespace:AurigaPetProject2023.UIviaWPF.Windows.Controls"
+        xmlns:asd="local.Controls"
+        
+        mc:Ignorable="d"
+        Title="ManagerWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        x:Name="managerWindow">
+    <Window.DataContext>
+        <viewModels:ManagerViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="headerStyle" TargetType="DataGridColumnHeader">
+            <!--<Setter Property="Background" Value="LightGray"/>-->
+            <!--<Setter Property="Foreground" Value="Black"/>-->
+            <!--<Setter Property="FontWeight" Value="Bold"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="ColumnHeaderStyle" Value="{StaticResource headerStyle}"></Setter>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2cm"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <!--<Button Height="20" Width="100" Command="{Binding ManagerPropertyViewModel.LoadProductTypesCommand}"> Load</Button>-->
+            <Button Height="20" Width="100" Click="Button_Click"> Load</Button>
+        </Grid>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Добавление">
+                <Grid>
+                    <controls:ProductTypeManagement x:Name="productTypeManagement"></controls:ProductTypeManagement>
+                        <!--MyBinding="{Binding Path=ManagerPropertyViewModel.ProductTypes}"></controls:ProductTypeManagement>-->
+                        <!--MyBinding="{Binding Path=ManagerPropertyViewModel.ProductTypes, Mode=OneWayToSource}"></controls:ProductTypeManagement>-->
+                    <!--<controls:ProductTypeManagement MyBinding="{Binding Path=ManagerPropertyViewModel.ProductTypes, Mode=TwoWay}"></controls:ProductTypeManagement>-->
+                    
+                    <!--<DataGrid x:Name="productTypesDataGrid" ItemsSource="{Binding ManagerPropertyViewModel.ProductTypes}"
+                              AutoGenerateColumns="False" Width="10cm">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="1cm" Binding="{Binding Path=ProductTypeID,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Название" Width="Auto" Binding="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridCheckBoxColumn Header="Уникальный номер" Width="1cm" Binding="{Binding Path=IsUnique, UpdateSourceTrigger=PropertyChanged}"></DataGridCheckBoxColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="qweqwe"></TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

@@ -70,5 +70,19 @@ namespace AurigaPetProject2023.DataAccess.Managers
             //readonlyList.ToList()
             #endregion
         }
+
+        public int Create(ProductType entity)
+        {
+            int result = 0;
+
+            Task.Run(async () =>
+            {
+                result = await _uow.ProductTypeRepository.CreateAsync(entity);
+            }).Wait();
+
+            _uow.Commit();
+            return result;
+
+        }
     }
 }

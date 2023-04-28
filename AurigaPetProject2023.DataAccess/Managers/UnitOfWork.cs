@@ -19,7 +19,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         public UnitOfWork()
         {
             _context = new NewContext();
-            _context.Database.BeginTransaction();
+            _transaction = _context.Database.BeginTransaction();
         }
 
         public IUserRepository UserRepository => _usersRepository ??= new UserRepository(_context);

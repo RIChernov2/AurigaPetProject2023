@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AurigaPetProject2023.UIviaWPF.Widows
+namespace AurigaPetProject2023.UIviaWPF.Windows
 {
     /// <summary>
-    /// Interaction logic for ManagerWindow.xaml
+    /// Interaction logic for UserWindow.xaml
     /// </summary>
-    public partial class ManagerWindow : Window
+    public partial class UserWindow : Window
     {
-        public ManagerWindow()
+        public UserWindow()
         {
             InitializeComponent();
         }

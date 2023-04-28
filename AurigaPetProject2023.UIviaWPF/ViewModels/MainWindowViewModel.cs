@@ -5,7 +5,7 @@ using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
-using AurigaPetProject2023.UIviaWPF.Widows;
+using AurigaPetProject2023.UIviaWPF.Windows;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
@@ -18,6 +18,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             LoginCommand = new RelayCommand(Login);
             ShowMouseDownCommand = new RelayCommand(MouseDown);
             ShowMouseUpCommand = new RelayCommand(MouseUp);
+
         }
         private MainWindowModel _model;
         public string LoginName
