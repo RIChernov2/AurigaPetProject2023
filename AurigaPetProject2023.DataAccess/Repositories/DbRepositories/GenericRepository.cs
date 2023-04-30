@@ -32,43 +32,9 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
         public virtual async Task<IReadOnlyList<TEntity>> GetAsync()
         {
             return await _dbSet.ToListAsync();
-
-            //try
-            //{
-            //    return await _dbSet.ToListAsync();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine("!!!!!!!!!!!!!!! +++++++++++" + ex.Message);
-            //    return null;
-            //}
-
         }
 
-        //// ТЕСТ
-        //public async Task<IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids)
-        //{
-        //    return await _dbSet.Where(x => ids.Contains(GetID(x))).ToListAsync();
-        //    //return await _dbSet.Where(x => ids.Contains(
-        //    //    (TArg)Activator.CreateInstance(typeof(TArg), x).GetType().GetProperty("Id").GetValue(x)
-        //    //    //(TArg)Activator.CreateInstance(typeof(TArg), x.GetType().GetProperty("Id").GetValue(x))
 
-        //    //    )).ToListAsync();
-        //    //return await _dbSet.Where(x => ids.Contains((TArg)(Activator.CreateInstance(typeof(TEntity), x).GetType().GetProperty("Id").GetValue(x))).ToListAsync();
-        //    //(TEntity)Activator.CreateInstance(typeof(TEntity), x);
-        //}
-
-        //private TArg GetID(TEntity entity)
-        //{
-        //    return (TArg)entity.GetType().GetProperty("RoleID").GetValue(entity);
-        //}
-
-
-        // от GPT
-        //public async Task<IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids)
-        //{
-        //    return await _dbSet.Where(x => ids.Contains((TArg)x.GetType().GetProperty("Id").GetValue(x))).ToListAsync();
-        //}
 
 
 

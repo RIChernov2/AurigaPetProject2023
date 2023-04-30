@@ -3,6 +3,7 @@ using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -117,21 +118,53 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 var manager = new ProductTypesStorageManager(unitOfWork);
                 var result = manager.Create(new ProductType() { Name = NewProductTypeName, IsUnique = NewProductTypeIsUnique });
                 LoadProductTypes();
+                if(result == 1)
+                {
+                    NewProductTypeStatusText = $"Категория с названием \"{NewProductTypeName}\" успешно добавлена";
+                }
+                else
+                {
+                    NewProductTypeStatusText = $"Ошибка в процессе добавления категории с названием \"{NewProductTypeName}\"";
+                }
                 NewProductTypeStatusEnable = true;
-                NewProductTypeStatusText = $"Категория с названием \"{NewProductTypeName}\" успешно добавлена";
-
-                ////ProductTypes = new BindingList<ProductType>(list);
-                //ProductTypes.Clear();
-                //foreach (var item in list)
-                //{
-                //    ProductTypes.Add(item);
-                //}
-                //ProductTypesIsLoaded = true;
             }
+        }
 
-            //NewProductTypeStatusEnable = true;
-            //NewProductTypeStatusText = $"Все ок";
-            //NewProductTypeStatusText = $"Категория с названием \"{NewProductTypeName}\" успешно добавлена";
+        public void UpdateProductType(ProductType productType)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new ProductTypesStorageManager(unitOfWork);
+                var result = manager.Update(productType);
+                LoadProductTypes();
+                if (result == 1)
+                {
+                    MessageBox.Show($"Категория успешно изменения");
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка в процессе изменения категории"); ;
+                }
+                NewProductTypeStatusEnable = true;
+            }
+        }
+        public void DeleteProductType(int id)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new ProductTypesStorageManager(unitOfWork);
+                var result = manager.Delete(id);
+                LoadProductTypes();
+                if (result == 1)
+                {
+                    MessageBox.Show($"Категория успешно удалена");
+                }
+                else
+                {
+                    MessageBox.Show ($"Ошибка в процессе удаления категории");
+                }
+                NewProductTypeStatusEnable = true;
+            }
         }
 
         #endregion

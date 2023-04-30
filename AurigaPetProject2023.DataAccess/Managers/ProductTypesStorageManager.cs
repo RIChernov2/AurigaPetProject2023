@@ -30,45 +30,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
             }).Wait();
 
             return result;
-
-
-
-
-            //List<ProductType> result = new List<ProductType>();
-
-            //Task.Run(() =>
-            //{
-            //    var task = _uow.ProductTypeRepository.GetAsync();
-            //    var aaa = task.Result;
-            //    result = aaa.ToList();
-            //}).Wait();
-
-            //return result;
-
-            #region  ПОТОМ УДАЛИТЬ
-            //List<ProductType> result = new List<ProductType>();
-
-            //var bbb = Task.Run(() =>
-            //{
-            //    var task = _uow.ProductTypeRepository.GetAsync();
-            //    var aaa = task.Result;
-            //    result = aaa.ToList();
-            //});
-
-            //Task.WaitAll(bbb);
-
-            //return result;
-
-            //var task = _uow.ProductTypeRepository.GetAsync();
-            ////Task.WaitAll(task);
-            //var aaa = task.Result;
-
-            //return aaa.ToList();
-
-
-            //var readonlyList = await _uow.ProductTypeRepository.GetAsync();
-            //readonlyList.ToList()
-            #endregion
         }
 
         public int Create(ProductType entity)
@@ -83,6 +44,32 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _uow.Commit();
             return result;
 
+        }
+
+        public int Update(ProductType entity)
+        {
+            int result = 0;
+
+            Task.Run(async () =>
+            {
+                result = await _uow.ProductTypeRepository.UpdateAsync(entity);
+            }).Wait();
+
+            _uow.Commit();
+            return result;
+        }
+
+        public int Delete(int id)
+        {
+            int result = 0;
+
+            Task.Run(async () =>
+            {
+                result = await _uow.ProductTypeRepository.DeleteAsync(id);
+            }).Wait();
+
+            _uow.Commit();
+            return result;
         }
     }
 }

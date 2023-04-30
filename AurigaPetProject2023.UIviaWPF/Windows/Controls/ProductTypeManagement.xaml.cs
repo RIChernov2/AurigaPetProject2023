@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.UIviaWPF.ViewModels;
+﻿using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.UIviaWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +40,16 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         }
 
         public static readonly DependencyProperty MyBindingProperty;
-        //public static readonly DependencyProperty MyBindingProperty =
-        //    DependencyProperty.Register("MyBinding", typeof(Binding), typeof(ProductTypeManagement), new PropertyMetadata(null));
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
+            model.NewProductType = new ProductType()
+            {
+                Name = newProductTypeNameTextBox.Text,
+                IsUnique = newProductTypeIsUniqueCheckBox.IsChecked == true ? true : false,
+                ProductTypeID = model.SelectedProductType.ProductTypeID
+            };
         }
     }
 }

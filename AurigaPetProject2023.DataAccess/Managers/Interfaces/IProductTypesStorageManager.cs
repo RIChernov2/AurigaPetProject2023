@@ -9,5 +9,7 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
         Task<List<ProductType>> GetAllAsync();
         List<ProductType> GetAll();
         int Create(ProductType entity);
+        int Update(ProductType entity);
+        int Delete(int id);
     }
 }
