@@ -35,22 +35,10 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .FromTable("Roles").ForeignColumn("RoleType_ID")
                 .ToTable("RoleTypes").PrimaryColumn("RoleType_ID")
                 .OnDeleteOrUpdate(Rule.Cascade);
-
-
-
-            //Create.Index("IX_Users_LastName")
-            //    .OnTable("Users")
-            //    .OnColumn("Last_Name");
-
-            //Create.Index("IX_Users_Email")
-            //    .OnTable("Users")
-            //    .OnColumn("Email");
         }
 
         public override void Down()
         {
-            //Delete.Table("Roles");
-            //Delete.Table("RoleTypes");
             Delete.Table("Users");
         }
     }

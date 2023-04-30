@@ -3,7 +3,6 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.IO;
 
 namespace AurigaPetProject2023.DataAccess.Helpers
 {

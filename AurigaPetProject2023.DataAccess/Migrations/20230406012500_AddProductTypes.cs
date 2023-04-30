@@ -12,14 +12,6 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .WithColumn("ProductType_ID").AsInt32().PrimaryKey().Identity().NotNullable()
                 .WithColumn("Name").AsString(50).NotNullable()
                 .WithColumn("Unique").AsBoolean();
-
-            //Create.Index("IX_Users_LastName")
-            //    .OnTable("Users")
-            //    .OnColumn("Last_Name");
-
-            //Create.Index("IX_Users_Email")
-            //    .OnTable("Users")
-            //    .OnColumn("Email");
         }
 
         public override void Down()
