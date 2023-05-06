@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
@@ -78,13 +79,13 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(NewProductTypeStatusText));
             }
         }
-        public bool NewProductTypeStatusEnable
+        public Visibility NewProductTypeStatusVisibility
         {
-            get { return _model.NewProductTypeStatusEnable; }
+            get { return _model.NewProductTypeStatusVisibility; }
             set
             {
-                _model.NewProductTypeStatusEnable = value;
-                OnPropertyChanged(nameof(NewProductTypeStatusEnable));
+                _model.NewProductTypeStatusVisibility = value;
+                OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
             }
         }
 
@@ -100,6 +101,16 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         private ProductType _selectedProductType;
         private ProductType _newProductType;
         public ProductType NewProductType { set => _newProductType = value; }
+
+        public Brush NewProductTypeStatusColor
+        {
+            get { return _model.NewProductTypeStatusColor; }
+            set
+            {
+                _model.NewProductTypeStatusColor = value;
+                OnPropertyChanged(nameof(NewProductTypeStatusColor));
+            }
+        }
 
         public ICommand LoadProductTypesCommand { get; }
 

@@ -4,6 +4,7 @@ using AurigaPetProject2023.UIviaWPF.Entities;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -54,16 +55,16 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private bool _newProductTypeIsUnique;
 
-        public bool NewProductTypeStatusEnable
+        public Visibility NewProductTypeStatusVisibility
         {
-            get { return _newProductTypeStatusEnable; }
+            get { return _newProductTypeStatusVisibility; }
             set
             {
-                _newProductTypeStatusEnable = value;
-                OnPropertyChanged(nameof(NewProductTypeStatusEnable));
+                _newProductTypeStatusVisibility = value;
+                OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
             }
         }
-        private bool _newProductTypeStatusEnable;
+        private Visibility _newProductTypeStatusVisibility;
 
         public string NewProductTypeStatusText
         {
@@ -95,20 +96,21 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         public void AddProductType()
         {
-            NewProductTypeStatusEnable = false;
+            //NewProductTypeStatusVisibility = Visibility.Hidden;
 
 
             if (!ProductTypesIsLoaded) return;
             if (string.IsNullOrEmpty(NewProductTypeName))
             {
-                NewProductTypeStatusEnable = true;
+                ChangeStatusColorAndVisibility(Brushes.Red);
                 NewProductTypeStatusText = "Нельзя добавить категорию без названия";
                 return;
             }
 
-            if(ProductTypes.Select(x=>x.Name.ToLower()).Contains(NewProductTypeName.ToLower()))
+            if (ProductTypes.Select(x => x.Name.ToLower()).Contains(NewProductTypeName.ToLower()))
             {
-                NewProductTypeStatusEnable = true;
+                //NewProductTypeStatusEnable = true;
+                ChangeStatusColorAndVisibility(Brushes.Red);
                 NewProductTypeStatusText = $"Уже существует категория с названием \"{NewProductTypeName}\"";
                 return;
             }
@@ -118,17 +120,55 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 var manager = new ProductTypesStorageManager(unitOfWork);
                 var result = manager.Create(new ProductType() { Name = NewProductTypeName, IsUnique = NewProductTypeIsUnique });
                 LoadProductTypes();
-                if(result == 1)
+                if (result == 1)
                 {
+                    ChangeStatusColorAndVisibility(Brushes.Green);
                     NewProductTypeStatusText = $"Категория с названием \"{NewProductTypeName}\" успешно добавлена";
                 }
                 else
                 {
+                    ChangeStatusColorAndVisibility(Brushes.Red);
                     NewProductTypeStatusText = $"Ошибка в процессе добавления категории с названием \"{NewProductTypeName}\"";
                 }
-                NewProductTypeStatusEnable = true;
             }
         }
+
+        public Brush NewProductTypeStatusColor
+        {
+            get { return _newProductTypeStatusColor; }
+            set
+            {
+                _newProductTypeStatusColor = value;
+                OnPropertyChanged(nameof(NewProductTypeStatusColor));
+            }
+        }
+        private Brush _newProductTypeStatusColor;
+        private void ChangeStatusColorAndVisibility(Brush color)
+        {
+            if (NewProductTypeStatusColor != color)
+            {
+                NewProductTypeStatusColor = color;
+            }
+            NewProductTypeStatusVisibility = Visibility.Visible;
+
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 2000; //millisec
+            timer.Elapsed += (sender, e) =>
+            {
+                //MessageBox.Show("Elapsed");
+                NewProductTypeStatusVisibility = Visibility.Hidden;
+                timerEnabled = false;
+                if (timer != null) timer.Dispose();
+            };
+
+            if (!timerEnabled)
+            {
+                timerEnabled = true;
+                timer.Start();
+            }
+
+        }
+        private bool timerEnabled;
 
         public void UpdateProductType(ProductType productType)
         {
@@ -145,7 +185,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     MessageBox.Show($"Ошибка в процессе изменения категории"); ;
                 }
-                NewProductTypeStatusEnable = true;
+                NewProductTypeStatusVisibility = Visibility.Hidden;
             }
         }
         public void DeleteProductType(int id)
@@ -161,9 +201,9 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 }
                 else
                 {
-                    MessageBox.Show ($"Ошибка в процессе удаления категории");
+                    MessageBox.Show($"Ошибка в процессе удаления категории");
                 }
-                NewProductTypeStatusEnable = true;
+                NewProductTypeStatusVisibility = Visibility.Hidden;
             }
         }
 

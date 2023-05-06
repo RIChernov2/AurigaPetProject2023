@@ -124,7 +124,8 @@
                         Grid.ColumnSpan="4"
                         HorizontalAlignment="Center"
                         Content="{Binding Path=NewProductTypeStatusText}"
-                        IsEnabled="{Binding Path=NewProductTypeStatusEnable}" />
+                        Foreground="{Binding NewProductTypeStatusColor}"
+                        Visibility="{Binding Path=NewProductTypeStatusVisibility}" />
                 </Grid>
                 <!--  Низ  -->
                 <Separator Height="0.1cm" />
