@@ -70,24 +70,46 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(NewProductTypeIsUnique));
             }
         }
-        public string NewProductTypeStatusText
+
+
+
+        public LabelInfo NewProductTypeStatusInfo
         {
-            get { return _model.NewProductTypeStatusText; }
+            get { return _model.NewProductTypeStatusInfo; }
             set
             {
-                _model.NewProductTypeStatusText = value;
-                OnPropertyChanged(nameof(NewProductTypeStatusText));
+                _model.NewProductTypeStatusInfo = value;
+                OnPropertyChanged(nameof(NewProductTypeStatusInfo));
             }
         }
-        public Visibility NewProductTypeStatusVisibility
-        {
-            get { return _model.NewProductTypeStatusVisibility; }
-            set
-            {
-                _model.NewProductTypeStatusVisibility = value;
-                OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
-            }
-        }
+
+        //public string NewProductTypeStatusText
+        //{
+        //    get { return _model.NewProductTypeStatusText; }
+        //    set
+        //    {
+        //        _model.NewProductTypeStatusText = value;
+        //        OnPropertyChanged(nameof(NewProductTypeStatusText));
+        //    }
+        //}
+        //public Visibility NewProductTypeStatusVisibility
+        //{
+        //    get { return _model.NewProductTypeStatusVisibility; }
+        //    set
+        //    {
+        //        _model.NewProductTypeStatusVisibility = value;
+        //        OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
+        //    }
+        //}
+        //public Brush NewProductTypeStatusColor
+        //{
+        //    get { return _model.NewProductTypeStatusColor; }
+        //    set
+        //    {
+        //        _model.NewProductTypeStatusColor = value;
+        //        OnPropertyChanged(nameof(NewProductTypeStatusColor));
+        //    }
+        //}
 
         public ProductType SelectedProductType
         {
@@ -102,15 +124,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         private ProductType _newProductType;
         public ProductType NewProductType { set => _newProductType = value; }
 
-        public Brush NewProductTypeStatusColor
-        {
-            get { return _model.NewProductTypeStatusColor; }
-            set
-            {
-                _model.NewProductTypeStatusColor = value;
-                OnPropertyChanged(nameof(NewProductTypeStatusColor));
-            }
-        }
+
 
         public ICommand LoadProductTypesCommand { get; }
 
