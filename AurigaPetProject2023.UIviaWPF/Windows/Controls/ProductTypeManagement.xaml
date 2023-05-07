@@ -35,6 +35,7 @@
         <Border
             Grid.Row="0"
             Grid.Column="0"
+            Margin="5,0,5,0"
             BorderBrush="Gray"
             BorderThickness="0,0,0,1">
             <TextBlock
@@ -44,18 +45,6 @@
                 Управление типами оборудования
             </TextBlock>
         </Border>
-        <!--<Grid Grid.Row="0" Grid.Column="0">
-            <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="16">
-                    Управление типами товаров
-                </TextBlock>
-            </Border>
-        </Grid>-->
-
-
 
         <!--  центральная часть экрана  -->
         <Grid Grid.Row="1" Grid.Column="0">
@@ -73,7 +62,7 @@
                 Margin="5"
                 Padding="5"
                 AutoGenerateColumns="False"
-                BorderBrush="Black"
+                BorderBrush="Gray"
                 BorderThickness="1"
                 IsReadOnly="true"
                 ItemsSource="{Binding Path=ProductTypes}"
@@ -102,113 +91,141 @@
                 Grid.Column="1"
                 IsEnabled="{Binding Path=ProductTypesIsLoaded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <!--  Верх  -->
-                <Button
-                    Width="Auto"
-                    Height="0.7cm"
-                    Margin="0,0.2cm,0,0"
-                    Padding="3"
-                    HorizontalAlignment="Center"
-                    Command="{Binding Path=AddProductTypeCommand}">
-                    Добавить элемент
-                </Button>
-                <Grid Margin="0,10,5,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="0.2cm" />
-                        <ColumnDefinition Width="1cm" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
 
-                    <Label>Название</Label>
-                    <TextBox
-                        Grid.Column="2"
-                        Grid.ColumnSpan="2"
-                        HorizontalAlignment="Stretch"
-                        VerticalContentAlignment="Center"
-                        Text="{Binding Path=NewProductTypeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                    <Label Grid.Row="1" Grid.Column="0">Уникальный</Label>
-                    <CheckBox
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding Path=NewProductTypeIsUnique, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label
-                        x:Name="statusLabel"
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="4"
-                        HorizontalAlignment="Center"
-                        Content="{Binding Path=Text}"
-                        DataContext="{Binding NewProductTypeStatusInfo}"
-                        Foreground="{Binding Path=Color}"
-                        Visibility="{Binding Path=Visibility}" />
-                </Grid>
+                <Border
+                    Margin="0,5,5,0"
+                    BorderBrush="Gray"
+                    BorderThickness="1">
+                    <Grid Margin="0,10,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="0.2cm" />
+                            <ColumnDefinition Width="1cm" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1cm" />
+                            <RowDefinition Height="0.75cm" />
+                        </Grid.RowDefinitions>
+
+                        <Label>Название</Label>
+                        <TextBox
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            Text="{Binding Path=NewProductTypeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <Label Grid.Row="1" Grid.Column="0">Уникальный</Label>
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding Path=NewProductTypeIsUnique, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Width="120"
+                            Height="0.6cm"
+                            Margin="10,0,0,0"
+                            Padding="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Command="{Binding Path=AddProductTypeCommand}">
+                            Добавить элемент
+                        </Button>
+
+                        <Label
+                            x:Name="statusLabel"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            HorizontalAlignment="Center"
+                            Content="{Binding Path=Text}"
+                            DataContext="{Binding NewProductTypeStatusInfo}"
+                            Foreground="{Binding Path=Color}"
+                            Visibility="{Binding Path=Visibility}" />
+
+                    </Grid>
+                </Border>
                 <!--  Низ  -->
-                <Separator Height="0.1cm" />
-                <Grid Margin="10,0,10,0" HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Width="Auto"
-                        Height="0.7cm"
-                        Padding="3"
-                        HorizontalAlignment="Center"
-                        Click="Button_Click"
-                        Command="{Binding Path=UpdateProductTypeCommand}">
-                        Изменить
-                    </Button>
-                    <Button
-                        x:Name="changeButton"
-                        Grid.Column="2"
-                        Width="Auto"
-                        Height="0.7cm"
-                        Padding="3"
-                        HorizontalAlignment="Center"
-                        Command="{Binding Path=DeleteProductTypeCommand}">
-                        Удалить
-                    </Button>
-                </Grid>
-                <Grid Margin="0,10,5,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="0.2cm" />
-                        <ColumnDefinition Width="1cm" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0">Название</Label>
-                    <TextBox
-                        x:Name="newProductTypeNameTextBox"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Grid.ColumnSpan="2"
-                        HorizontalAlignment="Stretch"
-                        VerticalContentAlignment="Center"
-                        Text="{Binding Path=SelectedProductType.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                    <Label Grid.Row="2" Grid.Column="0">Уникальный</Label>
-                    <CheckBox
-                        x:Name="newProductTypeIsUniqueCheckBox"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding Path=SelectedProductType.IsUnique, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
 
-                </Grid>
-                <Separator Height="0.1cm" />
+                <Border
+                    Margin="0,5,5,0"
+                    BorderBrush="Gray"
+                    BorderThickness="1">
+                    <Grid Margin="0,10,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="0.2cm" />
+                            <ColumnDefinition Width="1cm" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1cm" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0">
+                            Название
+                        </Label>
+                        <TextBox
+                            x:Name="newProductTypeNameTextBox"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            Text="{Binding Path=SelectedProductType.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+
+                        <Label Grid.Row="1" Grid.Column="0">Уникальный</Label>
+                        <CheckBox
+                            x:Name="newProductTypeIsUniqueCheckBox"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding Path=SelectedProductType.IsUnique, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+
+                        <Grid
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="15" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button
+                                Width="90"
+                                Height="0.6cm"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                Click="Button_Click"
+                                Command="{Binding Path=UpdateProductTypeCommand}">
+                                Изменить
+                            </Button>
+                            <Button
+                                x:Name="changeButton"
+                                Grid.Column="2"
+                                Width="90"
+                                Height="0.6cm"
+                                HorizontalAlignment="Center"
+                                Command="{Binding Path=DeleteProductTypeCommand}">
+                                Удалить
+                            </Button>
+                        </Grid>
+
+                    </Grid>
+                </Border>
 
             </StackPanel>
         </Grid>
