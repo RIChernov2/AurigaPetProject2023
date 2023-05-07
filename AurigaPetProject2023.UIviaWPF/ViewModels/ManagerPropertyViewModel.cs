@@ -83,33 +83,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
-        //public string NewProductTypeStatusText
-        //{
-        //    get { return _model.NewProductTypeStatusText; }
-        //    set
-        //    {
-        //        _model.NewProductTypeStatusText = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusText));
-        //    }
-        //}
-        //public Visibility NewProductTypeStatusVisibility
-        //{
-        //    get { return _model.NewProductTypeStatusVisibility; }
-        //    set
-        //    {
-        //        _model.NewProductTypeStatusVisibility = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
-        //    }
-        //}
-        //public Brush NewProductTypeStatusColor
-        //{
-        //    get { return _model.NewProductTypeStatusColor; }
-        //    set
-        //    {
-        //        _model.NewProductTypeStatusColor = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusColor));
-        //    }
-        //}
 
         public ProductType SelectedProductType
         {

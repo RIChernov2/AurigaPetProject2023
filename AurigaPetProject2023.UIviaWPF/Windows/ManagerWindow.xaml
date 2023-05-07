@@ -10,7 +10,7 @@
     xmlns:viewModels="clr-namespace:AurigaPetProject2023.UIviaWPF.ViewModels"
     x:Name="managerWindow"
     Title="ManagerWindow"
-    Width="1200"
+    Width="1000"
     Height="550"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -37,19 +37,34 @@
         <!--<Grid>
             <Button Height="20" Width="100" Click="Button_Click"> Load</Button>
         </Grid>-->
-        <TabControl Grid.Row="1">
-            <TabItem Header="Добавление">
+        <TabControl
+            x:Name="mainTabControl"
+            Grid.Row="1"
+            SelectionChanged="mainTabControl_SelectionChanged">
+            <TabItem x:Name="newProductTab" Header="Ввод нового инвентаря">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="75*" />
+                        <ColumnDefinition Width="150*" />
                     </Grid.ColumnDefinitions>
 
-                    <controls:ProductTypeManagement x:Name="productTypeManagement" Grid.Column="1" />
+                    <controls:AddProduct
+                        x:Name="addProductControl"
+                        Grid.Column="0"
+                        Margin="5,5,5,5"
+                        BorderBrush="Black"
+                        BorderThickness="1" />
+
+                    <controls:ProductTypeManagement
+                        x:Name="productTypeManagement"
+                        Grid.Column="1"
+                        Margin="5,5,5,5"
+                        BorderBrush="Black"
+                        BorderThickness="1" />
                 </Grid>
 
             </TabItem>
-            <TabItem Header="qweqwe" />
+            <TabItem x:Name="tabSecond" Header="qweqwe" />
 
         </TabControl>
     </Grid>

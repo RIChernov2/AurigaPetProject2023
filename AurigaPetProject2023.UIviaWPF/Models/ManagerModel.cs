@@ -33,7 +33,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private bool _productTypesIsLoaded;
 
-
         public string NewProductTypeName
         {
             get { return _newProductTypeName; }
@@ -56,7 +55,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private bool _newProductTypeIsUnique;
 
-
         public LabelInfo NewProductTypeStatusInfo
         {
             get { return _newProductTypeStatusInfo; }
@@ -67,41 +65,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private LabelInfo _newProductTypeStatusInfo;
-
-
-        //public Visibility NewProductTypeStatusVisibility
-        //{
-        //    get { return _newProductTypeStatusVisibility; }
-        //    set
-        //    {
-        //        _newProductTypeStatusVisibility = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusVisibility));
-        //    }
-        //}
-        //private Visibility _newProductTypeStatusVisibility;
-
-        //public string NewProductTypeStatusText
-        //{
-        //    get { return _newProductTypeStatusText; }
-        //    set
-        //    {
-        //        _newProductTypeStatusText = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusText));
-        //    }
-        //}
-        //private string _newProductTypeStatusText;
-
-        //public Brush NewProductTypeStatusColor
-        //{
-        //    get { return _newProductTypeStatusColor; }
-        //    set
-        //    {
-        //        _newProductTypeStatusColor = value;
-        //        OnPropertyChanged(nameof(NewProductTypeStatusColor));
-        //    }
-        //}
-        //private Brush _newProductTypeStatusColor;
-
+       
 
         public void LoadProductTypes()
         {

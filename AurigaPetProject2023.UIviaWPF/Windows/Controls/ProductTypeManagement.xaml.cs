@@ -24,8 +24,10 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
     {
         static ProductTypeManagement()
         {
-            MyBindingProperty = DependencyProperty.Register("MyBinding", typeof(Binding),
-                typeof(ProductTypeManagement), new FrameworkPropertyMetadata(null) {BindsTwoWayByDefault = true });
+            // зачем я это все прописывал?
+
+            //MyBindingProperty = DependencyProperty.Register("MyBinding", typeof(Binding),
+            //    typeof(ProductTypeManagement), new FrameworkPropertyMetadata(null) {BindsTwoWayByDefault = true });
 
         }
         public ProductTypeManagement()
@@ -33,16 +35,18 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
             InitializeComponent();
         }
 
-        public Binding MyBinding
-        {
-            get { return (Binding)GetValue(MyBindingProperty); }
-            set { SetValue(MyBindingProperty, value); }
-        }
+        //public Binding MyBinding
+        //{
+        //    get { return (Binding)GetValue(MyBindingProperty); }
+        //    set { SetValue(MyBindingProperty, value); }
+        //}
 
-        public static readonly DependencyProperty MyBindingProperty;
+        //public static readonly DependencyProperty MyBindingProperty;
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // считываем введенные данные, для того чтобы отправить на update
             ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
             model.NewProductType = new ProductType()
             {
@@ -51,5 +55,17 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
                 ProductTypeID = model.SelectedProductType.ProductTypeID
             };
         }
+
+        //private void propertyTypeControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    //ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
+        //    //model.LoadProductTypesCommand.Execute(null);
+        //}
+
+        //private void propertyTypeControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
+        //    model.LoadProductTypesCommand.Execute(null);
+        //}
     }
 }
