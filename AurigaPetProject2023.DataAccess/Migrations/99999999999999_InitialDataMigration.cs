@@ -11,6 +11,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         {
             AddProductTypes();
             AddProducts();
+            AddUniqueIds();
             AddUnderRepairProducts();
             AddDisabledProducts();
             AddUsers();
@@ -67,6 +68,26 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .Row(new { ProductType_ID = "5", Description = "Одноместная" })
                 .Row(new { ProductType_ID = "6", Description = "Ракетки, Китай" })
                 .Row(new { ProductType_ID = "7", Description = "Премиум, морозостойкий" });
+        }
+
+        private void AddUniqueIds()
+        {
+            Insert.IntoTable("UniqueIds")
+                .Row(new { Product_ID = "4" })
+                .Row(new { Product_ID = "5" })
+                .Row(new { Product_ID = "7" })
+
+                .Row(new { Product_ID = "11" })
+                .Row(new { Product_ID = "12" })
+                .Row(new { Product_ID = "14" })
+
+                .Row(new { Product_ID = "18" })
+                .Row(new { Product_ID = "19" })
+                .Row(new { Product_ID = "21" })
+
+                .Row(new { Product_ID = "25" })
+                .Row(new { Product_ID = "26" })
+                .Row(new { Product_ID = "28" });
         }
         private void AddUnderRepairProducts()
         {

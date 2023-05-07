@@ -37,5 +37,12 @@ namespace AurigaPetProject2023.UIviaWPF.Entities
             }
         }
         private Brush _color;
+
+        public LabelInfo()
+        {
+            Visibility = Visibility.Hidden;
+            Text = "Статус";
+            Color = Brushes.Transparent;
+        }
     }
 }

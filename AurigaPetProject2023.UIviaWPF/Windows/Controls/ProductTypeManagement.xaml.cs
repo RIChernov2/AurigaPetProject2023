@@ -33,6 +33,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         public ProductTypeManagement()
         {
             InitializeComponent();
+
         }
 
         //public Binding MyBinding

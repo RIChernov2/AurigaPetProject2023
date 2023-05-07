@@ -32,7 +32,19 @@
         </Grid.RowDefinitions>
 
         <!--  верхняя часть экрана  -->
-        <Grid Grid.Row="0" Grid.Column="0">
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            BorderBrush="Gray"
+            BorderThickness="0,0,0,1">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16">
+                Управление типами оборудования
+            </TextBlock>
+        </Border>
+        <!--<Grid Grid.Row="0" Grid.Column="0">
             <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TextBlock
                     HorizontalAlignment="Center"
@@ -41,7 +53,9 @@
                     Управление типами товаров
                 </TextBlock>
             </Border>
-        </Grid>
+        </Grid>-->
+
+
 
         <!--  центральная часть экрана  -->
         <Grid Grid.Row="1" Grid.Column="0">
@@ -56,7 +70,11 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Width="Auto"
+                Margin="5"
+                Padding="5"
                 AutoGenerateColumns="False"
+                BorderBrush="Black"
+                BorderThickness="1"
                 IsReadOnly="true"
                 ItemsSource="{Binding Path=ProductTypes}"
                 SelectedItem="{Binding Path=SelectedProductType}"
@@ -121,6 +139,7 @@
                         VerticalAlignment="Center"
                         IsChecked="{Binding Path=NewProductTypeIsUnique, UpdateSourceTrigger=PropertyChanged}" />
                     <Label
+                        x:Name="statusLabel"
                         Grid.Row="3"
                         Grid.Column="0"
                         Grid.ColumnSpan="4"
