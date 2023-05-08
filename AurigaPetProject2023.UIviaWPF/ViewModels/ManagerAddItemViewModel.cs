@@ -7,16 +7,16 @@ using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerAddProductViewModel : BaseModel, INotifyPropertyChanged
+    public class ManagerAddItemViewModel : BaseModel, INotifyPropertyChanged
     {
-        public ManagerAddProductViewModel()
+        public ManagerAddItemViewModel()
         {
             _model = new ManagerModel();
         }
-        public ManagerAddProductViewModel(ManagerModel model)
+        public ManagerAddItemViewModel(ManagerModel model)
         {
             _model = model;
-            AddProductCommand = new RelayCommand(AddProduct);
+            AddItemCommand = new RelayCommand(AddProduct);
 
             // подписываемся на события в модели
             _model.PropertyChanged += OnMyModelPropertyChanged;
@@ -29,7 +29,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
 
 
-        public BindingList<ProductType> ProductTypes => _model.ProductTypes;
+        public BindingList<ItemType> ItemTypes => _model.ItemTypes;
 
         private string _description;
         public string Description
@@ -41,28 +41,28 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(Description));
             }
         }
-        private ProductType _selectedProductType;
-        public ProductType SelectedProductType
+        private ItemType _selectedItemType;
+        public ItemType SelectedItemType
         {
-            get => _selectedProductType;
+            get => _selectedItemType;
             set
             {
-                _selectedProductType = value;
-                OnPropertyChanged(nameof(SelectedProductType));
+                _selectedItemType = value;
+                OnPropertyChanged(nameof(SelectedItemType));
             }
         }
-        public LabelInfo NewProductStatusInfo
+        public LabelInfo NewItemStatusInfo
         {
-            get { return _model.NewProductStatusInfo; }
+            get { return _model.NewItemStatusInfo; }
             set
             {
-                _model.NewProductStatusInfo = value;
-                OnPropertyChanged(nameof(NewProductStatusInfo));
+                _model.NewItemStatusInfo = value;
+                OnPropertyChanged(nameof(NewItemStatusInfo));
             }
         }
 
 
-        public ICommand AddProductCommand;
+        public ICommand AddItemCommand;
         private void AddProduct()
         {
             //Product product = new Product();

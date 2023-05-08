@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
-    public class ProductTypeRepository : GenericRepository<ProductType, int>, IProductTypeRepository
+    public class ProductTypeRepository : GenericRepository<ItemType, int>, IProductTypeRepository
     {
         public ProductTypeRepository(DbContext context) : base(context)
         {

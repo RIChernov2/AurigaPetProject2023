@@ -40,23 +40,24 @@
         <TabControl
             x:Name="mainTabControl"
             Grid.Row="1"
-            SelectionChanged="mainTabControl_SelectionChanged">
-            <TabItem x:Name="newProductTab" Header="Ввод нового инвентаря">
+            SelectionChanged="mainTabControl_SelectionChanged"
+            >
+            <TabItem x:Name="newItemTab" Header="Ввод нового инвентаря">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75*" />
                         <ColumnDefinition Width="150*" />
                     </Grid.ColumnDefinitions>
 
-                    <controls:AddProduct
-                        x:Name="addProductControl"
+                    <controls:AddItem
+                        x:Name="addItemControl"
                         Grid.Column="0"
                         Margin="5,5,5,5"
                         BorderBrush="Black"
                         BorderThickness="1" />
 
-                    <controls:ProductTypeManagement
-                        x:Name="productTypeManagement"
+                    <controls:ItemTypeManagement
+                        x:Name="itemTypeManagement"
                         Grid.Column="1"
                         Margin="5,5,5,5"
                         BorderBrush="Black"

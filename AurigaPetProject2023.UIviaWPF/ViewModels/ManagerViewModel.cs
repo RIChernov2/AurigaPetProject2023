@@ -14,12 +14,12 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             // не нужно ли через параметры конструктора перезавать?
             // не нужно ли сделать через интерфейс IManagerModel ?
             _model = new ManagerModel();
-            ManagerPropertyViewModel = new ManagerPropertyViewModel(_model);
-            ManagerAddProductViewModel = new ManagerAddProductViewModel(_model);
+            ManagerItemPropertyViewModel = new ManagerItemPropertyViewModel (_model);
+            ManagerAddItemViewModel = new ManagerAddItemViewModel(_model);
         }
         private ManagerModel _model;
 
-        public ManagerPropertyViewModel ManagerPropertyViewModel { get; }
-        public ManagerAddProductViewModel ManagerAddProductViewModel { get; }
+        public ManagerItemPropertyViewModel  ManagerItemPropertyViewModel { get; }
+        public ManagerAddItemViewModel ManagerAddItemViewModel { get; }
     }
 }

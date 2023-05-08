@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Managers
 {
-    public class ProductManager : IProductManager
+    public class ItemStorageManager : IItemStorageManager
     {
 
         private readonly IUnitOfWork _uow;
 
-        public ProductManager(IUnitOfWork uow)
+        public ItemStorageManager(IUnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public List<Product> GetAll()
+        public List<Item> GetAll()
         {
-            List<Product> result = new List<Product>();
+            List<Item> result = new List<Item>();
 
             //Task.Run(async () =>
             //{

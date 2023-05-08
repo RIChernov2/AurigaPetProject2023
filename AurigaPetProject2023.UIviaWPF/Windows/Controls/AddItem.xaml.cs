@@ -19,16 +19,16 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
     /// <summary>
     /// Interaction logic for AddProduct.xaml
     /// </summary>
-    public partial class AddProduct : UserControl
+    public partial class AddItem : UserControl
     {
-        public AddProduct()
+        public AddItem()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ManagerAddProductViewModel viewModel = (ManagerAddProductViewModel)this.DataContext;
+            ManagerAddItemViewModel viewModel = (ManagerAddItemViewModel)this.DataContext;
 
         }
     }

@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Managers
 {
-    public class ProductTypesStorageManager : IProductTypesStorageManager
+    public class ItemTypesStorageManager : IItemTypesStorageManager
     {
         private readonly IUnitOfWork _uow;
 
-        public ProductTypesStorageManager(IUnitOfWork uow)
+        public ItemTypesStorageManager(IUnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public async Task<List<ProductType>> GetAllAsync()
+        public async Task<List<ItemType>> GetAllAsync()
         {
             return (await _uow.ProductTypeRepository.GetAsync()).ToList();
 
         }
-        public List<ProductType> GetAll()
+        public List<ItemType> GetAll()
         {
-            List<ProductType> result = new List<ProductType>();
+            List<ItemType> result = new List<ItemType>();
 
             Task.Run(async () =>
             {
@@ -32,7 +32,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
             return result;
         }
 
-        public int Create(ProductType entity)
+        public int Create(ItemType entity)
         {
             int result = 0;
 
@@ -46,7 +46,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
         }
 
-        public int Update(ProductType entity)
+        public int Update(ItemType entity)
         {
             int result = 0;
 

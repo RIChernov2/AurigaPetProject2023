@@ -32,7 +32,7 @@ namespace AurigaPetProject2023.UI
                 ///
                 //var list = await unitOfWork.ProductTypeRepository.Ge
 
-                var manager = new ProductTypesStorageManager(unitOfWork);
+                var manager = new ItemTypesStorageManager(unitOfWork);
                 //var list = await manager.GetAllAsync();
                 var list2 = manager.GetAll();
             }

@@ -58,7 +58,7 @@ namespace AurigaPetProject2023.DataAccess.Helpers
                     .WithGlobalConnectionString($"{GetConnectionString()}")
                     //Retrieve the migration configuration
                     //.ScanIn(typeof(AddLogTable).Assembly).For.Migrations())
-                    .ScanIn(typeof(AddProductTypes).Assembly).For.Migrations())
+                    .ScanIn(typeof(AddItemTypes).Assembly).For.Migrations())
                 //Enable console log
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 //Build a service provider

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
 {
-    public interface IProductManager
+    public interface IItemStorageManager
     {
-        List<Product> GetAll();
+        List<Item> GetAll();
     }
 }

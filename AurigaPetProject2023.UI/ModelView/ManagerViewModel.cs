@@ -18,7 +18,7 @@ namespace AurigaPetProject2023.UI.ModelView
         }
         private ManagerModel _model;
 
-        public BindingList<ProductType> ProductTypes => _model.ProductTypes;
+        public BindingList<ItemType> ProductTypes => _model.ProductTypes;
 
         public ICommand LoadProductTypesCommand { get; }
 

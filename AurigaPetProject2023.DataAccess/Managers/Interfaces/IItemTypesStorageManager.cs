@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
 {
-    public interface IProductTypesStorageManager
+    public interface IItemTypesStorageManager
     {
-        Task<List<ProductType>> GetAllAsync();
-        List<ProductType> GetAll();
-        int Create(ProductType entity);
-        int Update(ProductType entity);
+        Task<List<ItemType>> GetAllAsync();
+        List<ItemType> GetAll();
+        int Create(ItemType entity);
+        int Update(ItemType entity);
         int Delete(int id);
     }
 }

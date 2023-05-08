@@ -20,9 +20,9 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
     /// <summary>
     /// Interaction logic for ProductTypeManagement.xaml
     /// </summary>
-    public partial class ProductTypeManagement : UserControl
+    public partial class ItemTypeManagement : UserControl
     {
-        static ProductTypeManagement()
+        static ItemTypeManagement()
         {
             // зачем я это все прописывал?
 
@@ -30,7 +30,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
             //    typeof(ProductTypeManagement), new FrameworkPropertyMetadata(null) {BindsTwoWayByDefault = true });
 
         }
-        public ProductTypeManagement()
+        public ItemTypeManagement()
         {
             InitializeComponent();
 
@@ -49,14 +49,14 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         {
 
             // считываем введенные данные, для того чтобы отправить на update
-            ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
-            if (model.SelectedProductType == null) return;
+            ManagerItemPropertyViewModel  model = (ManagerItemPropertyViewModel )this.DataContext;
+            if (model.SelectedItemType == null) return;
 
-            model.NewProductType = new ProductType()
+            model.NewItemType = new ItemType()
             {
-                Name = newProductTypeNameTextBox.Text,
-                IsUnique = newProductTypeIsUniqueCheckBox.IsChecked == true ? true : false,
-                ProductTypeID = model.SelectedProductType.ProductTypeID
+                Name = newItemTypeNameTextBox.Text,
+                IsUnique = newItemTypeIsUniqueCheckBox.IsChecked == true ? true : false,
+                ItemTypeID = model.SelectedItemType.ItemTypeID
             };
         }
 

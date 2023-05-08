@@ -6,7 +6,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        Task<IReadOnlyList<Product>> GetAsync();
-        Task<int> CreateAsync(Product entity);
+        Task<IReadOnlyList<Item>> GetAsync();
+        Task<int> CreateAsync(Item entity);
     }
 }

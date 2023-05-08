@@ -9,13 +9,13 @@ namespace AurigaPetProject2023.DataAccess.Migrations
     {
         public override void Up()
         {
-            AddProductTypes();
-            AddProducts();
-            AddUniqueIds();
-            AddUnderRepairProducts();
-            AddDisabledProducts();
+            AddItemTypes();
+            AddItems();
+            AddItemUniqueInfos();
+            AddRepairingInfos();
+            AddDisabledItems();
             AddUsers();
-            AddRentInformation();
+            AddRentInfo();
 
         }
 
@@ -23,9 +23,9 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         {
         }
 
-        private void AddProductTypes()
+        private void AddItemTypes()
         {
-            Insert.IntoTable("ProductTypes")
+            Insert.IntoTable("ItemTypes")
                 .Row(new { Name = "Нож", Unique = "0" })
                 .Row(new { Name = "Фонарь", Unique = "false" })
                 .Row(new { Name = "Топор", Unique = "false" })
@@ -34,90 +34,90 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .Row(new { Name = "Теннисные ракетки", Unique = "false" })
                 .Row(new { Name = "Спальный мешок", Unique = true });
         }
-        private void AddProducts()
+        private void AddItems()
         {
-            Insert.IntoTable("Products")
-                .Row(new { ProductType_ID = "1", Description = "Нож перочинный" })
-                .Row(new { ProductType_ID = "2", Description = "Фонарь" })
-                .Row(new { ProductType_ID = "3", Description = "Двуручный" })
-                .Row(new { ProductType_ID = "4", Description = "Гамак детский" })
-                .Row(new { ProductType_ID = "5", Description = "Двуспальная" })
-                .Row(new { ProductType_ID = "6", Description = "Профессиональные" })
-                .Row(new { ProductType_ID = "7", Description = "До минус 10" })
+            Insert.IntoTable("Items")
+                .Row(new { ItemType_ID = "1", Description = "Нож перочинный" })
+                .Row(new { ItemType_ID = "2", Description = "Фонарь" })
+                .Row(new { ItemType_ID = "3", Description = "Двуручный" })
+                .Row(new { ItemType_ID = "4", Description = "Гамак детский" })
+                .Row(new { ItemType_ID = "5", Description = "Двуспальная" })
+                .Row(new { ItemType_ID = "6", Description = "Профессиональные" })
+                .Row(new { ItemType_ID = "7", Description = "До минус 10" })
 
-                .Row(new { ProductType_ID = "1", Description = "Охотничий" })
-                .Row(new { ProductType_ID = "2", Description = "Мощный, аккумуляторный" })
-                .Row(new { ProductType_ID = "3", Description = "Топорик" })
-                .Row(new { ProductType_ID = "4", Description = "Гамак" })
-                .Row(new { ProductType_ID = "5", Description = "Одноместная" })
-                .Row(new { ProductType_ID = "6", Description = "Ракетки, Китай" })
-                .Row(new { ProductType_ID = "7", Description = "До минус 12" })
+                .Row(new { ItemType_ID = "1", Description = "Охотничий" })
+                .Row(new { ItemType_ID = "2", Description = "Мощный, аккумуляторный" })
+                .Row(new { ItemType_ID = "3", Description = "Топорик" })
+                .Row(new { ItemType_ID = "4", Description = "Гамак" })
+                .Row(new { ItemType_ID = "5", Description = "Одноместная" })
+                .Row(new { ItemType_ID = "6", Description = "Ракетки, Китай" })
+                .Row(new { ItemType_ID = "7", Description = "До минус 12" })
 
-                .Row(new { ProductType_ID = "1", Description = "Универсальный" })
-                .Row(new { ProductType_ID = "2", Description = "Аккумуляторный" })
-                .Row(new { ProductType_ID = "3", Description = "Топорик" })
-                .Row(new { ProductType_ID = "4", Description = "В комплекте с покрывалом" })
-                .Row(new { ProductType_ID = "5", Description = "Походная" })
-                .Row(new { ProductType_ID = "6", Description = "Ракетки" })
-                .Row(new { ProductType_ID = "7", Description = "Премиум, морозостойкий" })
+                .Row(new { ItemType_ID = "1", Description = "Универсальный" })
+                .Row(new { ItemType_ID = "2", Description = "Аккумуляторный" })
+                .Row(new { ItemType_ID = "3", Description = "Топорик" })
+                .Row(new { ItemType_ID = "4", Description = "В комплекте с покрывалом" })
+                .Row(new { ItemType_ID = "5", Description = "Походная" })
+                .Row(new { ItemType_ID = "6", Description = "Ракетки" })
+                .Row(new { ItemType_ID = "7", Description = "Премиум, морозостойкий" })
 
-                .Row(new { ProductType_ID = "1", Description = "Нож перочинный" })
-                .Row(new { ProductType_ID = "2", Description = "Фонарь" })
-                .Row(new { ProductType_ID = "3", Description = "Топорик" })
-                .Row(new { ProductType_ID = "4", Description = "Гамак" })
-                .Row(new { ProductType_ID = "5", Description = "Одноместная" })
-                .Row(new { ProductType_ID = "6", Description = "Ракетки, Китай" })
-                .Row(new { ProductType_ID = "7", Description = "Премиум, морозостойкий" });
+                .Row(new { ItemType_ID = "1", Description = "Нож перочинный" })
+                .Row(new { ItemType_ID = "2", Description = "Фонарь" })
+                .Row(new { ItemType_ID = "3", Description = "Топорик" })
+                .Row(new { ItemType_ID = "4", Description = "Гамак" })
+                .Row(new { ItemType_ID = "5", Description = "Одноместная" })
+                .Row(new { ItemType_ID = "6", Description = "Ракетки, Китай" })
+                .Row(new { ItemType_ID = "7", Description = "Премиум, морозостойкий" });
         }
 
-        private void AddUniqueIds()
+        private void AddItemUniqueInfos()
         {
-            Insert.IntoTable("UniqueIds")
-                .Row(new { Product_ID = "4" })
-                .Row(new { Product_ID = "5" })
-                .Row(new { Product_ID = "7" })
+            Insert.IntoTable("ItemUniqueInfos")
+                .Row(new { Item_ID = "4" })
+                .Row(new { Item_ID = "5" })
+                .Row(new { Item_ID = "7" })
 
-                .Row(new { Product_ID = "11" })
-                .Row(new { Product_ID = "12" })
-                .Row(new { Product_ID = "14" })
+                .Row(new { Item_ID = "11" })
+                .Row(new { Item_ID = "12" })
+                .Row(new { Item_ID = "14" })
 
-                .Row(new { Product_ID = "18" })
-                .Row(new { Product_ID = "19" })
-                .Row(new { Product_ID = "21" })
+                .Row(new { Item_ID = "18" })
+                .Row(new { Item_ID = "19" })
+                .Row(new { Item_ID = "21" })
 
-                .Row(new { Product_ID = "25" })
-                .Row(new { Product_ID = "26" })
-                .Row(new { Product_ID = "28" });
+                .Row(new { Item_ID = "25" })
+                .Row(new { Item_ID = "26" })
+                .Row(new { Item_ID = "28" });
         }
-        private void AddUnderRepairProducts()
+        private void AddRepairingInfos()
         {
-            Insert.IntoTable("UnderRepairProducts")
-                .Row(new { Product_ID = "22", Start_Date = DateTime.Now.AddDays(-215), Reason = "Перегорела лампочка",
+            Insert.IntoTable("RepairingInfos")
+                .Row(new { Item_ID = "22", Start_Date = DateTime.Now.AddDays(-215), Reason = "Перегорела лампочка",
                     End_Date = DateTime.Now.AddDays(-212), ResultDescription = "Лампочка была заменена"})
-                .Row(new { Product_ID = "9", Start_Date = DateTime.Now.AddDays(-150), Reason = "Батареи не даржат",
+                .Row(new { Item_ID = "9", Start_Date = DateTime.Now.AddDays(-150), Reason = "Батареи не даржат",
                     End_Date = DateTime.Now.AddDays(-145), ResultDescription = "Заменены батарейки"})
-                .Row(new { Product_ID = "7", Start_Date = DateTime.Now.AddDays(-60), Reason = "Скомкался материал",
+                .Row(new { Item_ID = "7", Start_Date = DateTime.Now.AddDays(-60), Reason = "Скомкался материал",
                     End_Date = DateTime.Now.AddDays(-55), ResultDescription = "Проблема устранена"})
-                .Row(new { Product_ID = "27", Start_Date = DateTime.Now.AddDays(-55), Reason = "Сломалась ручка",
+                .Row(new { Item_ID = "27", Start_Date = DateTime.Now.AddDays(-55), Reason = "Сломалась ручка",
                     End_Date = DateTime.Now.AddDays(-47), ResultDescription = "Исправлено"})
-                .Row(new { Product_ID = "14", Start_Date = DateTime.Now.AddDays(-35), Reason = "Спальник уронили в костер",
+                .Row(new { Item_ID = "14", Start_Date = DateTime.Now.AddDays(-35), Reason = "Спальник уронили в костер",
                     End_Date = DateTime.Now.AddDays(-27), ResultDescription = "Списано, восстановлению не подлежит"})
-                .Row(new { Product_ID = "5", Start_Date = DateTime.Now.AddDays(-30), Reason = "Прожгли крышу углем",
+                .Row(new { Item_ID = "5", Start_Date = DateTime.Now.AddDays(-30), Reason = "Прожгли крышу углем",
                     End_Date = DateTime.Now.AddDays(-24), ResultDescription = "Установлена заплатка"})
-                .Row(new { Product_ID = "4", Start_Date = DateTime.Now.AddDays(-25), Reason = "Сгнил материал",
+                .Row(new { Item_ID = "4", Start_Date = DateTime.Now.AddDays(-25), Reason = "Сгнил материал",
                     End_Date = DateTime.Now.AddDays(-15), ResultDescription = "Списано, восстановлению не подлежит"})
-                .Row(new { Product_ID = "3", Start_Date = DateTime.Now.AddDays(-7), Reason = "Слетел с древка" })
-                .Row(new { Product_ID = "11", Start_Date = DateTime.Now.AddDays(-6), Reason = "Требуется замена карабина" })
-                .Row(new { Product_ID = "1", Start_Date = DateTime.Now.AddDays(-2), Reason = "Требуется замена ручки" })
-                .Row(new { Product_ID = "15", Start_Date = DateTime.Now.AddDays(-2), Reason = "Появилась ржавчина" })
-                .Row(new { Product_ID = "19", Start_Date = DateTime.Now.AddDays(-1), Reason = "Отклеилось покрытие" });
+                .Row(new { Item_ID = "3", Start_Date = DateTime.Now.AddDays(-7), Reason = "Слетел с древка" })
+                .Row(new { Item_ID = "11", Start_Date = DateTime.Now.AddDays(-6), Reason = "Требуется замена карабина" })
+                .Row(new { Item_ID = "1", Start_Date = DateTime.Now.AddDays(-2), Reason = "Требуется замена ручки" })
+                .Row(new { Item_ID = "15", Start_Date = DateTime.Now.AddDays(-2), Reason = "Появилась ржавчина" })
+                .Row(new { Item_ID = "19", Start_Date = DateTime.Now.AddDays(-1), Reason = "Отклеилось покрытие" });
         }
-        private void AddDisabledProducts()
+        private void AddDisabledItems()
         {
-            Insert.IntoTable("DisabledProducts")
-                .Row(new { Product_ID = "2", Date = DateTime.Now.AddDays(-55), Reason = "Потерян арендатором"})
-                .Row(new { Product_ID = "14", Date = DateTime.Now.AddDays(-27), Reason = "Сожгли, восстановлению не подлежит"})
-                .Row(new { Product_ID = "4", Date = DateTime.Now.AddDays(-15), Reason = "Сгнил материал, восстановлению не подлежит"});
+            Insert.IntoTable("DisabledInfos")
+                .Row(new { Item_ID = "2", Date = DateTime.Now.AddDays(-55), Reason = "Потерян арендатором"})
+                .Row(new { Item_ID = "14", Date = DateTime.Now.AddDays(-27), Reason = "Сожгли, восстановлению не подлежит"})
+                .Row(new { Item_ID = "4", Date = DateTime.Now.AddDays(-15), Reason = "Сгнил материал, восстановлению не подлежит"});
         }
         private void AddUsers()
         {
@@ -155,41 +155,41 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .Row(new { User_ID = "12", RoleType_ID = "1" })
                 .Row(new { User_ID = "12", RoleType_ID = "2" });
         }
-        private void AddRentInformation()
+        private void AddRentInfo()
         {
-            Insert.IntoTable("RentInformation")
-                .Row(new { User_ID = "3", Product_ID = "2", Cost = 1200, IsPaid = true,
+            Insert.IntoTable("RentInfos")
+                .Row(new { User_ID = "3", Item_ID = "2", Cost = 1200, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-65), Expire_Date = DateTime.Now.AddDays(-58),
                     End_Date = DateTime.Now.AddDays(-58)})
-                .Row(new { User_ID = "5", Product_ID = "18", Cost = 1200, IsPaid = true,
+                .Row(new { User_ID = "5", Item_ID = "18", Cost = 1200, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-64), Expire_Date = DateTime.Now.AddDays(-57),
                     End_Date = DateTime.Now.AddDays(-57)})
-                .Row(new { User_ID = "2", Product_ID = "27", Cost = 5000, IsPaid = true,
+                .Row(new { User_ID = "2", Item_ID = "27", Cost = 5000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-64), Expire_Date = DateTime.Now.AddDays(-57),
                     End_Date = DateTime.Now.AddDays(-57)})
-                .Row(new { User_ID = "1", Product_ID = "20", Cost = 1000, IsPaid = true,
+                .Row(new { User_ID = "1", Item_ID = "20", Cost = 1000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-63), Expire_Date = DateTime.Now.AddDays(-56),
                     End_Date = DateTime.Now.AddDays(-55)})
-                .Row(new { User_ID = "6", Product_ID = "13", Cost = 1000, IsPaid = true,
+                .Row(new { User_ID = "6", Item_ID = "13", Cost = 1000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-53), Expire_Date = DateTime.Now.AddDays(-46),
                     End_Date = DateTime.Now.AddDays(-46)})
-                .Row(new { User_ID = "7", Product_ID = "14", Cost = 9000, IsPaid = true,
+                .Row(new { User_ID = "7", Item_ID = "14", Cost = 9000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-35), Expire_Date = DateTime.Now.AddDays(-28),
                     End_Date = DateTime.Now.AddDays(-27)})
-                .Row(new { User_ID = "4", Product_ID = "24", Cost = 1000, IsPaid = true,
+                .Row(new { User_ID = "4", Item_ID = "24", Cost = 1000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-32), Expire_Date = DateTime.Now.AddDays(-25),
                     End_Date = DateTime.Now.AddDays(-26)})
-                .Row(new { User_ID = "1", Product_ID = "6", Cost = 1000, IsPaid = true,
+                .Row(new { User_ID = "1", Item_ID = "6", Cost = 1000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-12), Expire_Date = DateTime.Now.AddDays(2)})
-                .Row(new { User_ID = "1", Product_ID = "7", Cost = 2000, IsPaid = true,
+                .Row(new { User_ID = "1", Item_ID = "7", Cost = 2000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-15), Expire_Date = DateTime.Now.AddDays(-1)})
-                .Row(new { User_ID = "2", Product_ID = "9", Cost = 500, IsPaid = false,
+                .Row(new { User_ID = "2", Item_ID = "9", Cost = 500, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-6), Expire_Date = DateTime.Now.AddDays(1)})
-                .Row(new { User_ID = "5", Product_ID = "25", Cost = 1000, IsPaid = false,
+                .Row(new { User_ID = "5", Item_ID = "25", Cost = 1000, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-8), Expire_Date = DateTime.Now.AddDays(-1)})
-                .Row(new { User_ID = "10", Product_ID = "16", Cost = 2000, IsPaid = false,
+                .Row(new { User_ID = "10", Item_ID = "16", Cost = 2000, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-2), Expire_Date = DateTime.Now.AddDays(12)})
-                .Row(new { User_ID = "9", Product_ID = "28", Cost = 3000, IsPaid = false,
+                .Row(new { User_ID = "9", Item_ID = "28", Cost = 3000, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-1), Expire_Date = DateTime.Now.AddDays(13)});
 
         }

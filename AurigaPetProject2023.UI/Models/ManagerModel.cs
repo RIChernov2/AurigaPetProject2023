@@ -7,14 +7,14 @@ namespace AurigaPetProject2023.UI.Models
 {
     public class ManagerModel
     {
-        public BindingList<ProductType> ProductTypes { get; private set; }
+        public BindingList<ItemType> ProductTypes { get; private set; }
         public void LoadProductTypes()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductTypesStorageManager(unitOfWork);
+                var manager = new ItemTypesStorageManager(unitOfWork);
                 var list = manager.GetAll();
-                ProductTypes = new BindingList<ProductType>(list);
+                ProductTypes = new BindingList<ItemType>(list);
             }
         }
     }

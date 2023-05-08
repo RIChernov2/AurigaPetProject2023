@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="AurigaPetProject2023.UIviaWPF.Windows.Controls.AddProduct"
+    x:Class="AurigaPetProject2023.UIviaWPF.Windows.Controls.AddItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,7 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <viewModels:ManagerAddProductViewModel />
+        <viewModels:ManagerAddItemViewModel />
     </UserControl.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -61,8 +61,8 @@
             Margin="10,0,10,0"
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
-            ItemsSource="{Binding ProductTypes}"
-            SelectedItem="{Binding Path=SelectedProductType}" />
+            ItemsSource="{Binding ItemTypes}"
+            SelectedItem="{Binding Path=SelectedItemType}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
@@ -81,7 +81,7 @@
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             Content="{Binding Path=Text}"
-            DataContext="{Binding NewProductStatusInfo}"
+            DataContext="{Binding NewItemStatusInfo}"
             Foreground="{Binding Path=Color}"
             Visibility="{Binding Path=Visibility}" />
 

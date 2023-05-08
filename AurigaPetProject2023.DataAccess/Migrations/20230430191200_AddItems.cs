@@ -4,17 +4,17 @@ using System.Data;
 namespace AurigaPetProject2023.DataAccess.Migrations
 {
     [Migration(20230430191200)]
-    public class AddProducts : Migration
+    public class AddItems : Migration
     {
         public override void Up()
         {
-            Create.Table("Products")
-                .WithColumn("Product_ID").AsInt32().PrimaryKey().Identity().NotNullable()
+            Create.Table("Items")
+                .WithColumn("Item_ID").AsInt32().PrimaryKey().Identity().NotNullable()
 
-                .WithColumn("ProductType_ID").AsInt32().NotNullable()
-                .ForeignKey("FK_Products_ProductTypes_ProductType_ID", "ProductTypes", "ProductType_ID")
+                .WithColumn("ItemType_ID").AsInt32().NotNullable()
+                .ForeignKey("FK_Items_ItemTypes_ItemType_ID", "ItemTypes", "ItemType_ID")
                 .OnDeleteOrUpdate(Rule.Cascade)
-                .Indexed("IX_Products_ProductType_ID")
+                .Indexed("IX_Items_ItemType_ID")
 
                 .WithColumn("Description").AsString(100).Nullable();
 
@@ -26,7 +26,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
 
         public override void Down()
         {
-            Delete.Table("Products");
+            Delete.Table("Items");
         }
     }
 }

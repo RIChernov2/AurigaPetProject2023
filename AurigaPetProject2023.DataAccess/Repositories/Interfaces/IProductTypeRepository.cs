@@ -3,7 +3,7 @@
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IProductTypeRepository: IGenericRepository<ProductType, int>
+    public interface IProductTypeRepository: IGenericRepository<ItemType, int>
     {
     }
 }

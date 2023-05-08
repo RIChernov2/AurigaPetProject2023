@@ -10,149 +10,149 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 {
     public class ManagerModel : BaseModel, INotifyPropertyChanged
     {
-        public BindingList<ProductType> ProductTypes { get; private set; }
+        public BindingList<ItemType> ItemTypes { get; private set; }
 
         public ManagerModel()
         {
-            ProductTypes = new BindingList<ProductType>();
-            ProductTypesIsLoaded = false;
-            NewProductTypeStatusInfo = new LabelInfo();
+            ItemTypes = new BindingList<ItemType>();
+            ItemTypesIsLoaded = false;
+            NewItemTypeStatusInfo = new LabelInfo();
         }
 
         #region Управление типами товаров
 
 
-        public bool ProductTypesIsLoaded
+        public bool ItemTypesIsLoaded
         {
-            get { return _productTypesIsLoaded; }
+            get { return _itemTypesIsLoaded; }
             set
             {
-                _productTypesIsLoaded = value;
-                OnPropertyChanged(nameof(ProductTypesIsLoaded));
+                _itemTypesIsLoaded = value;
+                OnPropertyChanged(nameof(ItemTypesIsLoaded));
             }
         }
-        private bool _productTypesIsLoaded;
+        private bool _itemTypesIsLoaded;
 
-        public string NewProductTypeName
+        public string NewItemTypeName
         {
-            get { return _newProductTypeName; }
+            get { return _newItemTypeName; }
             set
             {
-                _newProductTypeName = value;
-                OnPropertyChanged(nameof(ProductTypesIsLoaded));
+                _newItemTypeName = value;
+                OnPropertyChanged(nameof(ItemTypesIsLoaded));
             }
         }
-        private string _newProductTypeName;
+        private string _newItemTypeName;
 
-        public bool NewProductTypeIsUnique
+        public bool NewItemTypeIsUnique
         {
-            get { return _newProductTypeIsUnique; }
+            get { return _newItemTypeIsUnique; }
             set
             {
-                _newProductTypeIsUnique = value;
-                OnPropertyChanged(nameof(ProductTypesIsLoaded));
+                _newItemTypeIsUnique = value;
+                OnPropertyChanged(nameof(ItemTypesIsLoaded));
             }
         }
-        private bool _newProductTypeIsUnique;
+        private bool _newItemTypeIsUnique;
 
-        public LabelInfo NewProductTypeStatusInfo
+        public LabelInfo NewItemTypeStatusInfo
         {
-            get { return _newProductTypeStatusInfo; }
+            get { return _newItemTypeStatusInfo; }
             set
             {
-                _newProductTypeStatusInfo = value;
-                OnPropertyChanged(nameof(ProductTypesIsLoaded));
+                _newItemTypeStatusInfo = value;
+                OnPropertyChanged(nameof(ItemTypesIsLoaded));
             }
         }
-        private LabelInfo _newProductTypeStatusInfo;
+        private LabelInfo _newItemTypeStatusInfo;
 
-        public LabelInfo NewProductStatusInfo
+        public LabelInfo NewItemStatusInfo
         {
-            get { return _newProductStatusInfo; }
+            get { return _newItemStatusInfo; }
             set
             {
-                _newProductStatusInfo = value;
-                OnPropertyChanged(nameof(NewProductStatusInfo));
+                _newItemStatusInfo = value;
+                OnPropertyChanged(nameof(NewItemStatusInfo));
             }
         }
-        private LabelInfo _newProductStatusInfo;
+        private LabelInfo _newItemStatusInfo;
 
 
-        public void LoadProductTypes()
+        public void LoadItemTypes()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductTypesStorageManager(unitOfWork);
+                var manager = new ItemTypesStorageManager(unitOfWork);
                 var list = manager.GetAll();
 
                 //ProductTypes = new BindingList<ProductType>(list);
-                ProductTypes.Clear();
+                ItemTypes.Clear();
                 foreach (var item in list)
                 {
-                    ProductTypes.Add(item);
+                    ItemTypes.Add(item);
                 }
-                ProductTypesIsLoaded = true;
+                ItemTypesIsLoaded = true;
             }
         }
-        public void AddProductType()
+        public void AddItemType()
         {
             //NewProductTypeStatusVisibility = Visibility.Hidden;
 
 
-            if (!ProductTypesIsLoaded) return;
-            if (string.IsNullOrEmpty(NewProductTypeName))
+            if (!ItemTypesIsLoaded) return;
+            if (string.IsNullOrEmpty(NewItemTypeName))
             {
                 ChangeStatusColorAndVisibility(Brushes.Red);
-                NewProductTypeStatusInfo.Text = "Нельзя добавить категорию без названия";
+                NewItemTypeStatusInfo.Text = "Нельзя добавить категорию без названия";
                 return;
             }
 
-            if (ProductTypes.Select(x => x.Name.ToLower()).Contains(NewProductTypeName.ToLower()))
+            if (ItemTypes.Select(x => x.Name.ToLower()).Contains(NewItemTypeName.ToLower()))
             {
                 //NewProductTypeStatusEnable = true;
                 ChangeStatusColorAndVisibility(Brushes.Red);
-                NewProductTypeStatusInfo.Text = $"Уже существует категория с названием \"{NewProductTypeName}\"";
+                NewItemTypeStatusInfo.Text = $"Уже существует категория с названием \"{NewItemTypeName}\"";
                 return;
             }
 
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductTypesStorageManager(unitOfWork);
-                var result = manager.Create(new ProductType() { Name = NewProductTypeName, IsUnique = NewProductTypeIsUnique });
-                LoadProductTypes();
+                var manager = new ItemTypesStorageManager(unitOfWork);
+                var result = manager.Create(new ItemType() { Name = NewItemTypeName, IsUnique = NewItemTypeIsUnique });
+                LoadItemTypes();
                 if (result == 1)
                 {
                     ChangeStatusColorAndVisibility(Brushes.Green);
-                    NewProductTypeStatusInfo.Text = $"Категория с названием \"{NewProductTypeName}\" успешно добавлена";
+                    NewItemTypeStatusInfo.Text = $"Категория с названием \"{NewItemTypeName}\" успешно добавлена";
                 }
                 else
                 {
                     ChangeStatusColorAndVisibility(Brushes.Red);
-                    NewProductTypeStatusInfo.Text = $"Ошибка в процессе добавления категории с названием \"{NewProductTypeName}\"";
+                    NewItemTypeStatusInfo.Text = $"Ошибка в процессе добавления категории с названием \"{NewItemTypeName}\"";
                 }
             }
         }
 
-        public void AddProduct(Product product)
+        public void AddItem(Item product)
         {
-            if (!ProductTypesIsLoaded) return;
+            if (!ItemTypesIsLoaded) return;
         }
 
 
         private void ChangeStatusColorAndVisibility(Brush color)
         {
-            if (NewProductTypeStatusInfo.Color != color)
+            if (NewItemTypeStatusInfo.Color != color)
             {
-                NewProductTypeStatusInfo.Color = color;
+                NewItemTypeStatusInfo.Color = color;
             }
-            NewProductTypeStatusInfo.Visibility = Visibility.Visible;
+            NewItemTypeStatusInfo.Visibility = Visibility.Visible;
 
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 2000; //millisec
             timer.Elapsed += (sender, e) =>
             {
                 //MessageBox.Show("Elapsed");
-                NewProductTypeStatusInfo.Visibility = Visibility.Hidden;
+                NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
                 timerEnabled = false;
                 if (timer != null) timer.Dispose();
             };
@@ -166,31 +166,32 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private bool timerEnabled;
 
-        public void UpdateProductType(ProductType productType)
+        public void UpdateProductType(ItemType productType)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductTypesStorageManager(unitOfWork);
+                var manager = new ItemTypesStorageManager(unitOfWork);
                 var result = manager.Update(productType);
-                LoadProductTypes();
+                //LoadItemTypes();
                 if (result == 1)
                 {
                     MessageBox.Show($"Категория успешно изменения");
+                    LoadItemTypes();
                 }
                 else
                 {
                     MessageBox.Show($"Ошибка в процессе изменения категории"); ;
                 }
-                NewProductTypeStatusInfo.Visibility = Visibility.Hidden;
+                NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
             }
         }
-        public void DeleteProductType(int id)
+        public void DeleteItemType(int id)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductTypesStorageManager(unitOfWork);
+                var manager = new ItemTypesStorageManager(unitOfWork);
                 var result = manager.Delete(id);
-                LoadProductTypes();
+                LoadItemTypes();
                 if (result == 1)
                 {
                     MessageBox.Show($"Категория успешно удалена");
@@ -199,7 +200,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     MessageBox.Show($"Ошибка в процессе удаления категории");
                 }
-                NewProductTypeStatusInfo.Visibility = Visibility.Hidden;
+                NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
             }
         }
 

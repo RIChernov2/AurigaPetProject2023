@@ -4,19 +4,19 @@
 namespace AurigaPetProject2023.DataAccess.Migrations
 {
     [Migration(20230406012500)]
-    public class AddProductTypes : Migration
+    public class AddItemTypes : Migration
     {
         public override void Up()
         {
-            Create.Table("ProductTypes")
-                .WithColumn("ProductType_ID").AsInt32().PrimaryKey().Identity().NotNullable()
+            Create.Table("ItemTypes")
+                .WithColumn("ItemType_ID").AsInt32().PrimaryKey().Identity().NotNullable()
                 .WithColumn("Name").AsString(50).NotNullable()
                 .WithColumn("Unique").AsBoolean();
         }
 
         public override void Down()
         {
-            Delete.Table("ProductTypes");
+            Delete.Table("ItemTypes");
         }
     }
 }

@@ -21,8 +21,8 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             _model = new ManagerViewModel();
             this.DataContext = _model;
 
-            productTypeManagement.DataContext = _model.ManagerPropertyViewModel;
-            addProductControl.DataContext = _model.ManagerAddProductViewModel;
+            itemTypeManagement.DataContext = _model.ManagerItemPropertyViewModel;
+            addItemControl.DataContext = _model.ManagerAddItemViewModel;
 
             //mainTabControl.SelectedItem = tabSecond;
         }
@@ -30,19 +30,26 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _model.ManagerPropertyViewModel.LoadProductTypesCommand.Execute(null);
+            _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
             //productTypesDataGrid.ItemsSource = _model.ProductTypes;
             
         }
 
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabControl tab = (TabControl)sender;
-            if((TabItem)tab.SelectedItem == newProductTab)
+            // короче тут похоже вот эта туннельность событий работает, надо убедиться, что не datadrid вызвала
+            // а вобще это конечно шляпа мб? ну то есть нужно ли это пытаться ставить на смену складки, или просто подгрузить?
+            if (e.Source is not TabControl)
             {
-                if(_model.ManagerPropertyViewModel.ProductTypes == null || _model.ManagerPropertyViewModel.ProductTypes.Count == 0)
+                return;
+            }
+
+            TabControl tab = (TabControl)sender;
+            if((TabItem)tab.SelectedItem == newItemTab)
+            {
+                if(_model.ManagerItemPropertyViewModel.ItemTypes == null || _model.ManagerItemPropertyViewModel.ItemTypes.Count == 0)
                 {
-                    _model.ManagerPropertyViewModel.LoadProductTypesCommand.Execute(null);
+                    _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
                 }
             }
         }
@@ -51,8 +58,8 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ProductManager(unitOfWork);
-                List <Product> list = manager.GetAll();
+                var manager = new ItemStorageManager(unitOfWork);
+                List <Item> list = manager.GetAll();
             }
         }
     }
