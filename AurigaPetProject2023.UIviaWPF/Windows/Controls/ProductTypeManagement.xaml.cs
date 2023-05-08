@@ -47,8 +47,11 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             // считываем введенные данные, для того чтобы отправить на update
             ManagerPropertyViewModel model = (ManagerPropertyViewModel)this.DataContext;
+            if (model.SelectedProductType == null) return;
+
             model.NewProductType = new ProductType()
             {
                 Name = newProductTypeNameTextBox.Text,

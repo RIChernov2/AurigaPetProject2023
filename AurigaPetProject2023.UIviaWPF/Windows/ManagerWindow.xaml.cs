@@ -1,4 +1,7 @@
-﻿using AurigaPetProject2023.UIviaWPF.ViewModels;
+﻿using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.DataAccess.Managers;
+using AurigaPetProject2023.UIviaWPF.ViewModels;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -41,6 +44,15 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 {
                     _model.ManagerPropertyViewModel.LoadProductTypesCommand.Execute(null);
                 }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new ProductManager(unitOfWork);
+                List <Product> list = manager.GetAll();
             }
         }
     }

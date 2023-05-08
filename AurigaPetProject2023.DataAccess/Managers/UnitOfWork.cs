@@ -14,6 +14,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         private IUserRepository _usersRepository;
         private IRoleRepository _roleRepository;
         private IProductTypeRepository _productTypeRepository;
+        private IProductRepository _productRepository;
         private DbContext _context;
 
         public UnitOfWork()
@@ -25,6 +26,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         public IUserRepository UserRepository => _usersRepository ??= new UserRepository(_context);
         public IRoleRepository RoleRepository => _roleRepository ??= new RoleRepository(_context);
         public IProductTypeRepository ProductTypeRepository => _productTypeRepository ??= new ProductTypeRepository(_context);
+        public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context);
 
 
         public void Commit()

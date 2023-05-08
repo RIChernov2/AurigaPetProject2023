@@ -65,7 +65,18 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private LabelInfo _newProductTypeStatusInfo;
-       
+
+        public LabelInfo NewProductStatusInfo
+        {
+            get { return _newProductStatusInfo; }
+            set
+            {
+                _newProductStatusInfo = value;
+                OnPropertyChanged(nameof(NewProductStatusInfo));
+            }
+        }
+        private LabelInfo _newProductStatusInfo;
+
 
         public void LoadProductTypes()
         {
@@ -120,6 +131,11 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                     NewProductTypeStatusInfo.Text = $"Ошибка в процессе добавления категории с названием \"{NewProductTypeName}\"";
                 }
             }
+        }
+
+        public void AddProduct(Product product)
+        {
+            if (!ProductTypesIsLoaded) return;
         }
 
 

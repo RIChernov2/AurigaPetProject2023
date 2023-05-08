@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AurigaPetProject2023.UIviaWPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         public AddProduct()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerAddProductViewModel viewModel = (ManagerAddProductViewModel)this.DataContext;
+
         }
     }
 }

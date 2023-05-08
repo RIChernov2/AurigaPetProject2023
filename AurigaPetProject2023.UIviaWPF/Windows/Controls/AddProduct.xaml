@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1cm" />
+            <RowDefinition Height="1cm" />
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
@@ -52,27 +53,37 @@
             Grid.Row="1"
             Grid.Column="1"
             Margin="10,0,10,0"
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
             Grid.Row="2"
             Grid.Column="1"
             Margin="10,0,10,0"
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
-            ItemsSource="{Binding ProductTypes}" />
-        <!--<Border BorderBrush="Gray" BorderThickness="0,0,0,1">
-            <TextBlock Text="Заголовок раздела" FontSize="18" FontWeight="Bold" Padding="5"/>
-        </Border>-->
+            ItemsSource="{Binding ProductTypes}"
+            SelectedItem="{Binding Path=SelectedProductType}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
-            Height="0.6cm"
             Width="120"
-            HorizontalAlignment="Left"
+            Height="0.6cm"
             Margin="10,0,0,0"
-            > Добавить
-            
+            HorizontalAlignment="Left"
+            Click="Button_Click">
+            Добавить
         </Button>
+
+        <Label
+            x:Name="statusLabel"
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Content="{Binding Path=Text}"
+            DataContext="{Binding NewProductStatusInfo}"
+            Foreground="{Binding Path=Color}"
+            Visibility="{Binding Path=Visibility}" />
 
     </Grid>
 </UserControl>

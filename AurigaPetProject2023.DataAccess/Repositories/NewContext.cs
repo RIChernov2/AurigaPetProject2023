@@ -11,6 +11,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         public DbSet<ProductType> ProductTypes { get; set; } = null;
         public DbSet<Role> Roles { get; set; } = null;
         public DbSet<User> Users { get; set; } = null;
+        public DbSet<Product> Products { get; set; } = null;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,6 +23,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         {
             modelBuilder.Entity<Role>().HasNoKey();
             modelBuilder.Entity<User>().Ignore(u => u.Roles);
+            modelBuilder.Entity<Product>().Ignore(p => p.ProductType);
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

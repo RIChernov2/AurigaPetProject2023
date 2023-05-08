@@ -64,7 +64,30 @@
                 </Grid>
 
             </TabItem>
-            <TabItem x:Name="tabSecond" Header="qweqwe" />
+            <TabItem
+                x:Name="tabSecond"
+                Width="56"
+                HorizontalAlignment="Left"
+                Header="qweqwe">
+
+                <StackPanel>
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1cm" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>-->
+                    <Button
+                        Grid.Row="1"
+                        Width="200"
+                        Height="1cm"
+                        Margin="74,31,223,361"
+                        Click="Button_Click_1"
+                        Content="Тест" RenderTransformOrigin="-0.555,1.145" />
+                </StackPanel>
+            </TabItem>
 
         </TabControl>
     </Grid>

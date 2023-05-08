@@ -15,8 +15,8 @@ namespace AurigaPetProject2023.DataAccess.Entities
         {
             string id = ProductTypeID == 0 ? "..." : ProductTypeID.ToString();
             string unique = IsUnique ? "Да" : "Нет";
-            return $"ID - {id}{Environment.NewLine}Название " +
-                $"- {Name}{Environment.NewLine}Уникальный - {unique}";
+            return $"ID - {id} {Environment.NewLine}Название " +
+                $"- {Name} {Environment.NewLine}Уникальный - {unique}";
         }
     }
 }
