@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.Controls", "AurigaPetProject2023.Controls\AurigaPetProject2023.Controls.csproj", "{C30303BF-F3A3-4E26-BE40-4B3DC43D2A95}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.UI", "AurigaPetProject2023.UI\AurigaPetProject2023.UI.csproj", "{3ADA5F6B-D2AA-42CE-B645-8F095D791ADA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.UIviaWPF", "AurigaPetProject2023.UIviaWPF\AurigaPetProject2023.UIviaWPF.csproj", "{5D0D5175-05DC-4414-B06D-A01B268D2F16}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{C30303BF-F3A3-4E26-BE40-4B3DC43D2A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C30303BF-F3A3-4E26-BE40-4B3DC43D2A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C30303BF-F3A3-4E26-BE40-4B3DC43D2A95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3ADA5F6B-D2AA-42CE-B645-8F095D791ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3ADA5F6B-D2AA-42CE-B645-8F095D791ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3ADA5F6B-D2AA-42CE-B645-8F095D791ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3ADA5F6B-D2AA-42CE-B645-8F095D791ADA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
