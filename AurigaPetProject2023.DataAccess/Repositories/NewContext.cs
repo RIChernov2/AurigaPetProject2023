@@ -9,8 +9,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         public DbSet<ItemType> ItemTypes { get; set; } = null;
         public DbSet<Role> Roles { get; set; } = null;
         public DbSet<User> Users { get; set; } = null;
-        public DbSet<Item> Products { get; set; } = null;
-        //public DbSet<ItemUniqueInfo> UniqueIds { get; set; } = null;
+        public DbSet<Item> Items { get; set; } = null;
+        public DbSet<ItemUniqueInfo> ItemUniqueInfos{ get; set; } = null;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -56,10 +56,23 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //using (UnitOfWork unitOfWork = new UnitOfWork())
+            //{
+            //    var manager = new ItemStorageManager(unitOfWork);
+            //    List <Item> list = manager.GetAll();
+            //}
+
+
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 var manager = new ItemStorageManager(unitOfWork);
-                List <Item> list = manager.GetAll();
+                List<Item> list = manager.GetAll();
+
+                Item newItem = new Item();
+                newItem.ItemTypeID = 7;
+                newItem.Description = "Супер мешок";
+
+                manager.Create(newItem);
             }
         }
     }

@@ -25,6 +25,25 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             return await _context.SaveChangesAsync();
         }
 
+        public virtual async Task<int> CreateUniqueIdAsync(int itemID)
+        {
+            DbSet<ItemUniqueInfo> dbSet = _context.Set<ItemUniqueInfo>();
+            await dbSet.AddAsync(new ItemUniqueInfo() { ItemID = itemID });
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public virtual int GetLastId()
+        {
+            NewContext context = (NewContext)_context;
+            return context.Items.Select(x => x.ItemID).OrderBy(x => x).Last();
+
+            //using (NewContext context = NewContext())
+            //{
+            //    return context.Items.Select(x => x.ItemID).OrderBy(x=>x).Last();
+            //}
+        }
+
         public virtual async Task<IReadOnlyList<Item>> GetAsync()
         {
             //var query = from products in _context.Set<Product>()
@@ -42,15 +61,15 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
             //return await _dbSet.ToListAsync();
 
-            return await (from products in _context.Set<Item>()
+            return await (from items in _context.Set<Item>()
                           join types in _context.Set<ItemType>()
-                          on products.ItemTypeID equals types.ItemTypeID
+                          on items.ItemTypeID equals types.ItemTypeID
                           //join uniqueIds in _context.Set<UniqueId>()
                           select new Item()
                           {
-                              ItemID = products.ItemTypeID,
-                              ItemTypeID = products.ItemTypeID,
-                              Description = products.Description,
+                              ItemID = items.ItemTypeID,
+                              ItemTypeID = items.ItemTypeID,
+                              Description = items.Description,
                               ItemType = types,
                           }).ToListAsync();
         }

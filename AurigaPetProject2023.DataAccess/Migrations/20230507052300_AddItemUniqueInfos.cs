@@ -11,10 +11,12 @@ namespace AurigaPetProject2023.DataAccess.Migrations
             Create.Table("ItemUniqueInfos")
                 .WithColumn("ItemUnique_ID").AsInt32().PrimaryKey().Identity().NotNullable()
 
-                .WithColumn("Item_ID").AsInt32().NotNullable()
+                .WithColumn("Item_ID").AsInt32().NotNullable().Unique()
                 .ForeignKey("FK_ItemUniqueInfos_Items_Item_ID", "Items", "Item_ID")
-                .OnDeleteOrUpdate(Rule.Cascade)
-                .Indexed("IX_ItemUniqueInfos_Item_ID");
+                .OnDeleteOrUpdate(Rule.Cascade);
+
+                // убрали из за Unique;
+                //.Indexed("IX_ItemUniqueInfos_Item_ID");
         }
 
         public override void Down()

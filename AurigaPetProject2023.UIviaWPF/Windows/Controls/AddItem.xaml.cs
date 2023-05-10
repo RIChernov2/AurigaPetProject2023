@@ -1,4 +1,6 @@
-﻿using AurigaPetProject2023.UIviaWPF.ViewModels;
+﻿using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.DataAccess.Managers;
+using AurigaPetProject2023.UIviaWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,33 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ManagerAddItemViewModel viewModel = (ManagerAddItemViewModel)this.DataContext;
+            try
+            {
+                ManagerAddItemViewModel viewModel = (ManagerAddItemViewModel)this.DataContext;
+                Item newItem = new Item();
+                newItem.ItemTypeID = viewModel.SelectedItemType.ItemTypeID;
+                newItem.Description = viewModel.Description;
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    var manager = new ItemStorageManager(unitOfWork);
+                    //List<Item> list = manager.GetAll();
+
+                    //Item newItem = new Item();
+                    //newItem.ItemTypeID = 7;
+                    //newItem.Description = "Супер мешок";
+
+                    manager.Create(newItem);
+                }
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show("Не удалось добавить оборудование. Тест ошибки:" 
+                    + Environment.NewLine + exc.Message
+                    + "Inner Exception Message:" + Environment.NewLine + exc.InnerException.InnerException.Message);
+            }
+
 
         }
     }

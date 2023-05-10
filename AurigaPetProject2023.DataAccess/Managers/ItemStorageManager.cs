@@ -37,6 +37,43 @@ namespace AurigaPetProject2023.DataAccess.Managers
             return result;
         }
 
+        public int Create(Item entity)
+        {
+            int result1 = 0;
+            int result2 = 0;
+            bool isUnique = false;
+
+            Task.Run(async () =>
+            {
+                result1 = await _uow.ItemRepository.CreateAsync(entity);
+                isUnique = (await _uow.ItemTypeRepository.GetAsync(entity.ItemTypeID)).IsUnique;
+
+                //if(isUnique)
+                //{
+                //    int lastId = _uow.ItemRepository.GetLastId();
+                //    //lastId = 0;
+                //    result2 = await _uow.ItemRepository.CreateUniqueIdAsync(lastId);
+                //}
+                
+            }).Wait();
+
+            if (isUnique)
+            {
+                int lastId = _uow.ItemRepository.GetLastId();
+                //lastId = 11; // тест отката транзакции и работы constrain-ов уникальности и foreign key
+                Task.Run(async () =>
+                {
+                    result2 = await _uow.ItemRepository.CreateUniqueIdAsync(lastId);
+                }).Wait();
+
+            }
+
+
+            _uow.Commit();
+
+            return result1 + result2;
+        }
+
 
     }
 }
