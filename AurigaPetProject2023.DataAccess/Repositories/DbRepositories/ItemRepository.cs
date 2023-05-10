@@ -8,12 +8,12 @@ using System.Xml;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
-    public class ProductRepository : IProductRepository
+    public class ItemRepository : IItemtRepository
     {
         private DbContext _context;
         private DbSet<Item> _dbSet;
 
-        public ProductRepository(DbContext context)
+        public ItemRepository(DbContext context)
         {
             _context = context;
             _dbSet = context.Set<Item>();

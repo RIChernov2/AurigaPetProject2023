@@ -17,7 +17,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
         public async Task<List<ItemType>> GetAllAsync()
         {
-            return (await _uow.ProductTypeRepository.GetAsync()).ToList();
+            return (await _uow.ItemTypeRepository.GetAsync()).ToList();
 
         }
         public List<ItemType> GetAll()
@@ -26,7 +26,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             Task.Run(async () =>
             {
-                result = (await _uow.ProductTypeRepository.GetAsync()).ToList(); 
+                result = (await _uow.ItemTypeRepository.GetAsync()).ToList(); 
             }).Wait();
 
             return result;
@@ -38,7 +38,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             Task.Run(async () =>
             {
-                result = await _uow.ProductTypeRepository.CreateAsync(entity);
+                result = await _uow.ItemTypeRepository.CreateAsync(entity);
             }).Wait();
 
             _uow.Commit();
@@ -52,7 +52,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             Task.Run(async () =>
             {
-                result = await _uow.ProductTypeRepository.UpdateAsync(entity);
+                result = await _uow.ItemTypeRepository.UpdateAsync(entity);
             }).Wait();
 
             _uow.Commit();
@@ -65,7 +65,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             Task.Run(async () =>
             {
-                result = await _uow.ProductTypeRepository.DeleteAsync(id);
+                result = await _uow.ItemTypeRepository.DeleteAsync(id);
             }).Wait();
 
             _uow.Commit();

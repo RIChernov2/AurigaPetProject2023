@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IProductRepository
+    public interface IItemtRepository
     {
         Task<IReadOnlyList<Item>> GetAsync();
         Task<int> CreateAsync(Item entity);

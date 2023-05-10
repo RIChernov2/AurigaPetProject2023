@@ -30,7 +30,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             Task resultTask = Task.Run(async () =>
             {
-                result = (await _uow.ProductRepository.GetAsync()).ToList();
+                result = (await _uow.ItemRepository.GetAsync()).ToList();
             });
             Task.WaitAll(resultTask);
 
