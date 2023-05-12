@@ -39,7 +39,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             set
             {
                 _newItemTypeName = value;
-                OnPropertyChanged(nameof(ItemTypesIsLoaded));
+                OnPropertyChanged(nameof(NewItemTypeName));
             }
         }
         private string _newItemTypeName;
@@ -50,7 +50,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             set
             {
                 _newItemTypeIsUnique = value;
-                OnPropertyChanged(nameof(ItemTypesIsLoaded));
+                OnPropertyChanged(nameof(NewItemTypeIsUnique));
             }
         }
         private bool _newItemTypeIsUnique;
@@ -61,7 +61,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             set
             {
                 _newItemTypeStatusInfo = value;
-                OnPropertyChanged(nameof(ItemTypesIsLoaded));
+                OnPropertyChanged(nameof(NewItemTypeStatusInfo));
             }
         }
         private LabelInfo _newItemTypeStatusInfo;
@@ -124,6 +124,8 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     ChangeStatusColorAndVisibility(Brushes.Green);
                     NewItemTypeStatusInfo.Text = $"Категория с названием \"{NewItemTypeName}\" успешно добавлена";
+                    NewItemTypeName = "";
+                    NewItemTypeIsUnique = false;
                 }
                 else
                 {
