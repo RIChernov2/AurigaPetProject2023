@@ -1,6 +1,7 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -12,11 +13,22 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         public BindingList<ItemType> ItemTypes { get; private set; }
 
-        public ManagerModel()
+        private  ManagerModel()
         {
             ItemTypes = new BindingList<ItemType>();
             ItemTypesIsLoaded = false;
             NewItemTypeStatusInfo = new LabelInfo();
+        }
+
+        private static ManagerModel _model;
+        public static ManagerModel GetInstance()
+        {
+            if (_model == null)
+            {
+                _model = new ManagerModel();
+            }
+
+            return _model;
         }
 
         #region Управление типами товаров
@@ -65,18 +77,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private LabelInfo _newItemTypeStatusInfo;
-
-        public LabelInfo NewItemStatusInfo
-        {
-            get { return _newItemStatusInfo; }
-            set
-            {
-                _newItemStatusInfo = value;
-                OnPropertyChanged(nameof(NewItemStatusInfo));
-            }
-        }
-        private LabelInfo _newItemStatusInfo;
-
 
         public void LoadItemTypes()
         {
@@ -134,12 +134,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 }
             }
         }
-
-        public void AddItem(Item product)
-        {
-            if (!ItemTypesIsLoaded) return;
-        }
-
 
         private void ChangeStatusColorAndVisibility(Brush color)
         {
@@ -207,5 +201,91 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
 
         #endregion
+
+        #region управление Item
+        private string _newItemDescription;
+        public string NewItemDescription
+        {
+            get => _newItemDescription;
+            set
+            {
+                _newItemDescription = value;
+                OnPropertyChanged(nameof(NewItemDescription));
+            }
+        }
+
+        private ItemType _newItemSelectedType;
+        public ItemType NewItemSelectedType
+        {
+            get => _newItemSelectedType;
+            set
+            {
+                _newItemSelectedType = value;
+                OnPropertyChanged(nameof(NewItemSelectedType));
+            }
+        }
+
+        //public LabelInfo NewItemStatusInfo
+        //{
+        //    get { return _newItemStatusInfo; }
+        //    set
+        //    {
+        //        _newItemStatusInfo = value;
+        //        OnPropertyChanged(nameof(NewItemStatusInfo));
+        //    }
+        //}
+        //private LabelInfo _newItemStatusInfo;
+
+
+        public void AddItem()
+        {
+            if (!ItemTypesIsLoaded) return;
+            if (NewItemSelectedType == null) return;
+            if (string.IsNullOrEmpty(NewItemDescription)) return;
+
+            Item newItem = new Item();
+            newItem.ItemTypeID = NewItemSelectedType.ItemTypeID;
+            newItem.Description = NewItemDescription;
+            newItem.ItemType = NewItemSelectedType;
+
+            if (MessageBox.Show("Вы уверены, что хотите давить данный элэмент:" +
+                    $"{Environment.NewLine}{Environment.NewLine}{PrintItem(newItem)}",
+                    "Подтверждение добавления",
+                    MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+
+
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    var manager = new ItemStorageManager(unitOfWork);
+                    int result = manager.Create(newItem);
+                    string message = result == 1 ? "Оборудование добавлено" : "Ошибка добавления оборудования";
+                    MessageBox.Show(message);
+                    if(result == 1)
+                    {
+                        NewItemDescription = "";
+                        NewItemSelectedType = null;
+
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show("Не удалось добавить оборудование. Тест ошибки:"
+                    + Environment.NewLine + exc.Message
+                    + "Inner Exception Message:" + Environment.NewLine + exc.InnerException.InnerException.Message);
+            }
+        }
+
+        private string PrintItem(Item item)
+        {
+            string unique = item.ItemType.IsUnique ? "Да" : "Нет";
+            return $"Описание \"{item.Description}\"{Environment.NewLine}Уникальный: \"{unique}\"";
+        }
+        #endregion
+
+
     }
 }

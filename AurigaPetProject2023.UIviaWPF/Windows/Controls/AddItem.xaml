@@ -54,7 +54,7 @@
             Grid.Column="1"
             Margin="10,0,10,0"
             VerticalAlignment="Center"
-            Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
+            Text="{Binding Path=NewItemDescription, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
             Grid.Row="2"
             Grid.Column="1"
@@ -62,7 +62,7 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             ItemsSource="{Binding ItemTypes}"
-            SelectedItem="{Binding Path=SelectedItemType}" />
+            SelectedItem="{Binding Path=NewItemSelectedType}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
@@ -70,11 +70,11 @@
             Height="0.6cm"
             Margin="10,0,0,0"
             HorizontalAlignment="Left"
-            Click="Button_Click">
+            Command="{Binding Path=AddItemCommand}">
             Добавить
         </Button>
 
-        <Label
+        <!--<Label
             x:Name="statusLabel"
             Grid.Row="4"
             Grid.Column="0"
@@ -83,7 +83,7 @@
             Content="{Binding Path=Text}"
             DataContext="{Binding NewItemStatusInfo}"
             Foreground="{Binding Path=Color}"
-            Visibility="{Binding Path=Visibility}" />
+            Visibility="{Binding Path=Visibility}" />-->
 
     </Grid>
 </UserControl>

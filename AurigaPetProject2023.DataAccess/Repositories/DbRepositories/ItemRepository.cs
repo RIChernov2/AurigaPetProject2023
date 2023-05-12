@@ -46,31 +46,24 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         public virtual async Task<IReadOnlyList<Item>> GetAsync()
         {
-            //var query = from products in _context.Set<Product>()
-            //            join types in _context.Set<ProductType>()
-            //            on products.ProductTypeID equals types.ProductTypeID
-
-            ////return await (from products in _context.Set<Product>()
-            ////              join types in _context.Set<ProductType>()
-            ////              on products.ProductType_ID equals types.ProductType_ID
-
-            //            //public virtual async Task<IReadOnlyList<TEntity>> GetAsync()
-            //            //{
-            //            //    return await _dbSet.ToListAsync();
-            //            //}
-
-            //return await _dbSet.ToListAsync();
 
             return await (from items in _context.Set<Item>()
                           join types in _context.Set<ItemType>()
                           on items.ItemTypeID equals types.ItemTypeID
-                          //join uniqueIds in _context.Set<UniqueId>()
+
+                          join uniqueIds in _context.Set<ItemUniqueInfo>()
+                          on items.ItemID equals uniqueIds.ItemID into T2
+                          
+                          from uniqueNumber in T2.DefaultIfEmpty()
+
                           select new Item()
                           {
                               ItemID = items.ItemTypeID,
                               ItemTypeID = items.ItemTypeID,
                               Description = items.Description,
                               ItemType = types,
+                              UniqueID =  !types.IsUnique ? null : uniqueNumber.ItemUniqueID
+                              //ItemType = types,
                           }).ToListAsync();
         }
     }

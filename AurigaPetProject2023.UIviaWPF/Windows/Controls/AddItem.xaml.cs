@@ -28,36 +28,39 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ManagerAddItemViewModel viewModel = (ManagerAddItemViewModel)this.DataContext;
-                Item newItem = new Item();
-                newItem.ItemTypeID = viewModel.SelectedItemType.ItemTypeID;
-                newItem.Description = viewModel.Description;
-
-                using (UnitOfWork unitOfWork = new UnitOfWork())
-                {
-                    var manager = new ItemStorageManager(unitOfWork);
-                    //List<Item> list = manager.GetAll();
-
-                    //Item newItem = new Item();
-                    //newItem.ItemTypeID = 7;
-                    //newItem.Description = "Супер мешок";
-
-                    manager.Create(newItem);
-                }
-            }
-            catch (Exception exc)
-            {
-
-                MessageBox.Show("Не удалось добавить оборудование. Тест ошибки:" 
-                    + Environment.NewLine + exc.Message
-                    + "Inner Exception Message:" + Environment.NewLine + exc.InnerException.InnerException.Message);
-            }
-
-
-        }
     }
 }
+
+
+
+// private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        ManagerAddItemViewModel viewModel = (ManagerAddItemViewModel)this.DataContext;
+        //        Item newItem = new Item();
+        //        newItem.ItemTypeID = viewModel.NewItemSelectedType.ItemTypeID;
+        //        newItem.Description = viewModel.NewItemDescription;
+
+//        using (UnitOfWork unitOfWork = new UnitOfWork())
+//        {
+//            var manager = new ItemStorageManager(unitOfWork);
+//            //List<Item> list = manager.GetAll();
+
+//            //Item newItem = new Item();
+//            //newItem.ItemTypeID = 7;
+//            //newItem.Description = "Супер мешок";
+
+//            manager.Create(newItem);
+//        }
+//    }
+//    catch (Exception exc)
+//    {
+
+//        MessageBox.Show("Не удалось добавить оборудование. Тест ошибки:" 
+//            + Environment.NewLine + exc.Message
+//            + "Inner Exception Message:" + Environment.NewLine + exc.InnerException.InnerException.Message);
+//    }
+
+
+//}

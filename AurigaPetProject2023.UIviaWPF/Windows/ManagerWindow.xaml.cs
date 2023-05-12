@@ -68,11 +68,11 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 var manager = new ItemStorageManager(unitOfWork);
                 List<Item> list = manager.GetAll();
 
-                Item newItem = new Item();
-                newItem.ItemTypeID = 7;
-                newItem.Description = "Супер мешок";
+                //Item newItem = new Item();
+                //newItem.ItemTypeID = 7;
+                //newItem.Description = "Супер мешок";
 
-                manager.Create(newItem);
+                //manager.Create(newItem);
             }
         }
     }
