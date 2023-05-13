@@ -10,5 +10,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
         Task<int> CreateAsync(Item entity);
         int GetLastId();
         Task<int> CreateUniqueIdAsync(int itemId);
+        Task<IReadOnlyList<ItemWithStatus>> GetItemsWithStatusAsync();
     }
 }

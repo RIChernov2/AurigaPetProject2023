@@ -26,13 +26,13 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         private void AddItemTypes()
         {
             Insert.IntoTable("ItemTypes")
-                .Row(new { Name = "Нож", Unique = "0" })
-                .Row(new { Name = "Фонарь", Unique = "false" })
-                .Row(new { Name = "Топор", Unique = "false" })
-                .Row(new { Name = "Гамак", Unique = "1" })
-                .Row(new { Name = "Палатка", Unique = "true" })
-                .Row(new { Name = "Теннисные ракетки", Unique = "false" })
-                .Row(new { Name = "Спальный мешок", Unique = true });
+                .Row(new { Name = "Нож", Is_Unique = "0" })
+                .Row(new { Name = "Фонарь", Is_Unique = "false" })
+                .Row(new { Name = "Топор", Is_Unique = "false" })
+                .Row(new { Name = "Гамак", Is_Unique = "1" })
+                .Row(new { Name = "Палатка", Is_Unique = "true" })
+                .Row(new { Name = "Теннисные ракетки", Is_Unique = "false" })
+                .Row(new { Name = "Спальный мешок", Is_Unique = true });
         }
         private void AddItems()
         {

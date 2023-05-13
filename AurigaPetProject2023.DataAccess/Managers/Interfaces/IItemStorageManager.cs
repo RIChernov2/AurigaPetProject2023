@@ -8,5 +8,6 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
     {
         List<Item> GetAll();
         int Create(Item entity);
+        List<ItemWithStatus> GetItemsWithStatus();
     }
 }

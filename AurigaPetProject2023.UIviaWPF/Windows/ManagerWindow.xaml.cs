@@ -2,6 +2,8 @@
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.ViewModels;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -67,6 +69,18 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             {
                 var manager = new ItemStorageManager(unitOfWork);
                 List<Item> list = manager.GetAll();
+                List<ItemWithStatus> list2 = manager.GetItemsWithStatus();
+
+                //foreach (var item in list2)
+                //{
+                //    Debug.WriteLine(item);
+                //}
+
+                foreach (var item in list2.Where(x => x.InRent || x.InRepair || x.Disabled))
+                {
+                    Debug.WriteLine(item);
+                }
+
 
                 //Item newItem = new Item();
                 //newItem.ItemTypeID = 7;
@@ -75,5 +89,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 //manager.Create(newItem);
             }
         }
+
+
     }
 }

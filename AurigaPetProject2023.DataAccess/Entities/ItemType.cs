@@ -8,7 +8,7 @@ namespace AurigaPetProject2023.DataAccess.Entities
         [Column("ItemType_ID")]
         public int ItemTypeID { get; set; }
         public string Name { get; set; }
-        [Column("Unique")]
+        [Column("Is_Unique")]
         public bool IsUnique { get; set; }
 
         public override string ToString()

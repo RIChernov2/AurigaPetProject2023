@@ -74,6 +74,16 @@ namespace AurigaPetProject2023.DataAccess.Managers
             return result1 + result2;
         }
 
+        public List<ItemWithStatus> GetItemsWithStatus()
+        {
+            List<ItemWithStatus> result = null;
+            
+            Task.Run(async () =>
+            {
+                result = (await _uow.ItemRepository.GetItemsWithStatusAsync()).ToList();
+            }).Wait();
 
+            return result;
+        }
     }
 }

@@ -53,18 +53,85 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
                           join uniqueIds in _context.Set<ItemUniqueInfo>()
                           on items.ItemID equals uniqueIds.ItemID into T2
-                          
+
                           from uniqueNumber in T2.DefaultIfEmpty()
 
                           select new Item()
                           {
-                              ItemID = items.ItemTypeID,
+                              ItemID = items.ItemID,
                               ItemTypeID = items.ItemTypeID,
                               Description = items.Description,
                               ItemType = types,
-                              UniqueID =  !types.IsUnique ? null : uniqueNumber.ItemUniqueID
+                              UniqueID = !types.IsUnique ? null : uniqueNumber.ItemUniqueID
                               //ItemType = types,
                           }).ToListAsync();
+        }
+
+        public virtual async Task<IReadOnlyList<ItemWithStatus>> GetItemsWithStatusAsync()
+        {
+            //return await (from items in _context.Set<Item>()
+            //              join types in _context.Set<ItemType>()
+            //              on items.ItemTypeID equals types.ItemTypeID
+
+            //              join uniqueIds in _context.Set<ItemUniqueInfo>()
+            //              on items.ItemID equals uniqueIds.ItemID into T2
+
+            //              from uniqueNumber in T2.DefaultIfEmpty()
+            //              join disableInfo in _context.Set<DisabledInfo>()
+            //              on items.ItemID equals disableInfo.ItemID into T3
+
+            //              from disable in T3.DefaultIfEmpty()
+            //              join repairInfo in _context.Set<RepairingInfo>()
+            //              //( 
+            //              //      from repairInfo in _context.Set<RepairingInfo>()
+            //              //      where repairInfo.EndtDate == null
+            //              //      )
+            //              on items.ItemID equals repairInfo.ItemID into T4
+
+            //              from repair in T4.DefaultIfEmpty()
+            //              where repair.EndtDate == null
+
+            //              select new ItemWithStatus()
+            //              {
+            //                  ItemID = items.ItemID,
+            //                  ItemTypeID = items.ItemTypeID,
+            //                  Description = items.Description,
+            //                  ItemType = types,
+            //                  UniqueID = !types.IsUnique ? null : uniqueNumber.ItemUniqueID,
+            //                  Disabled = disable == null ? false : true,
+            //                  InRepair = repair == null ? false : (repair.EndtDate == null? true: false)
+
+
+            //                  //ItemType = types,
+            //              }).ToListAsync();
+
+            return await (      from item in _context.Set<Item>()
+                                join itemType in _context.Set<ItemType>() on item.ItemTypeID equals itemType.ItemTypeID
+                                join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
+                                from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
+                                join disabledInfo in _context.Set<DisabledInfo>()on item.ItemID equals disabledInfo.ItemID into disabledInfoGroup
+                                from disabledInfo in disabledInfoGroup.DefaultIfEmpty()
+
+                                join rentInfo in _context.Set<RentInfo>() on item.ItemID equals rentInfo.ItemID into rentInfoGroup
+                                from rentInfo in rentInfoGroup.DefaultIfEmpty()
+
+                                join repairtInfo in _context.Set<RepairingInfo>() on item.ItemID equals repairtInfo.ItemID into repairingtInfoGroup
+                                from repairtInfo in repairingtInfoGroup.DefaultIfEmpty()
+
+                                select new ItemWithStatus()
+                                {
+                                    ItemID = item.ItemID,
+                                    ItemTypeID = item.ItemTypeID,
+                                    Description = item.Description,
+                                    ItemType = itemType,
+                                    UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID,
+                                    Disabled = disabledInfo == null ? false : true,
+                                    InRent = rentInfo != null && rentInfo.EndtDate == null,
+                                    InRepair = repairtInfo != null && repairtInfo.EndtDate == null
+
+
+                                    //ItemType = types,
+                                }).ToListAsync();
         }
     }
 }

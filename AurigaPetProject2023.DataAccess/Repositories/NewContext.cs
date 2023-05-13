@@ -11,6 +11,9 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         public DbSet<User> Users { get; set; } = null;
         public DbSet<Item> Items { get; set; } = null;
         public DbSet<ItemUniqueInfo> ItemUniqueInfos{ get; set; } = null;
+        public DbSet<DisabledInfo> DisabledInfos { get; set; } = null;
+        public DbSet<RentInfo> RentInfos { get; set; } = null;
+        public DbSet<RepairingInfo> RepairingInfos { get; set; } = null;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
