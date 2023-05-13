@@ -20,7 +20,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             InitializeComponent();
 
             //_model = new ManagerPropertyViewModel();
-            _model = new ManagerViewModel();
+            _model = new ManagerViewModels();
             this.DataContext = _model;
 
             itemTypeManagement.DataContext = _model.ManagerItemPropertyViewModel;
@@ -28,7 +28,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
 
             //mainTabControl.SelectedItem = tabSecond;
         }
-        private ManagerViewModel _model;
+        private ManagerViewModels _model;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -68,18 +68,22 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 var manager = new ItemStorageManager(unitOfWork);
-                List<Item> list = manager.GetAll();
-                List<ItemWithStatus> list2 = manager.GetItemsWithStatus();
+                //List<Item> list = manager.GetAll();
+                //List<ItemWithStatus> list2 = manager.GetItemsWithStatus();
 
                 //foreach (var item in list2)
                 //{
                 //    Debug.WriteLine(item);
                 //}
 
-                foreach (var item in list2.Where(x => x.InRent || x.InRepair || x.Disabled))
-                {
-                    Debug.WriteLine(item);
-                }
+                //foreach (var item in list2.Where(x => x.InRent || x.InRepair || x.Disabled))
+                //{
+                //    Debug.WriteLine(item);
+                //}
+
+                List<Item> list3 = manager.GetDisabled();
+                List<Item> list4 = manager.GetAvailiable();
+                //List<Item> list4 = manager.GetNotDisabledAsync();
 
 
                 //Item newItem = new Item();

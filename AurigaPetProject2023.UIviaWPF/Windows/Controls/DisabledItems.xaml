@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="AurigaPetProject2023.UIviaWPF.Windows.Controls.DisabledItems"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AurigaPetProject2023.UIviaWPF.Windows.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:AurigaPetProject2023.UIviaWPF.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <viewModels:ManagerDisableViewModel />
+    </UserControl.DataContext>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1cm" />
+
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="1"
+            BorderBrush="Gray"
+            BorderThickness="0,0,0,1">
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="16"
+                TextAlignment="Center">
+                Управление списанием оборудования
+            </TextBlock>
+        </Border>
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="1"
+            BorderBrush="Gray"
+            BorderThickness="0,0,0,1">
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="16"
+                TextAlignment="Center">
+                Списанное
+            </TextBlock>
+        </Border>
+
+
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1cm" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1cm" />
+                <RowDefinition Height="1cm" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <DataGrid DataContext="{Binding Path=DisabledItems}" />
+
+        </Grid>
+    </Grid>
+</UserControl>

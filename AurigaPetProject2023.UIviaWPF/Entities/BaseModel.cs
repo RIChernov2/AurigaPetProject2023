@@ -12,5 +12,11 @@ namespace AurigaPetProject2023.UIviaWPF.Entities
             if (PropertyChanged != null)
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        // метод для пеерподписи свойств viewmodel на model
+        protected virtual void OnMyModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.PropertyName)) OnPropertyChanged(e.PropertyName);
+        }
     }
 }

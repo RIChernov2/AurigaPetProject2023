@@ -11,7 +11,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 {
     public class ManagerModel : BaseModel, INotifyPropertyChanged
     {
-        public BindingList<ItemType> ItemTypes { get; private set; }
 
         private  ManagerModel()
         {
@@ -31,8 +30,10 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             return _model;
         }
 
-        #region Управление типами товаров
+        #region Управление типами товаров #############################################
 
+        public BindingList<ItemType> ItemTypes { get; private set; }
+        
 
         public bool ItemTypesIsLoaded
         {
@@ -202,7 +203,8 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
         #endregion
 
-        #region управление Item
+        #region управление Item ########################################################
+
         private string _newItemDescription;
         public string NewItemDescription
         {
@@ -284,6 +286,11 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             string unique = item.ItemType.IsUnique ? "Да" : "Нет";
             return $"Описание \"{item.Description}\"{Environment.NewLine}Уникальный: \"{unique}\"";
         }
+
+
+
+
+
         #endregion
 
 

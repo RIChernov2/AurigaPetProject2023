@@ -6,8 +6,12 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
 {
     public interface IItemStorageManager
     {
-        List<Item> GetAll();
+        List<Item> GetDisabled();
+        List<Item> GetAvailiable();
         int Create(Item entity);
-        List<ItemWithStatus> GetItemsWithStatus();
+
+        // зачем
+        //List<Item> GetAll();
+        //List<ItemWithStatus> GetItemsWithStatus();
     }
 }

@@ -15,7 +15,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <viewModels:ManagerViewModel />
+        <viewModels:ManagerViewModels />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="headerStyle" TargetType="DataGridColumnHeader">
@@ -40,9 +40,10 @@
         <TabControl
             x:Name="mainTabControl"
             Grid.Row="1"
-            SelectionChanged="mainTabControl_SelectionChanged"
-            >
-            <TabItem x:Name="newItemTab" Header="Ввод нового инвентаря">
+            SelectionChanged="mainTabControl_SelectionChanged">
+
+
+            <TabItem x:Name="newItemTab" Header="Добавление оборудовани">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75*" />
@@ -65,8 +66,11 @@
                 </Grid>
 
             </TabItem>
+
+            <TabItem x:Name="tabSecond" Header="Списание оборудования" />
+
             <TabItem
-                x:Name="tabSecond"
+                x:Name="tabThird"
                 Width="56"
                 HorizontalAlignment="Left"
                 Header="qweqwe">
@@ -86,7 +90,8 @@
                         Height="1cm"
                         Margin="74,31,223,361"
                         Click="Button_Click_1"
-                        Content="Тест" RenderTransformOrigin="-0.555,1.145" />
+                        Content="Тест"
+                        RenderTransformOrigin="-0.555,1.145" />
                 </StackPanel>
             </TabItem>
 

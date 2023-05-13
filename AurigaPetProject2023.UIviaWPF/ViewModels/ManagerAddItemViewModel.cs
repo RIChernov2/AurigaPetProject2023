@@ -11,20 +11,8 @@ using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerAddItemViewModel : BaseModel, INotifyPropertyChanged
+    public class ManagerAddItemViewModel : BaseModel
     {
-        //public ManagerAddItemViewModel()
-        //{
-        //    //_model = ManagerModel.GetInstance();
-        //}
-        //public ManagerAddItemViewModel(ManagerModel model)
-        //{
-        //    _model = model;
-        //    AddItemCommand = new RelayCommand(AddItem);
-
-        //    // подписываемся на события в модели
-        //    _model.PropertyChanged += OnMyModelPropertyChanged;
-        //}
 
         public ManagerAddItemViewModel()
         {
@@ -36,11 +24,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
 
         private ManagerModel _model;
-        private void OnMyModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.PropertyName)) OnPropertyChanged(e.PropertyName);
-        }
-
 
         public BindingList<ItemType> ItemTypes => _model.ItemTypes;
 

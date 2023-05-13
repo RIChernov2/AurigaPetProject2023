@@ -1,25 +1,31 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
-    public class DisabledItemRepository : IDisabledItemRepository
+    public class DisabledInfoRepository : IDisabledInfoRepository
     {
         private DbContext _context;
-        private DbSet<DisabledInfo> _set;
+        private DbSet<DisabledInfo> _dbSet;
 
-        public DisabledItemRepository(DbContext context)
+        public DisabledInfoRepository(DbContext context)
         {
             _context = context;
-            _set = _context.Set<DisabledInfo>();
+            _dbSet = _context.Set<DisabledInfo>();
         }
 
         public async Task<int> CreateAsync(DisabledInfo entity)
         {
-            await _set.AddAsync(entity);
+            await _dbSet.AddAsync(entity);
             return _context.SaveChanges();
+        }
+
+        public virtual async Task<IReadOnlyList<DisabledInfo>> GetAsync()
+        {
+            return await _dbSet.ToListAsync();
         }
     }
 }

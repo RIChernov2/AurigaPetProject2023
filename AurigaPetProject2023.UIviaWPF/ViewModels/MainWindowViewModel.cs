@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class MainWindowViewModel : BaseModel, INotifyPropertyChanged
+    public class MainWindowViewModel : BaseModel
     {
         public MainWindowViewModel()
         {

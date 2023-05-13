@@ -16,26 +16,39 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _uow = uow;
         }
 
-        public List<Item> GetAll()
-        {
-            List<Item> result = new List<Item>();
+        //public List<Item> GetAll()
+        //{
+        //    List<Item> result = new List<Item>();
 
-            //Task.Run(async () =>
-            //{
-            //    result = (await _uow.ProductRepository.GetAsync()).ToList();
-            //}).Wait();
+        //    //Task.Run(async () =>
+        //    //{
+        //    //    result = (await _uow.ProductRepository.GetAsync()).ToList();
+        //    //}).Wait();
 
 
-            // пробуем по-другому вызвать асинхронную, по идее там можно создать много дасков в разные таблицы, потом их всех подождать и выборку сделать
+        //    // пробуем по-другому вызвать асинхронную, по идее там можно создать много дасков в разные таблицы, потом их всех подождать и выборку сделать
 
-            Task resultTask = Task.Run(async () =>
-            {
-                result = (await _uow.ItemRepository.GetAsync()).ToList();
-            });
-            Task.WaitAll(resultTask);
+        //    Task resultTask = Task.Run(async () =>
+        //    {
+        //        result = (await _uow.ItemRepository.GetAsync()).ToList();
+        //    });
+        //    Task.WaitAll(resultTask);
 
-            return result;
-        }
+        //    return result;
+        //}
+
+        //public List<ItemWithStatus> GetItemsWithStatus()
+        //{
+        //    List<ItemWithStatus> result = null;
+
+        //    Task.Run(async () =>
+        //    {
+        //        result = (await _uow.ItemRepository.GetItemsWithStatusAsync()).ToList();
+        //    }).Wait();
+
+        //    return result;
+        //}
+
 
         public int Create(Item entity)
         {
@@ -74,14 +87,29 @@ namespace AurigaPetProject2023.DataAccess.Managers
             return result1 + result2;
         }
 
-        public List<ItemWithStatus> GetItemsWithStatus()
+
+
+        public List<Item> GetDisabled()
         {
-            List<ItemWithStatus> result = null;
-            
-            Task.Run(async () =>
+            List<Item> result = new List<Item>();
+
+            Task resultTask = Task.Run(async () =>
             {
-                result = (await _uow.ItemRepository.GetItemsWithStatusAsync()).ToList();
-            }).Wait();
+                result = (await _uow.ItemRepository.GetDisabledAsync()).ToList();
+            });
+            Task.WaitAll(resultTask);
+
+            return result;
+        }
+        public List<Item> GetAvailiable()
+        {
+            List<Item> result = new List<Item>();
+
+            Task resultTask = Task.Run(async () =>
+            {
+                result = (await _uow.ItemRepository.GetAvailiableAsync()).ToList();
+            });
+            Task.WaitAll(resultTask);
 
             return result;
         }

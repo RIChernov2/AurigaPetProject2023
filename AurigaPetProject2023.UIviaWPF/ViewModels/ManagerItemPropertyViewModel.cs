@@ -33,11 +33,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
-        private void OnMyModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(!string.IsNullOrEmpty(e.PropertyName)) OnPropertyChanged(e.PropertyName);
-        }
-
         private ManagerModel _model;
 
         public BindingList<ItemType> ItemTypes => _model.ItemTypes;

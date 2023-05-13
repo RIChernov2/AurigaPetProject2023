@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerViewModel
+    public class ManagerViewModels
     {
-        public ManagerViewModel()
+        public ManagerViewModels()
         {
             // не нужно ли через параметры конструктора перезавать?
             // не нужно ли сделать через интерфейс IManagerModel ?
             ManagerItemPropertyViewModel = new ManagerItemPropertyViewModel ();
             ManagerAddItemViewModel = new ManagerAddItemViewModel();
+            ManagerRepairViewModel = new ManagerDisableViewModel();
         }
 
 
         public ManagerItemPropertyViewModel  ManagerItemPropertyViewModel { get; }
         public ManagerAddItemViewModel ManagerAddItemViewModel { get; }
+        public ManagerDisableViewModel ManagerRepairViewModel { get; }
     }
 }
