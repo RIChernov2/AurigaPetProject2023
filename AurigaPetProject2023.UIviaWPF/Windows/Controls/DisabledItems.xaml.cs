@@ -24,5 +24,9 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         {
             InitializeComponent();
         }
+
+        private void Label_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

@@ -45,15 +45,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(NewItemSelectedType));
             }
         }
-        //public LabelInfo NewItemStatusInfo
-        //{
-        //    get { return _model.NewItemStatusInfo; }
-        //    set
-        //    {
-        //        _model.NewItemStatusInfo = value;
-        //        OnPropertyChanged(nameof(NewItemStatusInfo));
-        //    }
-        //}
 
 
         public ICommand AddItemCommand { get; }

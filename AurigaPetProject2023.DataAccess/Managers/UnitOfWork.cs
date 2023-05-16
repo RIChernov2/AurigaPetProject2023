@@ -15,6 +15,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         private IRoleRepository _roleRepository;
         private IItemTypeRepository _itemTypeRepository;
         private IItemtRepository _itemRepository;
+        private IDisabledInfoRepository _disabledInfoRepository;
         private DbContext _context;
 
         public UnitOfWork()
@@ -27,6 +28,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         public IRoleRepository RoleRepository => _roleRepository ??= new RoleRepository(_context);
         public IItemTypeRepository ItemTypeRepository => _itemTypeRepository ??= new ItemTypeRepository(_context);
         public IItemtRepository ItemRepository => _itemRepository ??= new ItemRepository(_context);
+        public IDisabledInfoRepository DisabledInfoRepository => _disabledInfoRepository ??= new DisabledInfoRepository(_context);
 
 
         public void Commit()

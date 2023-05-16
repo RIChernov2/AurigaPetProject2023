@@ -49,9 +49,17 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             TabControl tab = (TabControl)sender;
             if((TabItem)tab.SelectedItem == newItemTab)
             {
-                if(_model.ManagerItemPropertyViewModel.ItemTypes == null || _model.ManagerItemPropertyViewModel.ItemTypes.Count == 0)
+                //if(_model.ManagerItemPropertyViewModel.ItemTypes == null || _model.ManagerItemPropertyViewModel.ItemTypes.Count == 0)
+                if(!_model.ManagerItemPropertyViewModel.ItemTypesIsLoaded)
                 {
                     _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
+                }
+            }
+            else if ((TabItem)tab.SelectedItem == disabledItemTab)
+            {
+                if (!_model.ManagerDisableViewModel.ItemsIsLoaded)
+                {
+                    _model.ManagerDisableViewModel.LoadItemsCommand.Execute(null);
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AurigaPetProject2023.DataAccess.Entities
@@ -10,5 +11,7 @@ namespace AurigaPetProject2023.DataAccess.Entities
         public int DisabledInfoID { get; set; }
         [Column("Item_ID")]
         public int ItemID { get; set; }
+        public DateTime Date { get; set; }
+        public string Reason { get; set; }
     }
 }

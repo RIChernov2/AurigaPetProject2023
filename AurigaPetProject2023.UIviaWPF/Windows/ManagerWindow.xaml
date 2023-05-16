@@ -67,7 +67,9 @@
 
             </TabItem>
 
-            <TabItem x:Name="tabSecond" Header="Списание оборудования" />
+            <TabItem x:Name="disabledItemTab" Header="Списание оборудования">
+                <controls:DisabledItems />
+            </TabItem>
 
             <TabItem
                 x:Name="tabThird"

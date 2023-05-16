@@ -13,38 +13,57 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerItemModel.GetInstance();
 
-            LoadAvailableCommand = new RelayCommand(_model.LoadAvaliableItems);
-            LoadDisabledCommand = new RelayCommand(_model.LoadDisabledItems);
+            LoadItemsCommand = new RelayCommand(_model.LoadItems);
+            DisableItemCommand = new RelayCommand(_model.DisableItem);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
         private ManagerItemModel _model;
-        public bool AvaliableItemsIsLoaded
+        public bool ItemsIsLoaded
         {
-            get { return _model.AvaliableItemsIsLoaded; }
+            get { return _model.ItemsIsLoaded; }
             set
             {
-                _model.AvaliableItemsIsLoaded = value;
-                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
+                _model.ItemsIsLoaded = value;
+                OnPropertyChanged(nameof(ItemsIsLoaded));
             }
         }
+        public Item SelectedAvaliableItem
+        {
+            get { return _model.SelectedAvaliableItem; }
+            set
+            {
+                _model.SelectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
+        public string DisableReason
+        {
+            get { return _model.DisableReason; }
+            set
+            {
+                _model.DisableReason = value;
+                OnPropertyChanged(nameof(DisableReason));
+            }
+        }
+
+        public LabelInfo DisableOperationStatusInfo
+        {
+            get { return _model.DisableOperationStatusInfo; }
+            set
+            {
+                _model.DisableOperationStatusInfo = value;
+                OnPropertyChanged(nameof(DisableOperationStatusInfo));
+            }
+        }
+
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
-
-
-        public bool DisabledItemsIsLoaded
-        {
-            get { return _model.DisabledItemsIsLoaded; }
-            set
-            {
-                _model.DisabledItemsIsLoaded = value;
-                OnPropertyChanged(nameof(DisabledItemsIsLoaded));
-            }
-        }
         public BindingList<Item> DisabledItems => _model.DisabledItems;
 
-        ICommand LoadAvailableCommand { get; }
-        ICommand LoadDisabledCommand { get; }
+        public ICommand LoadItemsCommand { get; }
+        public ICommand DisableItemCommand { get; }
+
 
 
 

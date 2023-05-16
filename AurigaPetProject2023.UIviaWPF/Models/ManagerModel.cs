@@ -1,6 +1,7 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
+using AurigaPetProject2023.UIviaWPF.Helpers;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -103,15 +104,16 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             if (!ItemTypesIsLoaded) return;
             if (string.IsNullOrEmpty(NewItemTypeName))
             {
-                ChangeStatusColorAndVisibility(Brushes.Red);
+                //ChangeStatusColorAndVisibility(Brushes.Red);
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(NewItemTypeStatusInfo, Brushes.Red);
                 NewItemTypeStatusInfo.Text = "Нельзя добавить категорию без названия";
                 return;
             }
 
             if (ItemTypes.Select(x => x.Name.ToLower()).Contains(NewItemTypeName.ToLower()))
             {
-                //NewProductTypeStatusEnable = true;
-                ChangeStatusColorAndVisibility(Brushes.Red);
+                //ChangeStatusColorAndVisibility(Brushes.Red);
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(NewItemTypeStatusInfo, Brushes.Red);
                 NewItemTypeStatusInfo.Text = $"Уже существует категория с названием \"{NewItemTypeName}\"";
                 return;
             }
@@ -123,45 +125,47 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 LoadItemTypes();
                 if (result == 1)
                 {
-                    ChangeStatusColorAndVisibility(Brushes.Green);
+                    //ChangeStatusColorAndVisibility(Brushes.Green);
+                    new LabelInfoHelper().ChangeStatusColorAndVisibility(NewItemTypeStatusInfo, Brushes.Green);
                     NewItemTypeStatusInfo.Text = $"Категория с названием \"{NewItemTypeName}\" успешно добавлена";
                     NewItemTypeName = "";
                     NewItemTypeIsUnique = false;
                 }
                 else
                 {
-                    ChangeStatusColorAndVisibility(Brushes.Red);
+                    //ChangeStatusColorAndVisibility(Brushes.Red);
+                    new LabelInfoHelper().ChangeStatusColorAndVisibility(NewItemTypeStatusInfo, Brushes.Red);
                     NewItemTypeStatusInfo.Text = $"Ошибка в процессе добавления категории с названием \"{NewItemTypeName}\"";
                 }
             }
         }
 
-        private void ChangeStatusColorAndVisibility(Brush color)
-        {
-            if (NewItemTypeStatusInfo.Color != color)
-            {
-                NewItemTypeStatusInfo.Color = color;
-            }
-            NewItemTypeStatusInfo.Visibility = Visibility.Visible;
+        //private void ChangeStatusColorAndVisibility(Brush color)
+        //{
+        //    if (NewItemTypeStatusInfo.Color != color)
+        //    {
+        //        NewItemTypeStatusInfo.Color = color;
+        //    }
+        //    NewItemTypeStatusInfo.Visibility = Visibility.Visible;
 
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 2000; //millisec
-            timer.Elapsed += (sender, e) =>
-            {
-                //MessageBox.Show("Elapsed");
-                NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
-                timerEnabled = false;
-                if (timer != null) timer.Dispose();
-            };
+        //    System.Timers.Timer timer = new System.Timers.Timer();
+        //    timer.Interval = 2000; //millisec
+        //    timer.Elapsed += (sender, e) =>
+        //    {
+        //        //MessageBox.Show("Elapsed");
+        //        NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
+        //        timerEnabled = false;
+        //        if (timer != null) timer.Dispose();
+        //    };
 
-            if (!timerEnabled)
-            {
-                timerEnabled = true;
-                timer.Start();
-            }
+        //    if (!timerEnabled)
+        //    {
+        //        timerEnabled = true;
+        //        timer.Start();
+        //    }
 
-        }
-        private bool timerEnabled;
+        //}
+        //private bool timerEnabled;
 
         public void UpdateProductType(ItemType productType)
         {
@@ -262,13 +266,15 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     var manager = new ItemStorageManager(unitOfWork);
                     int result = manager.Create(newItem);
-                    string message = result == 1 ? "Оборудование добавлено" : "Ошибка добавления оборудования";
+                    string message = result != 0 ? "Оборудование добавлено" : "Ошибка добавления оборудования";
                     MessageBox.Show(message);
-                    if(result == 1)
+                    if(result != 0)
                     {
                         NewItemDescription = "";
                         NewItemSelectedType = null;
 
+                        // гарантируем загрузку айтемов, при открытии меню списания
+                        ManagerItemModel.GetInstance().ItemsIsLoaded = false;
                     }
                 }
             }

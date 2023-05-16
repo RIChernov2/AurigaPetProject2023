@@ -123,16 +123,15 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         private void DeleteItemType()
         {
             if (SelectedItemType == null) return;
-            //Messadialog = new CommonDialog();
 
-            //_model.DeleteProductType(SelectedProductType.ProductTypeID);
+            // проверка стоит здесь, а не в модели, так как тестировал, что будет, если не завязывать свойство на модель
+            // ну то есть SelectedItemType нет в модеи, чтобы его отобразить в контекстном меню
             if (MessageBox.Show("Вы уверены, что хотите удалить данный элэмент:" +
                 $"{Environment.NewLine}{Environment.NewLine}{SelectedItemType}",
                 "Подтверждение удаления",
                 MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 _model.DeleteItemType(SelectedItemType.ItemTypeID);
-                //LoadItemTypes();
             }
         }
 
