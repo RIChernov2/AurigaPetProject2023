@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Helpers;
@@ -17,7 +18,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             AvaliableItems = new BindingList<Item>();
             ItemsIsLoaded = false;
 
-            DisabledItems = new BindingList<Item>();
+            DisabledItems = new BindingList<ItemWithDisableInfo>();
             DisableOperationStatusInfo = new LabelInfo();
         }
 
@@ -78,7 +79,18 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         #endregion
 
         #region DisabledItems
-        public BindingList<Item> DisabledItems { get; private set; }
+        //public BindingList<Item> DisabledItems { get; private set; }
+        public BindingList<ItemWithDisableInfo> DisabledItems { get; private set; }
+        public ItemWithDisableInfo SelectedDisabledItem
+        {
+            get { return _selectedDisabledItem; }
+            set
+            {
+                _selectedDisabledItem = value;
+                OnPropertyChanged(nameof(SelectedDisabledItem));
+            }
+        }
+        private ItemWithDisableInfo _selectedDisabledItem;
         private void LoadDisabledItems()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())

@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
 using CommunityToolkit.Mvvm.Input;
@@ -58,8 +59,17 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
+        public ItemWithDisableInfo SelectedDisabledItem
+        {
+            get { return _model.SelectedDisabledItem; }
+            set
+            {
+                _model.SelectedDisabledItem = value;
+                OnPropertyChanged(nameof(SelectedDisabledItem));
+            }
+        }
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
-        public BindingList<Item> DisabledItems => _model.DisabledItems;
+        public BindingList<ItemWithDisableInfo> DisabledItems => _model.DisabledItems;
 
         public ICommand LoadItemsCommand { get; }
         public ICommand DisableItemCommand { get; }

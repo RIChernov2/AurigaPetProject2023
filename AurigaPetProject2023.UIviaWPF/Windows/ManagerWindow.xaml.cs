@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.ViewModels;
 using System.Collections.Generic;
@@ -89,7 +90,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 //    Debug.WriteLine(item);
                 //}
 
-                List<Item> list3 = manager.GetDisabled();
+                List<ItemWithDisableInfo> list3 = manager.GetDisabled();
                 List<Item> list4 = manager.GetAvailiable();
                 //List<Item> list4 = manager.GetNotDisabledAsync();
 

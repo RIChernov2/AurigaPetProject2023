@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Xml;
+using AurigaPetProject2023.DataAccess.Dto;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
-    public class ItemRepository : IItemtRepository
+    public class ItemRepository : IItemRepository
     {
         private DbContext _context;
         private DbSet<Item> _dbSet;
@@ -105,32 +106,55 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                          && !_context.Set<RentInfo>().Where(x=> x.EndtDate != null).Any(x => x.ItemID == item.ItemID)
 
                           select new Item
-                         {
-                             ItemID = item.ItemID,
-                             ItemTypeID = item.ItemTypeID,
-                             Description = item.Description,
-                             ItemType = itemType,
-                             UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
-                         }).ToListAsync();
+                            {
+                                ItemID = item.ItemID,
+                                ItemTypeID = item.ItemTypeID,
+                                Description = item.Description,
+                                ItemType = itemType,
+                                UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
+                            }).ToListAsync();
         }
 
-        public async Task<IReadOnlyList<Item>> GetDisabledAsync()
+        public async Task<IReadOnlyList<ItemWithDisableInfo>> GetDisabledAsync()
         {
             return await (from item in _context.Set<Item>()
                           join itemType in _context.Set<ItemType>() on item.ItemTypeID equals itemType.ItemTypeID
                           join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
                           from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
+                          join disabled in _context.Set<DisabledInfo>() on item.ItemID equals disabled.ItemID
+                          //where _context.Set<DisabledInfo>().Any(x => x.ItemID == item.ItemID)
 
-                          where _context.Set<DisabledInfo>().Any(x => x.ItemID == item.ItemID)
-                          select new Item
+                          select new ItemWithDisableInfo()
                           {
-                              ItemID = item.ItemID,
-                              ItemTypeID = item.ItemTypeID,
-                              Description = item.Description,
-                              ItemType = itemType,
-                              UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
+                              ItemData = new Item()
+                              {
+                                  ItemID = item.ItemID,
+                                  ItemTypeID = item.ItemTypeID,
+                                  Description = item.Description,
+                                  ItemType = itemType,
+                                  UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
+                              },
+
+                              DisabledInfoData = disabled
                           }).ToListAsync();
         }
+        //public async Task<IReadOnlyList<Item>> GetDisabledAsync()  
+        //{
+        //    return await (from item in _context.Set<Item>()
+        //                  join itemType in _context.Set<ItemType>() on item.ItemTypeID equals itemType.ItemTypeID
+        //                  join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
+        //                  from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
+
+        //                  where _context.Set<DisabledInfo>().Any(x => x.ItemID == item.ItemID)
+        //                  select new Item
+        //                  {
+        //                      ItemID = item.ItemID,
+        //                      ItemTypeID = item.ItemTypeID,
+        //                      Description = item.Description,
+        //                      ItemType = itemType,
+        //                      UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
+        //                  }).ToListAsync();
+        //}
 
         public async Task<IReadOnlyList<Item>> GetRepairingAsync()
         {

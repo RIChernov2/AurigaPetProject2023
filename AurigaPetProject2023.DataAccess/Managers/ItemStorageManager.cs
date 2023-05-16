@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,10 +89,9 @@ namespace AurigaPetProject2023.DataAccess.Managers
         }
 
 
-
-        public List<Item> GetDisabled()
+        public List<ItemWithDisableInfo> GetDisabled()
         {
-            List<Item> result = new List<Item>();
+            List<ItemWithDisableInfo> result = new List<ItemWithDisableInfo>();
 
             Task resultTask = Task.Run(async () =>
             {
@@ -101,6 +101,18 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
+        //public List<Item> GetDisabled()
+        //{
+        //    List<Item> result = new List<Item>();
+
+        //    Task resultTask = Task.Run(async () =>
+        //    {
+        //        result = (await _uow.ItemRepository.GetDisabledAsync()).ToList();
+        //    });
+        //    Task.WaitAll(resultTask);
+
+        //    return result;
+        //}
         public List<Item> GetAvailiable()
         {
             List<Item> result = new List<Item>();

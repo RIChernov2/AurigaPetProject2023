@@ -153,6 +153,8 @@
                     <RowDefinition Height="1cm" />
 
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="0.8cm" />
+                    <RowDefinition Height="2cm" />
 
                 </Grid.RowDefinitions>
 
@@ -172,20 +174,24 @@
                     AutoGenerateColumns="False"
                     IsReadOnly="true"
                     ItemsSource="{Binding Path=DisabledItems}"
-                    SelectionMode="Single">
+                    SelectedItem="{Binding Path=SelectedDisabledItem}"
+                    SelectionMode="Single"
+                    CanUserReorderColumns="False"
+                    >
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding Path=ItemID}"
-                            Header="ID" />
+                            Binding="{Binding Path=ItemData.ItemID}"
+                            Header="ID"
+                            />
 
                         <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding Path=ItemType.Name}"
+                            Binding="{Binding Path=ItemData.ItemType.Name}"
                             Header="Тип" />
                         <DataGridTextColumn
                             Width="2cm"
-                            Binding="{Binding Path=Description}"
+                            Binding="{Binding Path=ItemData.Description}"
                             Header="Описание" />
                         <!--<DataGridCheckBoxColumn
                             Width="Auto"
@@ -193,17 +199,16 @@
                             Header="Уникальный номер" />-->
                         <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding Path=UniqueID}"
+                            Binding="{Binding Path=ItemData.UniqueID}"
                             Header="Уник.номер" />
                     </DataGrid.Columns>
-
                 </DataGrid>
-
-
+                <Label Grid.Row="2" HorizontalAlignment="Center">Информация об удаленном элементе</Label>
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="20,0,20,0"
+                    Text="{Binding Path=SelectedDisabledItem.DisabledInfoData}" />
             </Grid>
-
-
         </Border>
-
     </Grid>
 </UserControl>
