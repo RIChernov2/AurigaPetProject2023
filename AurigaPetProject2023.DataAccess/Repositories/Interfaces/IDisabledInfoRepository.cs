@@ -8,5 +8,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
     {
         Task<int> CreateAsync(DisabledInfo entity);
         Task<IReadOnlyList<DisabledInfo>> GetAsync();
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
 using CommunityToolkit.Mvvm.Input;
@@ -13,20 +14,39 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerRepairItemModel.GetInstance();
 
-            LoadItemsCommand = new RelayCommand(_model.LoadItems);
+            LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
+            LoadRepairItemsCommand = new RelayCommand(_model.LoadRepairItems);
+            RepairItemCommand = new RelayCommand(_model.RepairItem);
         }
         private ManagerRepairItemModel _model;
-        public bool ItemsIsLoaded
+        public bool AvaliableItemsIsLoaded
         {
-            get { return _model.ItemsIsLoaded; }
+            get { return _model.AvaliableItemsIsLoaded; }
             set
             {
-                _model.ItemsIsLoaded = value;
-                OnPropertyChanged(nameof(ItemsIsLoaded));
+                _model.AvaliableItemsIsLoaded = value;
+                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
+            }
+        }
+        public bool RepairingItemsIsLoaded
+        {
+            get { return _model.RepairingItemsIsLoaded; }
+            set
+            {
+                _model.RepairingItemsIsLoaded = value;
+                OnPropertyChanged(nameof(RepairingItemsIsLoaded));
             }
         }
 
-        public BindingList<ItemWithRepairingInfoInfo> RepairingItems => _model.RepairingItems;
+        public Item SelectedAvaliableItem
+        {
+            get { return _model.SelectedAvaliableItem; }
+            set
+            {
+                _model.SelectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
         public ItemWithRepairingInfoInfo SelectedRepairingItem
         {
             get { return _model.SelectedRepairingItem; }
@@ -36,8 +56,12 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(SelectedRepairingItem));
             }
         }
+        public BindingList<Item> AvaliableItems => _model.AvaliableItems;
+        public BindingList<ItemWithRepairingInfoInfo> RepairingItems => _model.RepairingItems;
 
+        public ICommand LoadAvaliableItemsCommand { get; }
+        public ICommand LoadRepairItemsCommand { get; }
+        public ICommand RepairItemCommand { get; }
 
-        public ICommand LoadItemsCommand { get; }
     }
 }

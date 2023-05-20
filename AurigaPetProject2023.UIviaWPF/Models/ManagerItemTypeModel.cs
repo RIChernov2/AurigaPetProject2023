@@ -10,22 +10,22 @@ using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
-    public class ManagerModel : BaseModel, INotifyPropertyChanged
+    public class ManagerItemTypeModel : BaseModel, INotifyPropertyChanged
     {
 
-        private  ManagerModel()
+        private  ManagerItemTypeModel()
         {
             ItemTypes = new BindingList<ItemType>();
             ItemTypesIsLoaded = false;
             NewItemTypeStatusInfo = new LabelInfo();
         }
 
-        private static ManagerModel _model;
-        public static ManagerModel GetInstance()
+        private static ManagerItemTypeModel _model;
+        public static ManagerItemTypeModel GetInstance()
         {
             if (_model == null)
             {
-                _model = new ManagerModel();
+                _model = new ManagerItemTypeModel();
             }
 
             return _model;
@@ -274,7 +274,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                         NewItemSelectedType = null;
 
                         // гарантируем загрузку айтемов, при открытии меню списания
-                        ManagerDisableItemModel.GetInstance().ItemsIsLoaded = false;
+                        ManagerDisableItemModel.GetInstance().AvaliableItemsIsLoaded = false;
                     }
                 }
             }

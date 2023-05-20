@@ -1,4 +1,5 @@
 ﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         public ManagerRepairItemModel()
         {
+
             RepairingItems = new BindingList<ItemWithRepairingInfoInfo>();
             //ItemsIsLoaded = false;
 
@@ -25,24 +27,42 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
             return _model;
         }
-
-        public void LoadItems()
-        {
-            LoadRepairItems();
-            ItemsIsLoaded = true;
-        }
-        public bool ItemsIsLoaded
+        public bool RepairingItemsIsLoaded
         {
             get { return _itemsIsLoaded; }
             set
             {
                 _itemsIsLoaded = value;
-                OnPropertyChanged(nameof(ItemsIsLoaded));
+                OnPropertyChanged(nameof(RepairingItemsIsLoaded));
             }
         }
         public bool _itemsIsLoaded;
 
+        #region AvaliableItems
+        public Item SelectedAvaliableItem
+        {
+            get { return _selectedAvaliableItem; }
+            set
+            {
+                _selectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
+        private Item _selectedAvaliableItem;
+        private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
+        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+        public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
+        public bool AvaliableItemsIsLoaded
+        {
+            get { return _managerItemModel.AvaliableItemsIsLoaded; }
+            set
+            {
+                _managerItemModel.AvaliableItemsIsLoaded = value;
+                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
+            }
+        }
 
+        #endregion
 
         #region RepairItems
         public BindingList<ItemWithRepairingInfoInfo> RepairingItems { get; private set; }
@@ -69,7 +89,12 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     RepairingItems.Add(item);
                 }
+                RepairingItemsIsLoaded = true;
             }
+        }
+        public void RepairItem()
+        {
+
         }
 
         #endregion

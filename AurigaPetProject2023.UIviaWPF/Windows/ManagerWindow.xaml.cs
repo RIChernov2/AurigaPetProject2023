@@ -58,16 +58,27 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             }
             else if ((TabItem)tab.SelectedItem == disabledItemTab)
             {
-                if (!_model.ManagerDisableViewModel.ItemsIsLoaded)
+                if (!_model.ManagerDisableViewModel.AvaliableItemsIsLoaded)
                 {
-                    _model.ManagerDisableViewModel.LoadItemsCommand.Execute(null);
+                    _model.ManagerDisableViewModel.LoadAvaliableItemsCommand.Execute(null);
                 }
+
+                if (!_model.ManagerDisableViewModel.DisabledItemsIsLoaded)
+                {
+                    _model.ManagerDisableViewModel.LoadDisableItemsCommand.Execute(null);
+                }
+
             }
             else if ((TabItem)tab.SelectedItem == repeirItemTab)
             {
-                if (!_model.ManagerRepairItemViewModel.ItemsIsLoaded)
+                if (!_model.ManagerRepairItemViewModel.AvaliableItemsIsLoaded)
                 {
-                    _model.ManagerRepairItemViewModel.LoadItemsCommand.Execute(null);
+                    _model.ManagerRepairItemViewModel.LoadAvaliableItemsCommand.Execute(null);
+                }
+
+                if (!_model.ManagerRepairItemViewModel.RepairingItemsIsLoaded)
+                {
+                    _model.ManagerRepairItemViewModel.LoadRepairItemsCommand.Execute(null);
                 }
             }
         }

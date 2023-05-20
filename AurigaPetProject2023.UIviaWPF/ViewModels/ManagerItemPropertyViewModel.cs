@@ -19,7 +19,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         //}
         public ManagerItemPropertyViewModel ()
         {
-            _model = ManagerModel.GetInstance();
+            _model = ManagerItemTypeModel.GetInstance();
 
             LoadItemTypesCommand = new RelayCommand(LoadItemTypes);
             AddItemTypeCommand = new RelayCommand(AddItemType);
@@ -33,7 +33,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
-        private ManagerModel _model;
+        private ManagerItemTypeModel _model;
 
         public BindingList<ItemType> ItemTypes => _model.ItemTypes;
 

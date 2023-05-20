@@ -15,8 +15,8 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         private ManagerDisableItemModel()
         {
 
-            AvaliableItems = new BindingList<Item>();
-            ItemsIsLoaded = false;
+            //AvaliableItems = new BindingList<Item>();
+            DisabledItemsIsLoaded = false;
 
             DisabledItems = new BindingList<ItemWithDisableInfo>();
             DisableOperationStatusInfo = new LabelInfo();
@@ -32,19 +32,13 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
             return _model;
         }
-        public  void LoadItems()
-        {
-            LoadAvaliableItems();
-            LoadDisabledItems();
-            ItemsIsLoaded = true;
-        }
-        public bool ItemsIsLoaded
+        public bool DisabledItemsIsLoaded
         {
             get { return _itemsIsLoaded; }
             set
             {
                 _itemsIsLoaded = value;
-                OnPropertyChanged(nameof(ItemsIsLoaded));
+                OnPropertyChanged(nameof(DisabledItemsIsLoaded));
             }
         }
         private bool _itemsIsLoaded;
@@ -60,19 +54,17 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private Item _selectedAvaliableItem;
-        public BindingList<Item> AvaliableItems { get; private set; }
-        private void LoadAvaliableItems()
-        {
-            using (UnitOfWork unitOfWork = new UnitOfWork())
-            {
-                var manager = new ItemStorageManager(unitOfWork);
-                var list = manager.GetAvailiable();
+        private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
+        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+        public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
 
-                AvaliableItems.Clear();
-                foreach (var item in list)
-                {
-                    AvaliableItems.Add(item);
-                }
+        public bool AvaliableItemsIsLoaded
+        {
+            get { return _managerItemModel.AvaliableItemsIsLoaded; }
+            set
+            {
+                _managerItemModel.AvaliableItemsIsLoaded = value;
+                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
             }
         }
 
@@ -91,7 +83,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private ItemWithDisableInfo _selectedDisabledItem;
-        private void LoadDisabledItems()
+        public void LoadDisabledItems()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
@@ -103,6 +95,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 {
                     DisabledItems.Add(item);
                 }
+                DisabledItemsIsLoaded = true;
             }
         }
 
@@ -181,7 +174,8 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             {
                 DisableReason = "";
                 SelectedAvaliableItem = null;
-                LoadItems();
+                LoadAvaliableItems();
+                LoadDisabledItems();
                 DisableOperationStatusInfo.Text = "Операция успешно завершена";
                 new LabelInfoHelper().ChangeStatusColorAndVisibility(DisableOperationStatusInfo, Brushes.Green);
             }

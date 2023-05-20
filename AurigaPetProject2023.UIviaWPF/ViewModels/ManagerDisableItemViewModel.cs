@@ -14,31 +14,34 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerDisableItemModel.GetInstance();
 
-            LoadItemsCommand = new RelayCommand(_model.LoadItems);
+            LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
+            LoadDisableItemsCommand = new RelayCommand(_model.LoadDisabledItems);
             DisableItemCommand = new RelayCommand(_model.DisableItem);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
         private ManagerDisableItemModel _model;
-        public bool ItemsIsLoaded
+        public bool AvaliableItemsIsLoaded
         {
-            get { return _model.ItemsIsLoaded; }
+            get { return _model.AvaliableItemsIsLoaded; }
             set
             {
-                _model.ItemsIsLoaded = value;
-                OnPropertyChanged(nameof(ItemsIsLoaded));
+                _model.AvaliableItemsIsLoaded = value;
+                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
             }
         }
-        public Item SelectedAvaliableItem
+        public bool DisabledItemsIsLoaded
         {
-            get { return _model.SelectedAvaliableItem; }
+            get { return _model.DisabledItemsIsLoaded; }
             set
             {
-                _model.SelectedAvaliableItem = value;
-                OnPropertyChanged(nameof(SelectedAvaliableItem));
+                _model.DisabledItemsIsLoaded = value;
+                OnPropertyChanged(nameof(DisabledItemsIsLoaded));
             }
         }
+
+
         public string DisableReason
         {
             get { return _model.DisableReason; }
@@ -59,6 +62,15 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
+        public Item SelectedAvaliableItem
+        {
+            get { return _model.SelectedAvaliableItem; }
+            set
+            {
+                _model.SelectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
         public ItemWithDisableInfo SelectedDisabledItem
         {
             get { return _model.SelectedDisabledItem; }
@@ -71,7 +83,8 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<ItemWithDisableInfo> DisabledItems => _model.DisabledItems;
 
-        public ICommand LoadItemsCommand { get; }
+        public ICommand LoadAvaliableItemsCommand { get; }
+        public ICommand LoadDisableItemsCommand { get; }
         public ICommand DisableItemCommand { get; }
 
 

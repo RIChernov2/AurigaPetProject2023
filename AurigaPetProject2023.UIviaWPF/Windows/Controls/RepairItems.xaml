@@ -107,8 +107,8 @@
                             Grid.Row="1"
                             Height="0.6cm"
                             Margin="10,0,10,0"
-                            Command="{Binding Path=DisableItemCommand}">
-                            Списать
+                            Command="{Binding Path=RepairItemCommand}">
+                            В ремонт
                         </Button>
                         <TextBox
                             x:Name="disableReasonDescription"

@@ -16,14 +16,14 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 
         public ManagerAddItemViewModel()
         {
-            _model = ManagerModel.GetInstance();
+            _model = ManagerItemTypeModel.GetInstance();
             AddItemCommand = new RelayCommand(AddItem);
 
             // подписываемся на события в модели
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
-        private ManagerModel _model;
+        private ManagerItemTypeModel _model;
 
         public BindingList<ItemType> ItemTypes => _model.ItemTypes;
 
