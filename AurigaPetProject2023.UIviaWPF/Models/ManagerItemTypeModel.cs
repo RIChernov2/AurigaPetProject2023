@@ -31,7 +31,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             return _model;
         }
 
-        #region Управление типами товаров #############################################
+        #region ItemType
 
         public BindingList<ItemType> ItemTypes { get; private set; }
         
@@ -98,8 +98,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         public void AddItemType()
         {
-            //NewProductTypeStatusVisibility = Visibility.Hidden;
-
 
             if (!ItemTypesIsLoaded) return;
             if (string.IsNullOrEmpty(NewItemTypeName))
@@ -138,34 +136,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                     NewItemTypeStatusInfo.Text = $"Ошибка в процессе добавления категории с названием \"{NewItemTypeName}\"";
                 }
             }
-        }
-
-        //private void ChangeStatusColorAndVisibility(Brush color)
-        //{
-        //    if (NewItemTypeStatusInfo.Color != color)
-        //    {
-        //        NewItemTypeStatusInfo.Color = color;
-        //    }
-        //    NewItemTypeStatusInfo.Visibility = Visibility.Visible;
-
-        //    System.Timers.Timer timer = new System.Timers.Timer();
-        //    timer.Interval = 2000; //millisec
-        //    timer.Elapsed += (sender, e) =>
-        //    {
-        //        //MessageBox.Show("Elapsed");
-        //        NewItemTypeStatusInfo.Visibility = Visibility.Hidden;
-        //        timerEnabled = false;
-        //        if (timer != null) timer.Dispose();
-        //    };
-
-        //    if (!timerEnabled)
-        //    {
-        //        timerEnabled = true;
-        //        timer.Start();
-        //    }
-
-        //}
-        //private bool timerEnabled;
+        }       
 
         public void UpdateProductType(ItemType productType)
         {
@@ -207,7 +178,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
         #endregion
 
-        #region управление Item ########################################################
+        #region Item
 
         private string _newItemDescription;
         public string NewItemDescription
@@ -230,18 +201,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(NewItemSelectedType));
             }
         }
-
-        //public LabelInfo NewItemStatusInfo
-        //{
-        //    get { return _newItemStatusInfo; }
-        //    set
-        //    {
-        //        _newItemStatusInfo = value;
-        //        OnPropertyChanged(nameof(NewItemStatusInfo));
-        //    }
-        //}
-        //private LabelInfo _newItemStatusInfo;
-
 
         public void AddItem()
         {
@@ -292,10 +251,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             string unique = item.ItemType.IsUnique ? "Да" : "Нет";
             return $"Описание \"{item.Description}\"{Environment.NewLine}Уникальный: \"{unique}\"";
         }
-
-
-
-
 
         #endregion
 
