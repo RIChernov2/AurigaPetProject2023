@@ -63,6 +63,13 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                     _model.ManagerDisableViewModel.LoadItemsCommand.Execute(null);
                 }
             }
+            else if ((TabItem)tab.SelectedItem == repeirItemTab)
+            {
+                if (!_model.ManagerRepairItemViewModel.ItemsIsLoaded)
+                {
+                    _model.ManagerRepairItemViewModel.LoadItemsCommand.Execute(null);
+                }
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

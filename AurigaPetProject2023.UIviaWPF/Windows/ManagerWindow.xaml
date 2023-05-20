@@ -66,6 +66,9 @@
                 </Grid>
 
             </TabItem>
+            <TabItem x:Name="repeirItemTab" Header="Ремонт оборудования" >
+                <controls:RepairItems />
+            </TabItem>
 
             <TabItem x:Name="disabledItemTab" Header="Списание оборудования">
                 <controls:DisabledItems />

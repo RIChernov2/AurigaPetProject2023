@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="AurigaPetProject2023.UIviaWPF.Windows.Controls.DisabledItems"
+    x:Class="AurigaPetProject2023.UIviaWPF.Windows.Controls.RepairItems"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,8 +9,9 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <UserControl.DataContext>
-        <viewModels:ManagerDisableItemViewModel />
+        <viewModels:ManagerRepairItemViewModel />
     </UserControl.DataContext>
 
     <Grid Background="White">
@@ -39,7 +40,7 @@
                         VerticalAlignment="Center"
                         FontSize="16"
                         TextAlignment="Center">
-                        Управление списанием оборудования
+                        Управление ремонтом оборудования
                     </TextBlock>
 
                 </Border>
@@ -158,7 +159,7 @@
                         VerticalAlignment="Center"
                         FontSize="16"
                         TextAlignment="Center">
-                        Списанное
+                        Находящееся в ремонте
                     </TextBlock>
 
                 </Border>
@@ -166,18 +167,16 @@
                 <DataGrid
                     Grid.Row="1"
                     AutoGenerateColumns="False"
-                    IsReadOnly="true"
-                    ItemsSource="{Binding Path=DisabledItems}"
-                    SelectedItem="{Binding Path=SelectedDisabledItem}"
-                    SelectionMode="Single"
                     CanUserReorderColumns="False"
-                    >
+                    IsReadOnly="true"
+                    ItemsSource="{Binding Path=RepairingItems}"
+                    SelectedItem="{Binding Path=SelectedRepairingItem}"
+                    SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="Auto"
                             Binding="{Binding Path=ItemData.ItemID}"
-                            Header="ID"
-                            />
+                            Header="ID" />
 
                         <DataGridTextColumn
                             Width="Auto"
@@ -201,7 +200,7 @@
                 <TextBlock
                     Grid.Row="3"
                     Margin="20,0,20,0"
-                    Text="{Binding Path=SelectedDisabledItem.DisabledInfoData}" />
+                    Text="{Binding Path=SelectedRepairingItem.RepairingInfoData}" />
             </Grid>
         </Border>
     </Grid>

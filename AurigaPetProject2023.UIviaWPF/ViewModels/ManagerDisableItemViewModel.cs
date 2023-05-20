@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerDisableViewModel : BaseModel
+    public class ManagerDisableItemViewModel : BaseModel
     {
-        public ManagerDisableViewModel()
+        public ManagerDisableItemViewModel()
         {
-            _model = ManagerItemModel.GetInstance();
+            _model = ManagerDisableItemModel.GetInstance();
 
             LoadItemsCommand = new RelayCommand(_model.LoadItems);
             DisableItemCommand = new RelayCommand(_model.DisableItem);
@@ -20,7 +20,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
-        private ManagerItemModel _model;
+        private ManagerDisableItemModel _model;
         public bool ItemsIsLoaded
         {
             get { return _model.ItemsIsLoaded; }

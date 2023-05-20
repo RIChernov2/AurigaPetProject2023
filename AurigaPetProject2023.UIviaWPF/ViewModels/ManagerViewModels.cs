@@ -15,12 +15,14 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             // не нужно ли сделать через интерфейс IManagerModel ?
             ManagerItemPropertyViewModel = new ManagerItemPropertyViewModel ();
             ManagerAddItemViewModel = new ManagerAddItemViewModel();
-            ManagerDisableViewModel = new ManagerDisableViewModel();
+            ManagerDisableViewModel = new ManagerDisableItemViewModel();
+            ManagerRepairItemViewModel = new ManagerRepairItemViewModel();
         }
 
 
         public ManagerItemPropertyViewModel  ManagerItemPropertyViewModel { get; }
         public ManagerAddItemViewModel ManagerAddItemViewModel { get; }
-        public ManagerDisableViewModel ManagerDisableViewModel { get; }
+        public ManagerDisableItemViewModel ManagerDisableViewModel { get; }
+        public ManagerRepairItemViewModel ManagerRepairItemViewModel { get; }
     }
 }

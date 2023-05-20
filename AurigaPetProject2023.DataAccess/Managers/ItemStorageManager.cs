@@ -101,18 +101,20 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-        //public List<Item> GetDisabled()
-        //{
-        //    List<Item> result = new List<Item>();
 
-        //    Task resultTask = Task.Run(async () =>
-        //    {
-        //        result = (await _uow.ItemRepository.GetDisabledAsync()).ToList();
-        //    });
-        //    Task.WaitAll(resultTask);
+        public List<ItemWithRepairingInfoInfo> GetRepairing()
+        {
+            List<ItemWithRepairingInfoInfo> result = new List<ItemWithRepairingInfoInfo>();
 
-        //    return result;
-        //}
+            Task resultTask = Task.Run(async () =>
+            {
+                result = (await _uow.ItemRepository.GetRepairingAsync()).ToList();
+            });
+            Task.WaitAll(resultTask);
+
+            return result;
+        }
+
         public List<Item> GetAvailiable()
         {
             List<Item> result = new List<Item>();
@@ -125,5 +127,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
+
+
     }
 }

@@ -274,7 +274,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                         NewItemSelectedType = null;
 
                         // гарантируем загрузку айтемов, при открытии меню списания
-                        ManagerItemModel.GetInstance().ItemsIsLoaded = false;
+                        ManagerDisableItemModel.GetInstance().ItemsIsLoaded = false;
                     }
                 }
             }

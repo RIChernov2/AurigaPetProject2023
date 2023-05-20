@@ -10,9 +10,9 @@ using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
-    public class ManagerItemModel : BaseModel, INotifyPropertyChanged
+    public class ManagerDisableItemModel : BaseModel, INotifyPropertyChanged
     {
-        private ManagerItemModel()
+        private ManagerDisableItemModel()
         {
 
             AvaliableItems = new BindingList<Item>();
@@ -22,12 +22,12 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             DisableOperationStatusInfo = new LabelInfo();
         }
 
-        private static ManagerItemModel _model;
-        public static ManagerItemModel GetInstance()
+        private static ManagerDisableItemModel _model;
+        public static ManagerDisableItemModel GetInstance()
         {
             if (_model == null)
             {
-                _model = new ManagerItemModel();
+                _model = new ManagerDisableItemModel();
             }
 
             return _model;
@@ -40,14 +40,14 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         public bool ItemsIsLoaded
         {
-            get { return _iItemsIsLoaded; }
+            get { return _itemsIsLoaded; }
             set
             {
-                _iItemsIsLoaded = value;
+                _itemsIsLoaded = value;
                 OnPropertyChanged(nameof(ItemsIsLoaded));
             }
         }
-        private bool _iItemsIsLoaded;
+        private bool _itemsIsLoaded;
 
         #region AvaliableItems
         public Item SelectedAvaliableItem
