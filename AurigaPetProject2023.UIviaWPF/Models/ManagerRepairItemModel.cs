@@ -20,6 +20,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
             //DisabledItems = new BindingList<ItemWithDisableInfo>();
             RepairOperationStatusInfo = new LabelInfo();
+            AbortRepairOperationStatusInfo = new LabelInfo();
         }
         private static ManagerRepairItemModel _model;
         public static ManagerRepairItemModel GetInstance()
@@ -91,6 +92,17 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         public string _repairReason;
 
+        public string RepairResultDescription
+        {
+            get { return _repairResultDescription; }
+            set
+            {
+                _repairResultDescription = value;
+                OnPropertyChanged(nameof(RepairResultDescription));
+            }
+        }
+        public string _repairResultDescription;
+
         public void LoadRepairItems()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
@@ -116,7 +128,20 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(RepairOperationStatusInfo));
             }
         }
-        public LabelInfo _repairOperationStatusInfo;
+        private LabelInfo _repairOperationStatusInfo;
+
+        public LabelInfo AbortRepairOperationStatusInfo
+        {
+            get { return _abortRepairOperationStatusInfo; }
+            set
+            {
+                _abortRepairOperationStatusInfo = value;
+                OnPropertyChanged(nameof(AbortRepairOperationStatusInfo));
+            }
+        }
+        private LabelInfo _abortRepairOperationStatusInfo;
+
+
         public void RepairItem()
         {
 
@@ -163,12 +188,75 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             if (result == 1)
             {
                 RepairReason = "";
-                SelectedAvaliableItem = null;
                 LoadAvaliableItems();
                 LoadRepairItems();
                 RepairOperationStatusInfo.Text = "Операция успешно завершена";
                 new LabelInfoHelper().ChangeStatusColorAndVisibility(RepairOperationStatusInfo, Brushes.Green);
             }
+            else
+            {
+                RepairOperationStatusInfo.Text = "Ошибка операции";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RepairOperationStatusInfo, Brushes.Red);
+            }
+        }
+
+        public void AbortRepairItem()
+        {
+            if (SelectedRepairingItem == null)
+            {
+                AbortRepairOperationStatusInfo.Text = "Необходимо выбрать оборудование для завершения ремонта.";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(AbortRepairOperationStatusInfo, Brushes.Red);
+                return;
+            }
+            if (string.IsNullOrEmpty(RepairResultDescription))
+            {
+                AbortRepairOperationStatusInfo.Text = "Необходимо указать результат ремонта.";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(AbortRepairOperationStatusInfo, Brushes.Red);
+                return;
+            }
+
+            var answer = MessageBox.Show("Вы уверены, что хотите завершить ремонт данного оборудования:" +
+                $"{Environment.NewLine}{Environment.NewLine}" +
+                $"ID - {SelectedRepairingItem.ItemData.ItemID}{Environment.NewLine}" +
+                $"Тип - \"{SelectedRepairingItem.ItemData.ItemType.Name}{Environment.NewLine}\"" +
+                $"Описание - \"{SelectedRepairingItem.ItemData.Description}\"{Environment.NewLine}{Environment.NewLine}" +
+                $"Причина немонта - \"{SelectedRepairingItem.RepairingInfoData.Reason}\"{Environment.NewLine}" +
+                $"Результат немонта - \"{RepairResultDescription}\"{Environment.NewLine}",
+                "Подтверждение удаления",
+                MessageBoxButton.YesNo);
+
+
+            if (answer == MessageBoxResult.No) return;
+
+
+            RepairingInfo entity = SelectedRepairingItem.RepairingInfoData.GetCopy();
+            entity.ResultDescription = RepairResultDescription;
+            entity.EndDate = DateTime.Now;
+
+            int result = 0;
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new RepairingInfoStorageManager(unitOfWork);
+                result = manager.Update(entity);
+
+            }
+
+            if (result == 1)
+            {
+                RepairResultDescription = "";
+                LoadAvaliableItems();
+                LoadRepairItems();
+                AbortRepairOperationStatusInfo.Text = "Операция успешно завершена";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(AbortRepairOperationStatusInfo, Brushes.Green);
+            }
+            else
+            {
+                AbortRepairOperationStatusInfo.Text = "Ошибка операции";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(AbortRepairOperationStatusInfo, Brushes.Red);
+            }
+
+
+
         }
 
         #endregion

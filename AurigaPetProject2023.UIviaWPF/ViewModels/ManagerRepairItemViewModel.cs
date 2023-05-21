@@ -17,6 +17,9 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
             LoadRepairItemsCommand = new RelayCommand(_model.LoadRepairItems);
             RepairItemCommand = new RelayCommand(_model.RepairItem);
+            AbortRepairItemCommand = new RelayCommand(_model.AbortRepairItem);
+
+            _model.PropertyChanged += OnMyModelPropertyChanged;
         }
         private ManagerRepairItemModel _model;
         public bool AvaliableItemsIsLoaded
@@ -47,6 +50,15 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(RepairReason));
             }
         }
+        public string RepairResultDescription
+        {
+            get { return _model.RepairResultDescription; }
+            set
+            {
+                _model.RepairResultDescription = value;
+                OnPropertyChanged(nameof(RepairResultDescription));
+            }
+        }
         public LabelInfo RepairOperationStatusInfo
         {
             get { return _model.RepairOperationStatusInfo; }
@@ -54,6 +66,16 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             {
                 _model.RepairOperationStatusInfo = value;
                 OnPropertyChanged(nameof(RepairOperationStatusInfo));
+            }
+        }
+
+        public LabelInfo AbortRepairOperationStatusInfo
+        {
+            get { return _model.AbortRepairOperationStatusInfo; }
+            set
+            {
+                _model.AbortRepairOperationStatusInfo = value;
+                OnPropertyChanged(nameof(AbortRepairOperationStatusInfo));
             }
         }
         public Item SelectedAvaliableItem
@@ -81,6 +103,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public ICommand LoadAvaliableItemsCommand { get; }
         public ICommand LoadRepairItemsCommand { get; }
         public ICommand RepairItemCommand { get; }
+        public ICommand AbortRepairItemCommand { get; }
 
     }
 }

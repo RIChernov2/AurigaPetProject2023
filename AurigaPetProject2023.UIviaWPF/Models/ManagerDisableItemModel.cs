@@ -179,6 +179,11 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 DisableOperationStatusInfo.Text = "Операция успешно завершена";
                 new LabelInfoHelper().ChangeStatusColorAndVisibility(DisableOperationStatusInfo, Brushes.Green);
             }
+            else
+            {
+                DisableOperationStatusInfo.Text = "Ошибка операции";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(DisableOperationStatusInfo, Brushes.Red);
+            }
         }
 
         #endregion
