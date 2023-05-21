@@ -102,8 +102,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                          from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
 
                          where !_context.Set<DisabledInfo>().Any(x => x.ItemID == item.ItemID)
-                         && !_context.Set<RepairingInfo>().Where(x => x.EndtDate != null).Any(x => x.ItemID == item.ItemID)
-                         && !_context.Set<RentInfo>().Where(x=> x.EndtDate != null).Any(x => x.ItemID == item.ItemID)
+                         && !_context.Set<RepairingInfo>().Where(x => x.EndDate == null).Any(x => x.ItemID == item.ItemID)
+                         && !_context.Set<RentInfo>().Where(x=> x.EndtDate == null).Any(x => x.ItemID == item.ItemID)
 
                           select new Item
                             {
@@ -122,6 +122,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                           join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
                           from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
                           join disabled in _context.Set<DisabledInfo>() on item.ItemID equals disabled.ItemID
+
 
                           select new ItemWithDisableInfo()
                           {
@@ -146,6 +147,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                           join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
                           from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
                           join repairing in _context.Set<RepairingInfo>() on item.ItemID equals repairing.ItemID
+                          where repairing.EndDate == null
 
                           //where _context.Set<RepairingInfo>().Any(x => x.ItemID == item.ItemID)
                           select new ItemWithRepairingInfoInfo

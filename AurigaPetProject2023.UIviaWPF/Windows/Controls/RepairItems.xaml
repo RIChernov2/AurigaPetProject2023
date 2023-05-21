@@ -48,7 +48,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
 
-                        <RowDefinition Height="2.6cm" />
+                        <RowDefinition Height="Auto" />
 
                     </Grid.RowDefinitions>
 
@@ -90,21 +90,21 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.8cm" />
+                            <RowDefinition Height="0.1cm" />
                             <RowDefinition />
-                            <RowDefinition Height="0.8cm" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label
-                            Grid.Row="0"
-                            Grid.Column="1"
+                            Grid.Row="1"
+                            Grid.Column="0"
                             Height="30"
                             HorizontalAlignment="Center">
-                            Причина списания
+                            Причина ремонта
                         </Label>
 
                         <Button
                             x:Name="disableItemButton"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Height="0.6cm"
                             Margin="10,0,10,0"
                             Command="{Binding Path=RepairItemCommand}">
@@ -117,7 +117,7 @@
                             Height="30"
                             Margin="10,0,10,0"
                             VerticalContentAlignment="Center"
-                            Text="{Binding Path=DisableReason}" />
+                            Text="{Binding Path=RepairReason}" />
 
                         <Label
                             x:Name="statusLabel"
@@ -126,7 +126,7 @@
                             Height="30"
                             HorizontalAlignment="Center"
                             Content="{Binding Path=Text}"
-                            DataContext="{Binding Path=DisableOperationStatusInfo}"
+                            DataContext="{Binding Path=RepairOperationStatusInfo}"
                             Foreground="{Binding Path=Color}"
                             Visibility="{Binding Path=Visibility}" />
 

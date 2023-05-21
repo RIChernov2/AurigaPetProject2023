@@ -2,7 +2,11 @@
 using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
+using AurigaPetProject2023.UIviaWPF.Helpers;
+using System;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -15,7 +19,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             //ItemsIsLoaded = false;
 
             //DisabledItems = new BindingList<ItemWithDisableInfo>();
-            //DisableOperationStatusInfo = new Labe
+            RepairOperationStatusInfo = new LabelInfo();
         }
         private static ManagerRepairItemModel _model;
         public static ManagerRepairItemModel GetInstance()
@@ -76,6 +80,16 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private ItemWithRepairingInfoInfo _selectedRepairingItem;
+        public string RepairReason
+        {
+            get { return _repairReason; }
+            set
+            {
+                _repairReason = value;
+                OnPropertyChanged(nameof(RepairReason));
+            }
+        }
+        public string _repairReason;
 
         public void LoadRepairItems()
         {
@@ -92,9 +106,69 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 RepairingItemsIsLoaded = true;
             }
         }
+
+        public LabelInfo RepairOperationStatusInfo
+        {
+            get { return _repairOperationStatusInfo; }
+            set
+            {
+                _repairOperationStatusInfo = value;
+                OnPropertyChanged(nameof(RepairOperationStatusInfo));
+            }
+        }
+        public LabelInfo _repairOperationStatusInfo;
         public void RepairItem()
         {
 
+            if (SelectedAvaliableItem == null)
+            {
+                RepairOperationStatusInfo.Text = "Необходимо выбрать оборудование для ремонта.";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RepairOperationStatusInfo, Brushes.Red);
+                return;
+            }
+            if (string.IsNullOrEmpty(RepairReason))
+            {
+                RepairOperationStatusInfo.Text = "Необходимо указать причину ремонта.";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RepairOperationStatusInfo, Brushes.Red);
+                return;
+            }
+
+            var answer = MessageBox.Show("Вы уверены, что хотите списать данное оборудование:" +
+                $"{Environment.NewLine}{Environment.NewLine}" +
+                $"ID - {SelectedAvaliableItem.ItemID}{Environment.NewLine}" +
+                $"Тип - \"{SelectedAvaliableItem.ItemType.Name}{Environment.NewLine}\"" +
+                $"Описание - \"{SelectedAvaliableItem.Description}\"{Environment.NewLine}{Environment.NewLine}" +
+                $"Причина немонта - \"{RepairReason}\"{Environment.NewLine}",
+                "Подтверждение удаления",
+                MessageBoxButton.YesNo);
+
+
+            if (answer == MessageBoxResult.No) return;
+
+
+
+            RepairingInfo entity = new RepairingInfo();
+            entity.ItemID = SelectedAvaliableItem.ItemID;
+            entity.Reason = RepairReason;
+            entity.StartDate = DateTime.Now;
+
+            int result = 0;
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new RepairingInfoStorageManager(unitOfWork);
+                result = manager.Create(entity);
+
+            }
+
+            if (result == 1)
+            {
+                RepairReason = "";
+                SelectedAvaliableItem = null;
+                LoadAvaliableItems();
+                LoadRepairItems();
+                RepairOperationStatusInfo.Text = "Операция успешно завершена";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RepairOperationStatusInfo, Brushes.Green);
+            }
         }
 
         #endregion

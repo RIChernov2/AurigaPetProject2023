@@ -4,6 +4,6 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
 {
     public interface IDisabledInfoStorageManager
     {
-        public int Create(DisabledInfo entity);
+        int Create(DisabledInfo entity);
     }
 }

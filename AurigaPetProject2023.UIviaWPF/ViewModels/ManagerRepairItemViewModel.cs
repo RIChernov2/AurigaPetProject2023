@@ -38,6 +38,24 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
+        public string RepairReason
+        {
+            get { return _model.RepairReason; }
+            set
+            {
+                _model.RepairReason = value;
+                OnPropertyChanged(nameof(RepairReason));
+            }
+        }
+        public LabelInfo RepairOperationStatusInfo
+        {
+            get { return _model.RepairOperationStatusInfo; }
+            set
+            {
+                _model.RepairOperationStatusInfo = value;
+                OnPropertyChanged(nameof(RepairOperationStatusInfo));
+            }
+        }
         public Item SelectedAvaliableItem
         {
             get { return _model.SelectedAvaliableItem; }
@@ -58,6 +76,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<ItemWithRepairingInfoInfo> RepairingItems => _model.RepairingItems;
+
 
         public ICommand LoadAvaliableItemsCommand { get; }
         public ICommand LoadRepairItemsCommand { get; }

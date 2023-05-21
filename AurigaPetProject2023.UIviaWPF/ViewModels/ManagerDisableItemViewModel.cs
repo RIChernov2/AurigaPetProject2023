@@ -51,7 +51,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(DisableReason));
             }
         }
-
         public LabelInfo DisableOperationStatusInfo
         {
             get { return _model.DisableOperationStatusInfo; }
@@ -61,7 +60,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(DisableOperationStatusInfo));
             }
         }
-
         public Item SelectedAvaliableItem
         {
             get { return _model.SelectedAvaliableItem; }

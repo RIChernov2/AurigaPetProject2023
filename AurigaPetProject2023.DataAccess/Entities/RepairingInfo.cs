@@ -14,7 +14,7 @@ namespace AurigaPetProject2023.DataAccess.Entities
         [Column("Start_Date")]
         public DateTime StartDate { get; set; }
         [Column("End_Date")]
-        public DateTime? EndtDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string Reason { get; set; }
         public string ResultDescription { get; set; }
     }

@@ -11,6 +11,7 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
         IItemTypeRepository ItemTypeRepository { get; }
         IItemRepository ItemRepository { get; }
         IDisabledInfoRepository DisabledInfoRepository { get; }
+        IRepairingInfoRepository RepairingInfoRepository { get; }
         void Commit();
     }
 }
