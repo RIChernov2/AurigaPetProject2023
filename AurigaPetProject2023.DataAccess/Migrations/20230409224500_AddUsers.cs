@@ -40,6 +40,8 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         public override void Down()
         {
             Delete.Table("Users");
+            Delete.Table("RoleTypes");
+            Delete.Table("Roles");
         }
     }
 }

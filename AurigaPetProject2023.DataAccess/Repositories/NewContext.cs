@@ -14,6 +14,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         public DbSet<DisabledInfo> DisabledInfos { get; set; } = null;
         public DbSet<RentInfo> RentInfos { get; set; } = null;
         public DbSet<RepairingInfo> RepairingInfos { get; set; } = null;
+        public DbSet<DiscountInfo> DiscountInfos { get; set; } = null;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +28,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
             modelBuilder.Entity<User>().Ignore(u => u.Roles);
             modelBuilder.Entity<Item>().Ignore(p => p.ItemType);
             modelBuilder.Entity<Item>().Ignore(p => p.UniqueID);
+            modelBuilder.Entity<DiscountInfo>().HasNoKey();
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

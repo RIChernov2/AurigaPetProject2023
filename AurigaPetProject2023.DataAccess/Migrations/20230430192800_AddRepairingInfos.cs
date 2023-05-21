@@ -22,7 +22,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .Indexed("IX_RepairingInfos_End_Date")
                 
                 .WithColumn("Reason").AsString(100).NotNullable()
-                .WithColumn("ResultDescription").AsString(100).Nullable();
+                .WithColumn("Result_Description").AsString(100).Nullable();
 
 
         }
