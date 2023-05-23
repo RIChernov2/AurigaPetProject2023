@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
-    public class MainWindowModel: BaseModel, INotifyPropertyChanged
+    public class MainWindowModel: BaseModel
     {
         private string _loginName;
         private string _password;

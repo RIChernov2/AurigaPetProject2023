@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
-    public class ManagerRepairItemModel: BaseModel, INotifyPropertyChanged
+    public class ManagerRepairItemModel: BaseModel
     {
         public ManagerRepairItemModel()
         {

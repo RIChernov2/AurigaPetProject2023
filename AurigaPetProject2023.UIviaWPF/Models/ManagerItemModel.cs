@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
-    public class ManagerItemModel : BaseModel, INotifyPropertyChanged
+    public class ManagerItemModel : BaseModel
     {
         public ManagerItemModel()
         {

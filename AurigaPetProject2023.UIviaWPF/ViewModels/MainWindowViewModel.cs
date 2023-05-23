@@ -57,25 +57,25 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             else
             {
                 _window.statusLabel.Visibility = Visibility.Hidden;
-                RunApplicationWindow(_window, responseInfo);
+                RunApplicationWindow(responseInfo);
             }
         }
-        private void RunApplicationWindow(MainWindow window, IUserLoginResponseInfo user)
+        private void RunApplicationWindow(IUserLoginResponseInfo userInfo)
         {
-            if (user.Roles.Contains(1) || user.Roles.Contains(2))
+            if (userInfo.Roles.Contains(1) || userInfo.Roles.Contains(2))
             {
                 ManagerWindow managerWindow = new ManagerWindow();
 
-                managerWindow.Closed += (sender, e) => window.Close();
-                window.Hide();
+                managerWindow.Closed += (sender, e) => _window.Close();
+                _window.Hide();
                 managerWindow.Show();
             }
-            else if (user.Roles.Contains(3))
+            else if (userInfo.Roles.Contains(3))
             {
-                UserWindow managerWindow = new UserWindow();
+                UserWindow managerWindow = new UserWindow(userInfo);
 
-                managerWindow.Closed += (sender, e) => window.Close();
-                window.Hide();
+                managerWindow.Closed += (sender, e) => _window.Close();
+                _window.Hide();
                 managerWindow.Show();
             }
             else

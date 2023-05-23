@@ -14,7 +14,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _uow = uow;
         }
 
-        public async Task<User> GetAsync(int id) => await _uow.UserRepository.GetAsync(id);
+        //public async Task<User> GetAsync(int id) => await _uow.UserRepository.GetAsync(id);
         public async Task<IUserLoginResponseInfo> GetUserForLoginAsync(IUserLoginInfo info) 
             => await _uow.UserRepository.GetUserForLoginAsync(info);
 

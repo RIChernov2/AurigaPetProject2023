@@ -13,5 +13,18 @@ namespace AurigaPetProject2023.UIviaWPF
     /// </summary>
     public partial class App : Application
     {
+
+        //Запуск одной копии приложения
+        private System.Threading.Mutex mutex;
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            bool createdNew;
+            string mutName = "AurigaPetProject2023";
+            mutex = new System.Threading.Mutex(true, mutName, out createdNew);
+            if (!createdNew)
+            {
+                this.Shutdown();
+            }
+        }
     }
 }

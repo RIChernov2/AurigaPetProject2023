@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerItemPropertyViewModel : BaseModel, INotifyPropertyChanged
+    public class ManagerItemPropertyViewModel : BaseModel
     {
         //public ManagerItemPropertyViewModel ()
         //{

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
-    public class ManagerRepairItemViewModel : BaseModel, INotifyPropertyChanged
+    public class ManagerRepairItemViewModel : BaseModel
     {
         public ManagerRepairItemViewModel()
         {

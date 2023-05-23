@@ -15,8 +15,13 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
         {
             InitializeComponent();
 
-            loginTextBox.Text = "Manager";
-            passwordBox.Password = "123";
+            //loginTextBox.Text = "Manager";
+            //passwordBox.Password = "123";
+
+            //loginTextBox.Text = "User1";
+            loginTextBox.Text = "+79267654321";
+            passwordBox.Password = "111";
+
             statusLabel.Visibility = Visibility.Hidden;
         }
 

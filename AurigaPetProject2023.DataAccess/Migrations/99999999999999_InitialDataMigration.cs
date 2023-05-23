@@ -152,7 +152,8 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         private void AddUsers()
         {
             Insert.IntoTable("Users")
-                .Row(new { Login_Name = "User1", Password = $"{HashHelper.GetHash("111")}" })
+                .Row(new { Login_Name = "User1", Password = $"{HashHelper.GetHash("111")}",
+                    Phone = "+79267654321" })
                 .Row(new { Login_Name = "User2", Password = $"{HashHelper.GetHash("222")}" })
                 .Row(new { Login_Name = "User3", Password = $"{HashHelper.GetHash("333")}" })
                 .Row(new { Login_Name = "User4", Password = $"{HashHelper.GetHash("444")}" })

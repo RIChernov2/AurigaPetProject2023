@@ -9,7 +9,17 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:UserViewModel/>
+        <!--<viewModels:ManagerViewModels />-->
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            
+        </Grid.RowDefinitions>
+
+        <TextBlock Height="Auto" Text="{Binding Path=UserInfoHeader}"></TextBlock>
     </Grid>
 </Window>
