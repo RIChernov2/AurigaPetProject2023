@@ -18,7 +18,7 @@ namespace AurigaPetProject2023.DataAccess.Entities
         [Column("Expire_Date")]
         public DateTime? ExpireDate { get; set; }
         [Column("End_Date")]
-        public DateTime? EndtDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public double Cost { get; set; }
         public bool IsPaid { get; set; }
     }

@@ -14,6 +14,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
         Task<IReadOnlyList<Item>> GetAvailiableAsync();
         Task<IReadOnlyList<ItemWithDisableInfo>> GetDisabledAsync();
         Task<IReadOnlyList<ItemWithRepairingInfoInfo>> GetRepairingAsync();
+        Task<IReadOnlyList<ItemWithRentInfo>> GetInRentAsync();
 
         //Task<IReadOnlyList<Item>> GetDisabledAsync();
         //Task<IReadOnlyList<Item>> GetRepairingAsync();

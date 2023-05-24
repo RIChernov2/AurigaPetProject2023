@@ -19,5 +19,10 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
         }
 
         UserViewModel _model;
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            _model.LoadRentItemsCommand.Execute(null);
+        }
     }
 }

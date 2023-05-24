@@ -128,6 +128,19 @@ namespace AurigaPetProject2023.DataAccess.Managers
             return result;
         }
 
+        public List<ItemWithRentInfo> GetInRent()
+        {
+            List<ItemWithRentInfo> result = new List<ItemWithRentInfo>();
+
+            Task resultTask = Task.Run(async () =>
+            {
+                result = (await _uow.ItemRepository.GetInRentAsync()).ToList();
+            });
+            Task.WaitAll(resultTask);
+
+            return result;
+        }
+
 
     }
 }

@@ -103,7 +103,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
                          where !_context.Set<DisabledInfo>().Any(x => x.ItemID == item.ItemID)
                          && !_context.Set<RepairingInfo>().Where(x => x.EndDate == null).Any(x => x.ItemID == item.ItemID)
-                         && !_context.Set<RentInfo>().Where(x=> x.EndtDate == null).Any(x => x.ItemID == item.ItemID)
+                         && !_context.Set<RentInfo>().Where(x=> x.EndDate == null).Any(x => x.ItemID == item.ItemID)
 
                           select new Item
                             {
@@ -164,26 +164,29 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                           }).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<ItemWithRentInfo>> GetInRentAsync()
+        {
+            return await (from item in _context.Set<Item>()
+                          join itemType in _context.Set<ItemType>() on item.ItemTypeID equals itemType.ItemTypeID
+                          join itemUniqueInfo in _context.Set<ItemUniqueInfo>() on item.ItemID equals itemUniqueInfo.ItemID into uniqueInfoGroup
+                          from uniqueInfo in uniqueInfoGroup.DefaultIfEmpty()
 
+                          join rent in _context.Set<RentInfo>() on item.ItemID equals rent.ItemID
+                          where rent.EndDate == null
 
+                          select new ItemWithRentInfo
+                          {
+                              ItemData = new Item()
+                              {
+                                  ItemID = item.ItemID,
+                                  ItemTypeID = item.ItemTypeID,
+                                  Description = item.Description,
+                                  ItemType = itemType,
+                                  UniqueID = !itemType.IsUnique ? null : uniqueInfo.ItemUniqueID
+                              },
+                              RentInfo = rent
+                          }).ToListAsync();
+        }
 
-
-        //public async Task<IReadOnlyList<Item>> GetNotDisabledAsync()
-        //{
-        //    //попробуем иначе
-        //    NewContext context = (NewContext)_context;
-        //    return await context.Items
-        //        .Where(x => !context.DisabledInfos.Select(y => y.ItemID).Contains(x.ItemID))
-        //        .Include(item => item.ItemType).ToListAsync();
-        //}
-
-        //public async Task<IReadOnlyList<Item>> GetDisabledAsync()
-        //{
-        //    //попробуем иначе
-        //    NewContext context = (NewContext)_context;
-        //    return await context.Items
-        //        .Where(x => context.DisabledInfos.Select(y => y.ItemID).Contains(x.ItemID))
-        //        .Include(item => item.ItemType).ToListAsync();
-        //}
     }
 }

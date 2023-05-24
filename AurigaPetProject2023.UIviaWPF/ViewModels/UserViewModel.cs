@@ -1,8 +1,13 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
@@ -12,11 +17,12 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = UserModel.GetInstance();
 
+            LoadRentItemsCommand = new RelayCommand(_model.LoadRentItems);
+
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
         private UserModel _model;
         public void SetUserInfo(IUserLoginResponseInfo userInfo) => _model.SetUserInfo(userInfo);
-
         public string UserInfoHeader
         {
             get { return _model.UserInfoHeader; }
@@ -26,6 +32,8 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(UserInfoHeader));
             }
         }
+        public BindingList<ItemWithRentInfo> ItemWithRentInfos => _model.ItemWithRentInfos;
+        public ICommand LoadRentItemsCommand { get; }
     }
 
 

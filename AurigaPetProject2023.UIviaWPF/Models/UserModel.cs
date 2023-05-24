@@ -1,7 +1,10 @@
-﻿using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Managers;
+using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using System;
 using System.ComponentModel;
+using System.Linq;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -9,7 +12,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         private UserModel()
         {
-
+            ItemWithRentInfos = new BindingList<ItemWithRentInfo>();
         }
         private IUserLoginResponseInfo _userInfo;
         private static UserModel _model;
@@ -45,5 +48,22 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         public string _userInfoHeadern;
+
+        public BindingList<ItemWithRentInfo> ItemWithRentInfos { get; set; }
+        public void LoadRentItems()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new ItemStorageManager(unitOfWork);
+                var list = manager.GetInRent();
+
+                //ProductTypes = new BindingList<ProductType>(list);
+                ItemWithRentInfos.Clear();
+                foreach (var item in list.Where(x => x.RentInfo.UserID == _userInfo.UserID))
+                {
+                    ItemWithRentInfos.Add(item);
+                }
+            }
+        }
     }
 }
