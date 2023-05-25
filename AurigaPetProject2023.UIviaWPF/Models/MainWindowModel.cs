@@ -30,9 +30,9 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
 
-        public IUserLoginResponseInfo Login()
+        public IUserResponseInfo Login()
         {
-            IUserLoginResponseInfo responseInfo;
+            IUserResponseInfo responseInfo;
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 UsersStorageManager repository = new UsersStorageManager(unitOfWork);

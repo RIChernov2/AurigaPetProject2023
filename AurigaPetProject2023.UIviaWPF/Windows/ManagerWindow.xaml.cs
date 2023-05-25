@@ -19,24 +19,8 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
         public ManagerWindow()
         {
             InitializeComponent();
-
-            //_model = new ManagerPropertyViewModel();
-            _model = new ManagerViewModels();
-            this.DataContext = _model;
-
-            itemTypeManagement.DataContext = _model.ManagerItemPropertyViewModel;
-            addItemControl.DataContext = _model.ManagerAddItemViewModel;
-
-            //mainTabControl.SelectedItem = tabSecond;
         }
-        private ManagerViewModels _model;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
-            //productTypesDataGrid.ItemsSource = _model.ProductTypes;
-            
-        }
 
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -47,13 +31,27 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 return;
             }
 
+            ManagerViewModels _model = (ManagerViewModels)this.DataContext;
+
+
             TabControl tab = (TabControl)sender;
-            if((TabItem)tab.SelectedItem == newItemTab)
+            if((TabItem)tab.SelectedItem == rentTab)
             {
-                //if(_model.ManagerItemPropertyViewModel.ItemTypes == null || _model.ManagerItemPropertyViewModel.ItemTypes.Count == 0)
-                if(!_model.ManagerItemPropertyViewModel.ItemTypesIsLoaded)
+                if(!_model.ManagerRentItemViewModel.UsersIsLoaded)
                 {
-                    _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
+                    _model.ManagerRentItemViewModel.LoadUsersCommand.Execute(null);
+                }
+            }
+            else if ((TabItem)tab.SelectedItem == repairItemTab)
+            {
+                if (!_model.ManagerRepairItemViewModel.AvaliableItemsIsLoaded)
+                {
+                    _model.ManagerRepairItemViewModel.LoadAvaliableItemsCommand.Execute(null);
+                }
+
+                if (!_model.ManagerRepairItemViewModel.RepairingItemsIsLoaded)
+                {
+                    _model.ManagerRepairItemViewModel.LoadRepairItemsCommand.Execute(null);
                 }
             }
             else if ((TabItem)tab.SelectedItem == disabledItemTab)
@@ -69,56 +67,18 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 }
 
             }
-            else if ((TabItem)tab.SelectedItem == repeirItemTab)
+            else if ((TabItem)tab.SelectedItem == newItemTab)
             {
-                if (!_model.ManagerRepairItemViewModel.AvaliableItemsIsLoaded)
+                if (!_model.ManagerItemPropertyViewModel.ItemTypesIsLoaded)
                 {
-                    _model.ManagerRepairItemViewModel.LoadAvaliableItemsCommand.Execute(null);
-                }
-
-                if (!_model.ManagerRepairItemViewModel.RepairingItemsIsLoaded)
-                {
-                    _model.ManagerRepairItemViewModel.LoadRepairItemsCommand.Execute(null);
+                    _model.ManagerItemPropertyViewModel.LoadItemTypesCommand.Execute(null);
                 }
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //using (UnitOfWork unitOfWork = new UnitOfWork())
-            //{
-            //    var manager = new ItemStorageManager(unitOfWork);
-            //    List <Item> list = manager.GetAll();
-            //}
-
-
-            using (UnitOfWork unitOfWork = new UnitOfWork())
-            {
-                var manager = new ItemStorageManager(unitOfWork);
-                //List<Item> list = manager.GetAll();
-                //List<ItemWithStatus> list2 = manager.GetItemsWithStatus();
-
-                //foreach (var item in list2)
-                //{
-                //    Debug.WriteLine(item);
-                //}
-
-                //foreach (var item in list2.Where(x => x.InRent || x.InRepair || x.Disabled))
-                //{
-                //    Debug.WriteLine(item);
-                //}
-
-                List<ItemWithDisableInfo> list3 = manager.GetDisabled();
-                List<Item> list4 = manager.GetAvailiable();
-                //List<Item> list4 = manager.GetNotDisabledAsync();
-
-
-                //Item newItem = new Item();
-                //newItem.ItemTypeID = 7;
-                //newItem.Description = "Супер мешок";
-
-                //manager.Create(newItem);
-            }
+            
         }
 
 

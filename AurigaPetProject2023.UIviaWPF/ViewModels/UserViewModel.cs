@@ -22,7 +22,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
         private UserModel _model;
-        public void SetUserInfo(IUserLoginResponseInfo userInfo) => _model.SetUserInfo(userInfo);
+        public void SetUserInfo(IUserResponseInfo userInfo) => _model.SetUserInfo(userInfo);
         public string UserInfoHeader
         {
             get { return _model.UserInfoHeader; }

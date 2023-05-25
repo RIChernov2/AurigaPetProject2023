@@ -3,7 +3,7 @@
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IUserLoginResponseInfo
+    public interface IUserResponseInfo
     {
         int UserID { get; set; }
         public string LoginName { get; set; }

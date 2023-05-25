@@ -9,7 +9,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
     /// </summary>
     public partial class UserWindow : Window
     {
-        public UserWindow(IUserLoginResponseInfo userInfo)
+        public UserWindow(IUserResponseInfo userInfo)
         {
             InitializeComponent();
 

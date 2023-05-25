@@ -14,7 +14,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         {
             ItemWithRentInfos = new BindingList<ItemWithRentInfo>();
         }
-        private IUserLoginResponseInfo _userInfo;
+        private IUserResponseInfo _userInfo;
         private static UserModel _model;
         public static UserModel GetInstance()
         {
@@ -26,7 +26,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             return _model;
         }
 
-        public void SetUserInfo(IUserLoginResponseInfo userInfo)
+        public void SetUserInfo(IUserResponseInfo userInfo)
         {
             _userInfo = userInfo;
 

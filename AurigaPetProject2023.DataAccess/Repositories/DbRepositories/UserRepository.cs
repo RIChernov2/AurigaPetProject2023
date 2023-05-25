@@ -2,6 +2,7 @@
 using AurigaPetProject2023.DataAccess.Helpers;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,29 +23,30 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             _dbSet = context.Set<User>();
         }
 
-        public virtual async Task<IUserLoginResponseInfo> GetUserForLoginAsync(IUserLoginInfo info)
+        public virtual async Task<IReadOnlyList<IUserResponseInfo>> GetUsersInfoAsync()
+        {
+            return await (from user in _dbSet
+                          where !_context.Set<BannedInfo>().Any(x => x.UserID == user.UserID)
+                          && _context.Set<Role>().Where(x=> x.RoleType == 3).Any(x => x.UserID == user.UserID)
+                          select new UserResponseInfo(user)
+                          ).ToListAsync();
+        }
+
+        // спецом не пойми как написано, хотел потестировать предикат
+        public virtual async Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info)
         {
             var user = (await GetByPredicateAsync(
                 u => (u.LoginName == info.LoginOrPhone || u.Phone == info.LoginOrPhone) &&
-                u.Password == HashHelper.GetHash(info.Password)
+                u.Password == HashHelper.GetHash(info.Password) && !_context.Set<BannedInfo>().Any(x=> x.UserID == u.UserID)
                 )).FirstOrDefault();
 
             if (user == null) return null;
 
-            UserLoginResponseInfo userResponseInfo = new UserLoginResponseInfo(user);
+            UserResponseInfo userResponseInfo = new UserResponseInfo(user);
             return userResponseInfo;                
         }
 
-
-
-        //public virtual async Task<User> GetAsync(int id)
-        //{
-        //    var user = await _dbSet.FindAsync(id);
-        //    user.Roles  = await _context.Set<Role>().Where(r => r.UserID == id).Select(r => r.RoleType).ToListAsync();
-        //    return user;
-        //}
-
-        public virtual async Task<IReadOnlyList<User>> GetByPredicateAsync(Expression<Func<User, bool>> predicate)
+        private async Task<IReadOnlyList<User>> GetByPredicateAsync(Expression<Func<User, bool>> predicate)
         {
             var users = await _dbSet.Where(predicate).ToListAsync();
             foreach (var user in users)

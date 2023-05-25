@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace AurigaPetProject2023.DataAccess.Entities
 {
-    public class UserLoginResponseInfo: IUserLoginResponseInfo
+    public class UserResponseInfo: IUserResponseInfo
     {
-        public UserLoginResponseInfo(User user)
+        public UserResponseInfo(User user)
         {
             UserID = user.UserID;
             LoginName = user.LoginName;

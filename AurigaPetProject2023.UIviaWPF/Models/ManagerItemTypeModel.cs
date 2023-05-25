@@ -116,6 +116,16 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 return;
             }
 
+
+            if (MessageBox.Show("Вы уверены, что хотите добавить следующую категорию оборудования:" +
+                $"{Environment.NewLine}{Environment.NewLine}{NewItemTypeName}",
+                "Подтверждение добавление типа",
+                MessageBoxButton.YesNo) == MessageBoxResult.No)
+            {
+                return;
+            }
+
+
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 var manager = new ItemTypesStorageManager(unitOfWork);

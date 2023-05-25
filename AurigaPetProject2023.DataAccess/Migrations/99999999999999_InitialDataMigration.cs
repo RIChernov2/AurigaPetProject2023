@@ -239,12 +239,12 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                     End_Date = DateTime.Now.AddDays(-15)})
 
 
-                .Row(new { User_ID = "1", Item_ID = "6", Cost = 1000, IsPaid = true,
-                    Start_Date = DateTime.Now.AddDays(-12), Expire_Date = DateTime.Now.AddDays(2)})
-                .Row(new { User_ID = "1", Item_ID = "7", Cost = 2000, IsPaid = true,
-                    Start_Date = DateTime.Now.AddDays(-15), Expire_Date = DateTime.Now.AddDays(-1)})
                 .Row(new { User_ID = "13", Item_ID = "35", Cost = 2000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-16), Expire_Date = DateTime.Now.AddDays(-2)})
+                .Row(new { User_ID = "1", Item_ID = "7", Cost = 2000, IsPaid = true,
+                    Start_Date = DateTime.Now.AddDays(-15), Expire_Date = DateTime.Now.AddDays(-1)})
+                .Row(new { User_ID = "1", Item_ID = "6", Cost = 1000, IsPaid = true,
+                    Start_Date = DateTime.Now.AddDays(-12), Expire_Date = DateTime.Now.AddDays(2)})
                 .Row(new { User_ID = "13", Item_ID = "34", Cost = 1000, IsPaid = true,
                     Start_Date = DateTime.Now.AddDays(-11), Expire_Date = DateTime.Now.AddDays(3)})
                 .Row(new { User_ID = "17", Item_ID = "32", Cost = 1000, IsPaid = false,
@@ -255,7 +255,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                     Start_Date = DateTime.Now.AddDays(-6), Expire_Date = DateTime.Now.AddDays(1)})
                 .Row(new { User_ID = "2", Item_ID = "9", Cost = 500, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-6), Expire_Date = DateTime.Now.AddDays(1)})
-                .Row(new { User_ID = "19", Item_ID = "30", Cost = 2000, IsPaid = false,
+                .Row(new { User_ID = "8", Item_ID = "30", Cost = 2000, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-3), Expire_Date = DateTime.Now.AddDays(11)})
                 .Row(new { User_ID = "20", Item_ID = "42", Cost = 3000, IsPaid = false,
                     Start_Date = DateTime.Now.AddDays(-2), Expire_Date = DateTime.Now.AddDays(12)})

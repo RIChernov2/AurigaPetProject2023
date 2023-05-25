@@ -8,7 +8,8 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
 {
     public interface IUsersStorageManager
     {
-        Task<IUserLoginResponseInfo> GetUserForLoginAsync(IUserLoginInfo info);
+        Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info);
+        List<IUserResponseInfo> GetUsersInfo();
         //Task<User> GetAsync(int id);
     }
 }

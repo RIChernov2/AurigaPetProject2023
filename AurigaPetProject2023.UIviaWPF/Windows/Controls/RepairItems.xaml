@@ -90,32 +90,32 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.1cm" />
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Grid.Column="0"
                             Height="30"
                             HorizontalAlignment="Center">
                             Причина ремонта
                         </Label>
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Height="25"
+                            Margin="10,5,10,5"
+                            VerticalContentAlignment="Center"
+                            Text="{Binding Path=RepairReason}" />
 
                         <Button
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Height="0.6cm"
                             Margin="10,0,10,0"
                             Command="{Binding Path=RepairItemCommand}">
                             В ремонт
                         </Button>
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Height="30"
-                            Margin="10,0,10,0"
-                            VerticalContentAlignment="Center"
-                            Text="{Binding Path=RepairReason}" />
+
 
                         <Label
                             Grid.Row="2"
@@ -205,37 +205,37 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Label
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Height="30"
-                            HorizontalAlignment="Center">
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Height="30"
+                        HorizontalAlignment="Center">
                         Результат ремонта
                     </Label>
 
                     <Button
-                            Grid.Row="2"
-                            Height="0.6cm"
-                            Margin="10,0,10,0"
-                            Command="{Binding Path=AbortRepairItemCommand}">
+                        Grid.Row="2"
+                        Height="0.6cm"
+                        Margin="10,0,10,0"
+                        Command="{Binding Path=AbortRepairItemCommand}">
                         Завершить
                     </Button>
                     <TextBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Height="30"
-                            Margin="10,0,10,0"
-                            VerticalContentAlignment="Center"
-                            Text="{Binding Path=RepairResultDescription}" />
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="10,0,10,0"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Path=RepairResultDescription}" />
 
                     <Label
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Height="30"
-                            HorizontalAlignment="Center"
-                            Content="{Binding Path=Text}"
-                            DataContext="{Binding Path=AbortRepairOperationStatusInfo}"
-                            Foreground="{Binding Path=Color}"
-                            Visibility="{Binding Path=Visibility}" />
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        Content="{Binding Path=Text}"
+                        DataContext="{Binding Path=AbortRepairOperationStatusInfo}"
+                        Foreground="{Binding Path=Color}"
+                        Visibility="{Binding Path=Visibility}" />
 
                 </Grid>
                 <Label Grid.Row="3" HorizontalAlignment="Center">Информация об элементе в ремонте</Label>

@@ -17,6 +17,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             ManagerAddItemViewModel = new ManagerAddItemViewModel();
             ManagerDisableViewModel = new ManagerDisableItemViewModel();
             ManagerRepairItemViewModel = new ManagerRepairItemViewModel();
+            ManagerRentItemViewModel = new ManagerRentItemViewModel();
         }
 
 
@@ -24,5 +25,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public ManagerAddItemViewModel ManagerAddItemViewModel { get; }
         public ManagerDisableItemViewModel ManagerDisableViewModel { get; }
         public ManagerRepairItemViewModel ManagerRepairItemViewModel { get; }
+        public ManagerRentItemViewModel ManagerRentItemViewModel { get; }
     }
 }

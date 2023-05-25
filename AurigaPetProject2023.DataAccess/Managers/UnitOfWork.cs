@@ -8,11 +8,12 @@ using System;
 
 namespace AurigaPetProject2023.DataAccess.Managers
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
+        // не забудь добавить в ResetRepositories
         private IDbContextTransaction _transaction;
         private IUserRepository _usersRepository;
-        private IRoleRepository _roleRepository;
+        //private IRoleRepository _roleRepository;
         private IItemTypeRepository _itemTypeRepository;
         private IItemRepository _itemRepository;
         private IDisabledInfoRepository _disabledInfoRepository;
@@ -26,7 +27,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
         }
 
         public IUserRepository UserRepository => _usersRepository ??= new UserRepository(_context);
-        public IRoleRepository RoleRepository => _roleRepository ??= new RoleRepository(_context);
+        //public IRoleRepository RoleRepository => _roleRepository ??= new RoleRepository(_context);
         public IItemTypeRepository ItemTypeRepository => _itemTypeRepository ??= new ItemTypeRepository(_context);
         public IItemRepository ItemRepository => _itemRepository ??= new ItemRepository(_context);
         public IDisabledInfoRepository DisabledInfoRepository => _disabledInfoRepository ??= new DisabledInfoRepository(_context);
@@ -57,7 +58,11 @@ namespace AurigaPetProject2023.DataAccess.Managers
         private void ResetRepositories()
         {
             _usersRepository = null;
-            _roleRepository = null;
+            //_roleRepository = null;
+            _itemTypeRepository = null;
+            _itemRepository = null;
+            _disabledInfoRepository = null;
+            _repairingInfoRepository = null;
         }
 
         // еще надо почитать про управляемые и не управляемые ресурсы
@@ -89,7 +94,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _transaction = null;
             _context?.Dispose();
             _context = null;
-        } 
+        }
 
         ~UnitOfWork()
         {

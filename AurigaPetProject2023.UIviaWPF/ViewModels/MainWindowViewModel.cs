@@ -48,7 +48,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _window.statusLabel.Visibility = Visibility.Hidden;
             Password = _window.passwordBox.Password;
-            IUserLoginResponseInfo responseInfo = _model.Login();
+            IUserResponseInfo responseInfo = _model.Login();
 
             if (responseInfo == null)
             {
@@ -60,7 +60,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 RunApplicationWindow(responseInfo);
             }
         }
-        private void RunApplicationWindow(IUserLoginResponseInfo userInfo)
+        private void RunApplicationWindow(IUserResponseInfo userInfo)
         {
             if (userInfo.Roles.Contains(1) || userInfo.Roles.Contains(2))
             {

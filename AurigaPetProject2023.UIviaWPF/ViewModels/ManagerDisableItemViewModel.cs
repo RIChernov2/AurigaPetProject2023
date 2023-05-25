@@ -85,9 +85,5 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public ICommand LoadDisableItemsCommand { get; }
         public ICommand DisableItemCommand { get; }
 
-
-
-
-        //public BindingList<ItemType> ItemTypes => _model.ItemTypes;
     }
 }

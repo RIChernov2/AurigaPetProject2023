@@ -42,12 +42,26 @@
             Grid.Row="1"
             SelectionChanged="mainTabControl_SelectionChanged">
 
+            <TabItem x:Name="rentTab" Header="Сдача в аренду">
+                <controls:RentItems />
+            </TabItem>
 
+
+
+            <TabItem x:Name="repairItemTab" Header="Ремонт оборудования" >
+                <controls:RepairItems />
+            </TabItem>
+
+            <TabItem x:Name="disabledItemTab" Header="Списание оборудования">
+                <controls:DisabledItems />
+            </TabItem>
             <TabItem x:Name="newItemTab" Header="Добавление оборудовани">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75*" />
-                        <ColumnDefinition Width="150*" />
+                        <ColumnDefinition Width="203*" />
+                        <ColumnDefinition Width="79*"/>
+                        <ColumnDefinition Width="49*"/>
+                        <ColumnDefinition Width="663*" />
                     </Grid.ColumnDefinitions>
 
                     <controls:AddItem
@@ -55,23 +69,16 @@
                         Grid.Column="0"
                         Margin="5,5,5,5"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1" Grid.ColumnSpan="3" />
 
                     <controls:ItemTypeManagement
                         x:Name="itemTypeManagement"
-                        Grid.Column="1"
+                        Grid.Column="3"
                         Margin="5,5,5,5"
                         BorderBrush="Black"
                         BorderThickness="1" />
                 </Grid>
 
-            </TabItem>
-            <TabItem x:Name="repeirItemTab" Header="Ремонт оборудования" >
-                <controls:RepairItems />
-            </TabItem>
-
-            <TabItem x:Name="disabledItemTab" Header="Списание оборудования">
-                <controls:DisabledItems />
             </TabItem>
 
             <TabItem
@@ -81,14 +88,6 @@
                 Header="qweqwe">
 
                 <StackPanel>
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1cm" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>-->
                     <Button
                         Grid.Row="1"
                         Width="200"
