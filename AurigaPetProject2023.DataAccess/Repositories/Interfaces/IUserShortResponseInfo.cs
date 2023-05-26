@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Drawing.Printing;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IUserResponseInfo
+    public interface IUserShortResponseInfo
     {
         int UserID { get; set; }
         public string LoginName { get; set; }
         public string Phone { get; set; }
-        List<int> Roles { get; set; }
+        string Print();
     }
 }

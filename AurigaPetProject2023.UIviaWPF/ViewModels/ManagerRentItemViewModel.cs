@@ -21,8 +21,8 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 
         private static ManagerRentItemModel _model;
 
-        public BindingList<IUserResponseInfo> Users => _model.Users;
-        public IUserResponseInfo SelectedUser
+        public BindingList<IUserShortResponseInfo> Users => _model.Users;
+        public IUserShortResponseInfo SelectedUser
         {
             get { return _model.SelectedUser; }
             set

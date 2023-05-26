@@ -23,12 +23,12 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             _dbSet = context.Set<User>();
         }
 
-        public virtual async Task<IReadOnlyList<IUserResponseInfo>> GetUsersInfoAsync()
+        public virtual async Task<IReadOnlyList<IUserShortResponseInfo>> GetUsersInfoAsync()
         {
             return await (from user in _dbSet
                           where !_context.Set<BannedInfo>().Any(x => x.UserID == user.UserID)
                           && _context.Set<Role>().Where(x=> x.RoleType == 3).Any(x => x.UserID == user.UserID)
-                          select new UserResponseInfo(user)
+                          select new UserShortResponseInfo(user)
                           ).ToListAsync();
         }
 

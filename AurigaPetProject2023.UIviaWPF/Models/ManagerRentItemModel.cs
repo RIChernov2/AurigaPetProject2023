@@ -11,7 +11,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         private ManagerRentItemModel()
         {
-            Users = new BindingList<IUserResponseInfo>();
+            Users = new BindingList<IUserShortResponseInfo>();
             //ItemTypesIsLoaded = false;
             //NewItemTypeStatusInfo = new LabelInfo();
         }
@@ -26,8 +26,8 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
             return _model;
         }
-        public BindingList<IUserResponseInfo> Users { get; set; }
-        public IUserResponseInfo SelectedUser 
+        public BindingList<IUserShortResponseInfo> Users { get; set; }
+        public IUserShortResponseInfo SelectedUser 
         { 
             get { return _selectedUser; }
             set 
@@ -36,7 +36,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(SelectedUser));
             }
         }
-        private IUserResponseInfo _selectedUser;
+        private IUserShortResponseInfo _selectedUser;
 
         public bool UsersIsLoaded
         {
