@@ -14,23 +14,14 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerRentItemModel.GetInstance();
 
-            LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
             LoadUsersCommand = new RelayCommand(_model.LoadUsers);
-            LoadUsersCommand = new RelayCommand(_model.RentItem);
+            RentOutItemCommand = new RelayCommand(_model.RentOutItem);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
         private static ManagerRentItemModel _model;
-        public bool AvaliableItemsIsLoaded
-        {
-            get { return _model.AvaliableItemsIsLoaded; }
-            set
-            {
-                _model.AvaliableItemsIsLoaded = value;
-                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
-            }
-        }
+
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
 
         public BindingList<IUserShortResponseInfo> Users => _model.Users;
@@ -84,8 +75,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
-        public ICommand LoadAvaliableItemsCommand { get; }
         public ICommand LoadUsersCommand { get; }
-        public ICommand RentItemCommand { get; }
+        public ICommand RentOutItemCommand { get; }
     }
 }

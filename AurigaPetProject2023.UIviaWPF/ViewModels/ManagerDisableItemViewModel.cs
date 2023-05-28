@@ -14,7 +14,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerDisableItemModel.GetInstance();
 
-            LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
             LoadDisableItemsCommand = new RelayCommand(_model.LoadDisabledItems);
             DisableItemCommand = new RelayCommand(_model.DisableItem);
 
@@ -22,15 +21,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
 
         private ManagerDisableItemModel _model;
-        public bool AvaliableItemsIsLoaded
-        {
-            get { return _model.AvaliableItemsIsLoaded; }
-            set
-            {
-                _model.AvaliableItemsIsLoaded = value;
-                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
-            }
-        }
         public bool DisabledItemsIsLoaded
         {
             get { return _model.DisabledItemsIsLoaded; }
@@ -81,7 +71,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<ItemWithDisableInfo> DisabledItems => _model.DisabledItems;
 
-        public ICommand LoadAvaliableItemsCommand { get; }
         public ICommand LoadDisableItemsCommand { get; }
         public ICommand DisableItemCommand { get; }
 

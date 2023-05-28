@@ -11,7 +11,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Converters
         {
             if (value is IUserShortResponseInfo typedValues)
             {
-                return $"ID=> {typedValues.UserID}, Login/Phone => {typedValues.LoginName ??= "-"}/{typedValues.Phone ??= "-"}";
+                return $"ID = {typedValues.UserID}, Login = {typedValues.LoginName ??= "none"}, Phone = {typedValues.Phone ??= "none"}";
             }
 
             return null;

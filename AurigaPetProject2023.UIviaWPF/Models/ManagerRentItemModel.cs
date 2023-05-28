@@ -115,7 +115,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private double _totalcost;
 
-        public void RentItem()
+        public void RentOutItem()
         {
 
             //var answer = MessageBox.Show("Вы уверены, что хотите сдать в аренду данное оборудование:" +

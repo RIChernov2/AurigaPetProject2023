@@ -37,9 +37,9 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             TabControl tab = (TabControl)sender;
             if((TabItem)tab.SelectedItem == rentTab)
             {
-                if (!_model.ManagerRentItemViewModel.AvaliableItemsIsLoaded)
+                if (!_model.ManagerItemViewModel.AvaliableItemsIsLoaded)
                 {
-                    _model.ManagerRentItemViewModel.LoadAvaliableItemsCommand.Execute(null);
+                    _model.ManagerItemViewModel.LoadAvaliableItemsCommand.Execute(null);
                 }
 
                 if (!_model.ManagerRentItemViewModel.UsersIsLoaded)
@@ -49,9 +49,9 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             }
             else if ((TabItem)tab.SelectedItem == repairItemTab)
             {
-                if (!_model.ManagerRepairItemViewModel.AvaliableItemsIsLoaded)
+                if (!_model.ManagerItemViewModel.AvaliableItemsIsLoaded)
                 {
-                    _model.ManagerRepairItemViewModel.LoadAvaliableItemsCommand.Execute(null);
+                    _model.ManagerItemViewModel.LoadAvaliableItemsCommand.Execute(null);
                 }
 
                 if (!_model.ManagerRepairItemViewModel.RepairingItemsIsLoaded)
@@ -61,9 +61,9 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             }
             else if ((TabItem)tab.SelectedItem == disabledItemTab)
             {
-                if (!_model.ManagerDisableViewModel.AvaliableItemsIsLoaded)
+                if (!_model.ManagerItemViewModel.AvaliableItemsIsLoaded)
                 {
-                    _model.ManagerDisableViewModel.LoadAvaliableItemsCommand.Execute(null);
+                    _model.ManagerItemViewModel.LoadAvaliableItemsCommand.Execute(null);
                 }
 
                 if (!_model.ManagerDisableViewModel.DisabledItemsIsLoaded)

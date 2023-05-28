@@ -14,7 +14,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         {
             _model = ManagerRepairItemModel.GetInstance();
 
-            LoadAvaliableItemsCommand = new RelayCommand(_model.LoadAvaliableItems);
             LoadRepairItemsCommand = new RelayCommand(_model.LoadRepairItems);
             RepairItemCommand = new RelayCommand(_model.RepairItem);
             AbortRepairItemCommand = new RelayCommand(_model.AbortRepairItem);
@@ -22,15 +21,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
         private ManagerRepairItemModel _model;
-        public bool AvaliableItemsIsLoaded
-        {
-            get { return _model.AvaliableItemsIsLoaded; }
-            set
-            {
-                _model.AvaliableItemsIsLoaded = value;
-                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
-            }
-        }
         public bool RepairingItemsIsLoaded
         {
             get { return _model.RepairingItemsIsLoaded; }
@@ -100,7 +90,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public BindingList<ItemWithRepairingInfoInfo> RepairingItems => _model.RepairingItems;
 
 
-        public ICommand LoadAvaliableItemsCommand { get; }
         public ICommand LoadRepairItemsCommand { get; }
         public ICommand RepairItemCommand { get; }
         public ICommand AbortRepairItemCommand { get; }
