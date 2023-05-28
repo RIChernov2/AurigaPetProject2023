@@ -133,7 +133,7 @@
                             Height="25"
                             Margin="10,5,10,5"
                             VerticalContentAlignment="Center"
-                            Text="{Binding Path=RepairReason}" />
+                            Text="{Binding Path=Price}" />
                         <Label
                             Grid.Row="1"
                             Grid.Column="2"
@@ -147,7 +147,8 @@
                             Height="25"
                             Margin="10,5,10,5"
                             VerticalContentAlignment="Center"
-                            Text="{Binding Path=RepairReason}" />
+                            ItemsSource="{Binding Path=RentMounthLengths}"
+                            SelectedItem="{Binding Path=SelectedRentLength}" />
 
                         <Grid
                             Grid.Row="2"
@@ -165,13 +166,14 @@
                                 Height="25"
                                 Margin="10,5,10,5"
                                 VerticalContentAlignment="Center"
-                                Text="{Binding Path=RepairReason}" />
+                                IsReadOnly="True"
+                                Text="{Binding Path=TotalCost}" />
                         </Grid>
                         <Button
                             Grid.Row="3"
                             Height="0.6cm"
                             Margin="10,0,10,0"
-                            Command="{Binding Path=RepairItemCommand}">
+                            Command="{Binding Path=RentItemCommand}">
                             В ремонт
                         </Button>
 

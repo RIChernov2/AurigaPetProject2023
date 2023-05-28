@@ -2,8 +2,10 @@
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -12,6 +14,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         private ManagerRentItemModel()
         {
             Users = new BindingList<IUserShortResponseInfo>();
+            RentMounthLengths = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             //ItemTypesIsLoaded = false;
             //NewItemTypeStatusInfo = new LabelInfo();
         }
@@ -26,6 +29,19 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
             return _model;
         }
+        private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
+        public bool AvaliableItemsIsLoaded
+        {
+            get { return _managerItemModel.AvaliableItemsIsLoaded; }
+            set
+            {
+                _managerItemModel.AvaliableItemsIsLoaded = value;
+                OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
+            }
+        }
+        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+        public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
+
         public BindingList<IUserShortResponseInfo> Users { get; set; }
         public IUserShortResponseInfo SelectedUser 
         { 
@@ -64,6 +80,71 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 }
                 UsersIsLoaded = true;
             }
+        }
+
+        public int[] RentMounthLengths { get; }
+        public int SelectedRentLength 
+        {
+            get { return _selectedRentLength; }
+            set
+            {
+                _selectedRentLength = value;
+                OnPropertyChanged(nameof(SelectedRentLength));
+            }
+        }
+        private int _selectedRentLength;
+
+        public double Price
+        {
+            get { return _price; }
+            set
+            {
+                _price = value;
+                OnPropertyChanged(nameof(Price));
+            }
+        }
+        private double _price;
+        public double TotalCost
+        {
+            get { return _totalcost; }
+            set
+            {
+                _totalcost = value;
+                OnPropertyChanged(nameof(TotalCost));
+            }
+        }
+        private double _totalcost;
+
+        public void RentItem()
+        {
+
+            //var answer = MessageBox.Show("Вы уверены, что хотите сдать в аренду данное оборудование:" +
+            //    $"{Environment.NewLine}{Environment.NewLine}" +
+            //    $"ID - {SelectedAvaliableItem.ItemID}{Environment.NewLine}" +
+            //    $"Тип - \"{SelectedAvaliableItem.ItemType.Name}{Environment.NewLine}\"" +
+            //    $"Описание - \"{SelectedAvaliableItem.Description}\"{Environment.NewLine}{Environment.NewLine}" +
+            //    $"Причина списания - \"{DisableReason}\"{Environment.NewLine}",
+            //    "Подтверждение удаления",
+            //    MessageBoxButton.YesNo);
+
+
+            //if (answer == MessageBoxResult.No) return;
+
+
+
+            //using (UnitOfWork unitOfWork = new UnitOfWork())
+            //{
+            //    var manager = new UsersStorageManager(unitOfWork);
+            //    var list = manager.GetUsersInfo();
+
+            //    //ProductTypes = new BindingList<ProductType>(list);
+            //    Users.Clear();
+            //    foreach (var item in list)
+            //    {
+            //        Users.Add(item);
+            //    }
+            //    UsersIsLoaded = true;
+            //}
         }
     }
 }

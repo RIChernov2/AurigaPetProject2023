@@ -37,7 +37,12 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             TabControl tab = (TabControl)sender;
             if((TabItem)tab.SelectedItem == rentTab)
             {
-                if(!_model.ManagerRentItemViewModel.UsersIsLoaded)
+                if (!_model.ManagerRentItemViewModel.AvaliableItemsIsLoaded)
+                {
+                    _model.ManagerRentItemViewModel.LoadAvaliableItemsCommand.Execute(null);
+                }
+
+                if (!_model.ManagerRentItemViewModel.UsersIsLoaded)
                 {
                     _model.ManagerRentItemViewModel.LoadUsersCommand.Execute(null);
                 }
