@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:AurigaPetProject2023.UIviaWPF.Windows.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:validationRules="clr-namespace:AurigaPetProject2023.UIviaWPF.ValidationRules"
     xmlns:viewModels="clr-namespace:AurigaPetProject2023.UIviaWPF.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -19,7 +20,7 @@
         <viewModels:ManagerRentItemViewModel />
     </UserControl.DataContext>
 
-    <Grid Background="White">
+    <Grid Background="White" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="*" />
@@ -127,13 +128,34 @@
                             HorizontalAlignment="Center">
                             Цена в неделю
                         </Label>
-                        <TextBox
+                        <TextBox x:Name="priceTextbox"
                             Grid.Row="1"
                             Grid.Column="1"
                             Height="25"
                             Margin="10,5,10,5"
-                            VerticalContentAlignment="Center"
-                            Text="{Binding Path=Price}" />
+                            VerticalContentAlignment="Center">
+                            <TextBox.Text>
+                                <Binding
+                                    Path="Price"
+                                    UpdateSourceTrigger="PropertyChanged"
+                                    ValidatesOnDataErrors="True">
+                                    <Binding.ValidationRules>
+                                        <validationRules:PriceValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="ToolTip" Value="{x:Null}" />
+                                    <Setter Property="ToolTipService.ShowDuration" Value="2000" />
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                         <Label
                             Grid.Row="1"
                             Grid.Column="2"
@@ -155,10 +177,15 @@
                             Grid.Column="1"
                             Grid.ColumnSpan="3">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="63*" />
+                                <ColumnDefinition Width="76*" />
+                                <ColumnDefinition Width="139*" />
                             </Grid.ColumnDefinitions>
-                            <Label Height="25" HorizontalAlignment="Right">
+                            <Label
+                                Grid.ColumnSpan="3"
+                                Height="25"
+                                Margin="48,5,0,5"
+                                HorizontalAlignment="Left">
                                 Итоговая цена
                             </Label>
                             <TextBox
@@ -196,3 +223,35 @@
 
     </Grid>
 </UserControl>
+
+
+
+
+
+
+<!--<TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Height="25"
+                            Margin="10,5,10,5"
+                            VerticalContentAlignment="Center">
+    <TextBox.Text>
+        <Binding Path="Price" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+            <Binding.ValidationRules>
+                <validationRules:PriceValidationRule/>
+            </Binding.ValidationRules>
+        </Binding>
+    </TextBox.Text>
+    <TextBox.Style>
+        <Style TargetType="TextBox">
+            <Setter Property="ToolTip" Value="{x:Null}" />
+            <Setter Property="ToolTipService.InitialShowDelay " Value="500" />
+            <Setter Property="ToolTipService.ShowDuration" Value="2000" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </TextBox.Style>
+</TextBox>-->

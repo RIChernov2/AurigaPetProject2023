@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
 {
@@ -83,16 +84,17 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
 
         public int[] RentMounthLengths { get; }
-        public int SelectedRentLength 
+        public int? SelectedRentLength 
         {
             get { return _selectedRentLength; }
             set
             {
                 _selectedRentLength = value;
+                SetTotalCost();
                 OnPropertyChanged(nameof(SelectedRentLength));
             }
         }
-        private int _selectedRentLength;
+        private int? _selectedRentLength;
 
         public double Price
         {
@@ -100,6 +102,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             set
             {
                 _price = value;
+                SetTotalCost();
                 OnPropertyChanged(nameof(Price));
             }
         }
@@ -115,6 +118,12 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private double _totalcost;
 
+        private void SetTotalCost() => TotalCost = Price * (SelectedRentLength ??= 0);
+
+        public void ActionOnPriceValidationFailing()
+        {
+            TotalCost = 0;
+        }
         public void RentOutItem()
         {
 

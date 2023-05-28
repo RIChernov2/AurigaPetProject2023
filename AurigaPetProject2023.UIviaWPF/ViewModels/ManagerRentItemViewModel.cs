@@ -2,8 +2,11 @@
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
+using AurigaPetProject2023.UIviaWPF.ValidationRules;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AurigaPetProject2023.UIviaWPF.ViewModels
@@ -16,6 +19,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 
             LoadUsersCommand = new RelayCommand(_model.LoadUsers);
             RentOutItemCommand = new RelayCommand(_model.RentOutItem);
+            PriceValidationFailingCommand = new RelayCommand(_model.ActionOnPriceValidationFailing);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
@@ -47,7 +51,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 
 
         public int[] RentMounthLengths => _model.RentMounthLengths;
-        public int SelectedRentLength
+        public int? SelectedRentLength
         {
             get { return _model.SelectedRentLength; }
             set
@@ -77,5 +81,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 
         public ICommand LoadUsersCommand { get; }
         public ICommand RentOutItemCommand { get; }
+        public ICommand PriceValidationFailingCommand { get; }
     }
 }

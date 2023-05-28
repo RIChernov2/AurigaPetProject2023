@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AurigaPetProject2023.UIviaWPF.ValidationRules;
+using AurigaPetProject2023.UIviaWPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,27 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         public RentItems()
         {
             InitializeComponent();
+
+
+
+            var a = Validation.GetValidationAdornerSite(priceTextbox);
+            var b = Validation.GetValidationAdornerSiteFor(priceTextbox);
+
+            //priceTextbox.GetVa(Validation.ErrorEvent, OnPriceErrorEventHandler);
+            //Validation.AddErrorHandler(priceTextbox, PriceValidationErrorHandler);
+
+            //priceTextbox.
+
+            PriceValidationRule validationRule = priceTextbox.GetBindingExpression(TextBox.TextProperty)?.ParentBinding.ValidationRules
+                .OfType<PriceValidationRule>()
+                .FirstOrDefault();
+
+            validationRule.OnValidationFailed += SetZeroCost;
+        }
+
+        private void SetZeroCost()
+        {
+            ((ManagerRentItemViewModel)this.DataContext).PriceValidationFailingCommand.Execute(null);
         }
     }
 }
