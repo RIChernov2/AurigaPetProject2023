@@ -1,7 +1,10 @@
-﻿using AurigaPetProject2023.UIviaWPF.ValidationRules;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
+using AurigaPetProject2023.UIviaWPF.ValidationRules;
 using AurigaPetProject2023.UIviaWPF.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +49,26 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         private void SetZeroCost()
         {
             ((ManagerRentItemViewModel)this.DataContext).PriceValidationFailingCommand.Execute(null);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (sender is not ComboBox cbox) return;
+            //if (cbox.SelectedItem is not IUserWithDiscountInfo itemWithRentInfo) return;
+
+            //ManagerRentItemViewModel model = (ManagerRentItemViewModel)this.DataContext;
+
+            //ICollectionView collectionView =  CollectionViewSource.GetDefaultView(model.RentItems);
+            ////collectionView.Filter = (item) =>
+            ////{
+            ////    //ItemWithRentInfo myItem = (ItemWithRentInfo)item;
+            ////    ItemWithRentInfo myItem = item as ItemWithRentInfo;
+
+            ////    return myItem.RentInfo.UserID == itemWithRentInfo.UserID;
+
+            ////};
+
+            //collectionView.Filter = (item) => true;
         }
     }
 }

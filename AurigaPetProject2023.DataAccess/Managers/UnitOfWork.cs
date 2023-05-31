@@ -10,14 +10,13 @@ namespace AurigaPetProject2023.DataAccess.Managers
 {
     public class UnitOfWork : IUnitOfWork
     {
-        // не забудь добавить в ResetRepositories
         private IDbContextTransaction _transaction;
         private IUserRepository _usersRepository;
-        //private IRoleRepository _roleRepository;
         private IItemTypeRepository _itemTypeRepository;
         private IItemRepository _itemRepository;
         private IDisabledInfoRepository _disabledInfoRepository;
         private IRepairingInfoRepository _repairingInfoRepository;
+        private IRentInfoRepository _rentInfoRepository;
         private DbContext _context;
 
         public UnitOfWork()
@@ -25,13 +24,13 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _context = new NewContext();
             _transaction = _context.Database.BeginTransaction();
         }
-
+        // НЕ ЗАБУДЬ ДОБАВЛЯТЬ В ResetRepositories !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public IUserRepository UserRepository => _usersRepository ??= new UserRepository(_context);
-        //public IRoleRepository RoleRepository => _roleRepository ??= new RoleRepository(_context);
         public IItemTypeRepository ItemTypeRepository => _itemTypeRepository ??= new ItemTypeRepository(_context);
         public IItemRepository ItemRepository => _itemRepository ??= new ItemRepository(_context);
         public IDisabledInfoRepository DisabledInfoRepository => _disabledInfoRepository ??= new DisabledInfoRepository(_context);
         public IRepairingInfoRepository RepairingInfoRepository => _repairingInfoRepository ??= new RepairingInfoRepository(_context);
+        public IRentInfoRepository RentInfoRepository => _rentInfoRepository ??= new RentInfoRepository(_context);
 
 
         public void Commit()
@@ -63,6 +62,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
             _itemRepository = null;
             _disabledInfoRepository = null;
             _repairingInfoRepository = null;
+            _rentInfoRepository = null;
         }
 
         // еще надо почитать про управляемые и не управляемые ресурсы

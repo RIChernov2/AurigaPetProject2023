@@ -16,10 +16,25 @@ namespace AurigaPetProject2023.DataAccess.Entities
         [Column("Start_Date")]
         public DateTime StartDate { get; set; }
         [Column("Expire_Date")]
-        public DateTime? ExpireDate { get; set; }
+        public DateTime ExpireDate { get; set; }
         [Column("End_Date")]
         public DateTime? EndDate { get; set; }
         public double Cost { get; set; }
         public bool IsPaid { get; set; }
+
+        public RentInfo GetCopy()
+        {
+            return new RentInfo()
+            {
+                RentInfoID = this.RentInfoID,
+                UserID = this.UserID,
+                ItemID = this.ItemID,
+                StartDate = this.StartDate,
+                ExpireDate = this.ExpireDate,
+                EndDate = this.EndDate,
+                Cost = this.Cost,
+                IsPaid = this.IsPaid
+            };
+        }
     }
 }

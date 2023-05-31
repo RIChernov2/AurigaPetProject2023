@@ -23,6 +23,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             RentItems = new BindingList<ItemWithRentInfo>();
 
             RentOutOperationStatusInfo = new LabelInfo();
+            RetuenFromRentOperationStatusInfo = new LabelInfo();
         }
 
         private static ManagerRentItemModel _model;
@@ -36,6 +37,14 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             return _model;
         }
         private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
+
+        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+
+        public BindingList<IUserWithDiscountInfo> Users { get; set; }
+        public int[] RentMounthLengths { get; }
+        public BindingList<ItemWithRentInfo> RentItems;
+
+
         public bool AvaliableItemsIsLoaded
         {
             get { return _managerItemModel.AvaliableItemsIsLoaded; }
@@ -45,20 +54,17 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(AvaliableItemsIsLoaded));
             }
         }
-        public Item SelectedAvaliableItem
+        public bool RentItemIsLoaded
         {
-            get { return _selectedAvaliableItem; }
+            get { return _rentItemIsLOaded; }
             set
             {
-                _selectedAvaliableItem = value;
-                OnPropertyChanged(nameof(SelectedAvaliableItem));
+                _rentItemIsLOaded = value;
+                OnPropertyChanged(nameof(RentItemIsLoaded));
             }
         }
-        private Item _selectedAvaliableItem;
-        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
-        public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
+        private bool _rentItemIsLOaded;
 
-        public BindingList<IUserWithDiscountInfo> Users { get; set; }
         public IUserWithDiscountInfo SelectedUser
         {
             get { return _selectedUser; }
@@ -71,6 +77,18 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private IUserWithDiscountInfo _selectedUser;
 
+        public IUserWithDiscountInfo SelectedUserInFilter
+        {
+            get { return _selectedUserInFilter; }
+            set
+            {
+                _selectedUserInFilter = value;
+                SetTotalCost();
+                OnPropertyChanged(nameof(SelectedUserInFilter));
+            }
+        }
+        private IUserWithDiscountInfo _selectedUserInFilter;
+
         public bool UsersIsLoaded
         {
             get { return _usersIsLoaded; }
@@ -82,24 +100,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private bool _usersIsLoaded;
 
-        public void LoadUsers()
-        {
-            using (UnitOfWork unitOfWork = new UnitOfWork())
-            {
-                var manager = new UsersStorageManager(unitOfWork);
-                var list = manager.GetUsersWithDiscountInfo();
-
-                //ProductTypes = new BindingList<ProductType>(list);
-                Users.Clear();
-                foreach (var item in list)
-                {
-                    Users.Add(item);
-                }
-                UsersIsLoaded = true;
-            }
-        }
-
-        public int[] RentMounthLengths { get; }
         public int? SelectedRentLength
         {
             get { return _selectedRentLength; }
@@ -111,6 +111,26 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private int? _selectedRentLength;
+        public Item SelectedAvaliableItem
+        {
+            get { return _selectedAvaliableItem; }
+            set
+            {
+                _selectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
+        private Item _selectedAvaliableItem;
+        public ItemWithRentInfo SelectedRentItem
+        {
+            get { return _selectedRentItem; }
+            set
+            {
+                _selectedRentItem = value;
+                OnPropertyChanged(nameof(SelectedRentItem));
+            }
+        }
+        private ItemWithRentInfo _selectedRentItem;
 
         public double Price
         {
@@ -133,7 +153,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
         }
         private double _totalcost;
-
         public bool IsPaid
         {
             get { return _isPaid; }
@@ -154,15 +173,57 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(RentOutOperationStatusInfo));
             }
         }
-        public LabelInfo _rentOutOperationStatusInfo;
+        public LabelInfo _rentOutOperationStatusInfo;      
+        public LabelInfo RetuenFromRentOperationStatusInfo
+        {
+            get { return _retuenFromRentOperationStatusInfo; }
+            set
+            {
+                _retuenFromRentOperationStatusInfo = value;
+                OnPropertyChanged(nameof(RetuenFromRentOperationStatusInfo));
+            }
+        }
+        public LabelInfo _retuenFromRentOperationStatusInfo;     
 
         private void SetTotalCost()
         {
-            int itemNumber = (int) (SelectedRentLength == null ? 0 : SelectedRentLength);
+            int itemNumber = (int)(SelectedRentLength == null ? 0 : SelectedRentLength);
             int discount = SelectedUser == null ? 0 : SelectedUser.DiscountPercentage;
-            TotalCost = Price * itemNumber * (1 - discount/100.0);
+            TotalCost = Price * itemNumber * (1 - discount / 100.0);
         }
+        public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
+        public void LoadUsers()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new UsersStorageManager(unitOfWork);
+                var list = manager.GetUsersWithDiscountInfo();
 
+                //ProductTypes = new BindingList<ProductType>(list);
+                Users.Clear();
+                foreach (var item in list)
+                {
+                    Users.Add(item);
+                }
+                UsersIsLoaded = true;
+            }
+        }
+        public void LoadRentItems()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new ItemStorageManager(unitOfWork);
+                var list = manager.GetInRent();
+
+                //ProductTypes = new BindingList<ProductType>(list);
+                RentItems.Clear();
+                foreach (var item in list)
+                {
+                    RentItems.Add(item);
+                }
+                RentItemIsLoaded = true;
+            }
+        }
         public void ActionOnPriceValidationFailing()
         {
             TotalCost = 0;
@@ -196,7 +257,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 $"ID - {SelectedAvaliableItem.ItemID}{Environment.NewLine}" +
                 $"Тип - \"{SelectedAvaliableItem.ItemType.Name}{Environment.NewLine}\"" +
                 $"Описание - \"{SelectedAvaliableItem.Description}\"{Environment.NewLine}{Environment.NewLine}" +
-                $"Срок аренды - {SelectedRentLength} недели(ль) {Environment.NewLine}" + 
+                $"Срок аренды - {SelectedRentLength} недели(ль) {Environment.NewLine}" +
                 $"Скидка (если имеется) - {SelectedUser.DiscountPercentage}%{Environment.NewLine}" +
                 $"Итоговая цена аренды - {TotalCost}{Environment.NewLine}" +
                 $"Оплата за аренду внечена - {(IsPaid ? "Да" : "Нет")}{Environment.NewLine}" + Environment.NewLine +
@@ -209,58 +270,87 @@ namespace AurigaPetProject2023.UIviaWPF.Models
 
 
 
-            //using (UnitOfWork unitOfWork = new UnitOfWork())
-            //{
-            //    var manager = new UsersStorageManager(unitOfWork);
-            //    var list = manager.GetUsersInfo();
+            RentInfo entity = new RentInfo();
+            entity.UserID = SelectedUser.UserID;
+            entity.ItemID = SelectedAvaliableItem.ItemID;
+            entity.StartDate = DateTime.Now;
+            entity.ExpireDate = DateTime.Now.AddDays((int)SelectedRentLength * 7);
+            entity.Cost = TotalCost;
+            entity.IsPaid = IsPaid;
 
-            //    //ProductTypes = new BindingList<ProductType>(list);
-            //    Users.Clear();
-            //    foreach (var item in list)
-            //    {
-            //        Users.Add(item);
-            //    }
-            //    UsersIsLoaded = true;
-            //}
-        }
-
-        public BindingList<ItemWithRentInfo> RentItems;
-        public ItemWithRentInfo SelectedRentItem
-        {
-            get { return _selectedRentItem; }
-            set
-            {
-                _selectedRentItem = value;
-                OnPropertyChanged(nameof(SelectedRentItem));
-            }
-        }
-        private ItemWithRentInfo _selectedRentItem;
-        public bool RentItemIsLoaded
-        {
-            get { return _rentItemIsLOaded; }
-            set
-            {
-                _rentItemIsLOaded = value;
-                OnPropertyChanged(nameof(RentItemIsLoaded));
-            }
-        }
-        private bool _rentItemIsLOaded;
-
-        public void LoadRentItems()
-        {
+            int result = 0;
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                var manager = new ItemStorageManager(unitOfWork);
-                var list = manager.GetInRent();
-
-                //ProductTypes = new BindingList<ProductType>(list);
-                RentItems.Clear();
-                foreach (var item in list)
-                {
-                    RentItems.Add(item);
-                }
-                RentItemIsLoaded = true;
+                var manager = new RentInfoStorageManager(unitOfWork);
+                result = manager.Create(entity);
             }
+
+            if (result == 1)
+            {
+                SelectedAvaliableItem = null;
+                SelectedUser = null;
+                Price = 0;
+                IsPaid = false;
+                LoadAvaliableItems();
+                LoadRentItems();
+                RentOutOperationStatusInfo.Text = "Операция успешно завершена";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RentOutOperationStatusInfo, Brushes.Green);
+            }
+            else
+            {
+                RentOutOperationStatusInfo.Text = "Ошибка операции";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RentOutOperationStatusInfo, Brushes.Red);
+            }
+        }
+        public void ReturnFromRent()
+        {
+            if (SelectedRentItem == null)
+            {
+                RetuenFromRentOperationStatusInfo.Text = "Необходимо выбрать оборудование для возврата из аренды.";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RetuenFromRentOperationStatusInfo, Brushes.Red);
+                return;
+            }
+
+            var answer = MessageBox.Show("Вы уверены, что хотите завершить аренду данного оборудования:" +
+                $"{Environment.NewLine}{Environment.NewLine}" +
+                $"ID - {SelectedRentItem.ItemData.ItemID}{Environment.NewLine}" +
+                $"Тип - \"{SelectedRentItem.ItemData.ItemType.Name}{Environment.NewLine}\"" +
+                $"Описание - \"{SelectedRentItem.ItemData.Description}\"{Environment.NewLine}{Environment.NewLine}",
+                "Подтверждение удаления",
+                MessageBoxButton.YesNo);
+
+
+            if (answer == MessageBoxResult.No) return;
+
+
+
+            RentInfo entity = SelectedRentItem.RentInfo.GetCopy();
+            entity.EndDate = DateTime.Now;
+            entity.IsPaid = true;
+
+            int result = 0;
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                var manager = new RentInfoStorageManager(unitOfWork);
+                result = manager.Update(entity);
+
+            }
+
+            if (result == 1)
+            {
+                SelectedRentItem = null;
+                LoadAvaliableItems();
+                LoadRentItems();
+
+                RetuenFromRentOperationStatusInfo.Text = "Операция успешно завершена";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RetuenFromRentOperationStatusInfo, Brushes.Green);
+            }
+            else
+            {
+                RetuenFromRentOperationStatusInfo.Text = "Ошибка операции";
+                new LabelInfoHelper().ChangeStatusColorAndVisibility(RetuenFromRentOperationStatusInfo, Brushes.Red);
+            }
+
         }
     }
 }

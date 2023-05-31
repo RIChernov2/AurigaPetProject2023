@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <converters:UserShortInfoConverter x:Key="userInfoConverter" />
         <converters:DiscountConverter x:Key="discountConverter" />
+        <converters:DateTimeToBoolConverter x:Key="dateTimeToBoolConverter" />
     </UserControl.Resources>
 
 
@@ -235,7 +236,7 @@
                             Height="0.6cm"
                             Margin="10,0,10,0"
                             Command="{Binding Path=RentOutItemCommand}">
-                            В ремонт
+                            В аренду
                         </Button>
 
 
@@ -272,8 +273,6 @@
 
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="0.8cm" />
-                    <RowDefinition Height="2cm" />
 
                 </Grid.RowDefinitions>
 
@@ -289,6 +288,7 @@
                 </Border>
 
                 <DataGrid
+                    x:Name="rentedOutItems"
                     Grid.Row="1"
                     AutoGenerateColumns="False"
                     CanUserReorderColumns="False"
@@ -318,9 +318,33 @@
                             Width="Auto"
                             Binding="{Binding Path=ItemData.UniqueID}"
                             Header="Уник.номер" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=RentInfo.UserID}"
+                            Header="ID User" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=RentInfo.StartDate}"
+                            Header="Начало" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=RentInfo.ExpireDate}"
+                            Header="Вернуть до">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=RentInfo.ExpireDate, Converter={StaticResource dateTimeToBoolConverter}}" Value="true">
+                                            <Setter Property="Background" Value="Salmon" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3cm" />
                         <ColumnDefinition />
@@ -329,46 +353,58 @@
                         <RowDefinition Height="0.1cm" />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
-                        Height="30"
+                        Height="25"
                         HorizontalAlignment="Center">
-                        Результат ремонта
+                        Фильтр
                     </Label>
-
-                    <Button
-                        Grid.Row="2"
-                        Height="0.6cm"
-                        Margin="10,0,10,0"
-                        Command="{Binding Path=AbortRepairItemCommand}">
-                        Завершить
-                    </Button>
-                    <TextBox
+                    <ComboBox
                         Grid.Row="1"
                         Grid.Column="1"
-                        Height="30"
-                        Margin="10,0,10,0"
+                        Grid.ColumnSpan="3"
+                        Height="25"
+                        Margin="10,5,10,5"
                         VerticalContentAlignment="Center"
-                        Text="{Binding Path=RepairResultDescription}" />
+                        ItemsSource="{Binding Path=Users}"
+                        MaxDropDownHeight="4cm"
+                        SelectedItem="{Binding Path=SelectedUserInFilter}"
+                        SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                    <Label
-                        Grid.Row="2"
+
+                    <Button
+                        Grid.Row="3"
+                        Height="0.6cm"
+                        Margin="10,0,10,0"
+                        Command="{Binding Path=ReturnFromRentCommand}">
+                        Завершить
+                    </Button>
+
+
+                    <TextBlock
+                        Grid.Row="3"
                         Grid.Column="1"
-                        Height="30"
+                        MinHeight="24"
+                        Margin="3"
                         HorizontalAlignment="Center"
-                        Content="{Binding Path=Text}"
-                        DataContext="{Binding Path=AbortRepairOperationStatusInfo}"
+                        TextWrapping="Wrap"
+                        Text="{Binding Path=Text}"
+                        DataContext="{Binding Path=RetuenFromRentOperationStatusInfo}"
                         Foreground="{Binding Path=Color}"
                         Visibility="{Binding Path=Visibility}" />
 
                 </Grid>
-                <Label Grid.Row="3" HorizontalAlignment="Center">Информация об элементе в ремонте</Label>
-                <TextBlock
-                    Grid.Row="4"
-                    Margin="20,0,20,0"
-                    Text="{Binding Path=SelectedRepairingItem.RepairingInfoData}" />
+
+
             </Grid>
         </Border>
 

@@ -22,6 +22,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             RentOutItemCommand = new RelayCommand(_model.RentOutItem);
             PriceValidationFailingCommand = new RelayCommand(_model.ActionOnPriceValidationFailing);
             LoadRentItemsCommand = new RelayCommand(_model.LoadRentItems);
+            ReturnFromRentCommand = new RelayCommand(_model.ReturnFromRent);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
@@ -37,17 +38,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
-
         public BindingList<IUserWithDiscountInfo> Users => _model.Users;
-        public IUserWithDiscountInfo SelectedUser
-        {
-            get { return _model.SelectedUser; }
-            set
-            {
-                _model.SelectedUser = value;
-                OnPropertyChanged(nameof(SelectedUser));
-            }
-        }
 
         public bool UsersIsLoaded
         {
@@ -68,6 +59,33 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             {
                 _model.SelectedRentLength = value;
                 OnPropertyChanged(nameof(SelectedRentLength));
+            }
+        }
+        public ItemWithRentInfo SelectedRentItem
+        {
+            get { return _model.SelectedRentItem; }
+            set
+            {
+                _model.SelectedRentItem = value;
+                OnPropertyChanged(nameof(SelectedRentItem));
+            }
+        }
+        public IUserWithDiscountInfo SelectedUser
+        {
+            get { return _model.SelectedUser; }
+            set
+            {
+                _model.SelectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
+            }
+        }
+        public IUserWithDiscountInfo SelectedUserInFilter
+        {
+            get { return _model.SelectedUserInFilter; }
+            set
+            {
+                _model.SelectedUserInFilter = value;
+                OnPropertyChanged(nameof(SelectedUserInFilter));
             }
         }
         public double Price
@@ -99,15 +117,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
 
         public BindingList<ItemWithRentInfo> RentItems => _model.RentItems;
-        public ItemWithRentInfo SelectedRentItem
-        {
-            get { return _model.SelectedRentItem; }
-            set
-            {
-                _model.SelectedRentItem = value;
-                OnPropertyChanged(nameof(SelectedRentItem));
-            }
-        }
         public bool RentItemIsLoaded
         {
             get { return _model.RentItemIsLoaded; }
@@ -126,10 +135,19 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(RentOutOperationStatusInfo));
             }
         }
-
+        public LabelInfo RetuenFromRentOperationStatusInfo
+        {
+            get { return _model.RetuenFromRentOperationStatusInfo; }
+            set
+            {
+                _model.RetuenFromRentOperationStatusInfo = value;
+                OnPropertyChanged(nameof(RetuenFromRentOperationStatusInfo));
+            }
+        }
         public ICommand LoadUsersCommand { get; }
         public ICommand RentOutItemCommand { get; }
         public ICommand PriceValidationFailingCommand { get; }
         public ICommand LoadRentItemsCommand { get; }
+        public ICommand ReturnFromRentCommand { get; }
     }
 }
