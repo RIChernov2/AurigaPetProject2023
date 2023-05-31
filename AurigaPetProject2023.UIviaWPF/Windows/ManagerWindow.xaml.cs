@@ -46,6 +46,11 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
                 {
                     _model.ManagerRentItemViewModel.LoadUsersCommand.Execute(null);
                 }
+
+                if (!_model.ManagerRentItemViewModel.RentItemIsLoaded)
+                {
+                    _model.ManagerRentItemViewModel.LoadRentItemsCommand.Execute(null);
+                }
             }
             else if ((TabItem)tab.SelectedItem == repairItemTab)
             {

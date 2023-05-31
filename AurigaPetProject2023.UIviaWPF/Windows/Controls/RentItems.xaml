@@ -13,6 +13,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:UserShortInfoConverter x:Key="userInfoConverter" />
+        <converters:DiscountConverter x:Key="discountConverter" />
     </UserControl.Resources>
 
 
@@ -20,7 +21,7 @@
         <viewModels:ManagerRentItemViewModel />
     </UserControl.DataContext>
 
-    <Grid Background="White" >
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="*" />
@@ -98,6 +99,7 @@
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label
                             Grid.Row="0"
@@ -114,7 +116,8 @@
                             Margin="10,5,10,5"
                             VerticalContentAlignment="Center"
                             ItemsSource="{Binding Path=Users}"
-                            MaxDropDownHeight="4cm">
+                            MaxDropDownHeight="4cm"
+                            SelectedItem="{Binding Path=SelectedUser}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />
@@ -128,7 +131,8 @@
                             HorizontalAlignment="Center">
                             Цена в неделю
                         </Label>
-                        <TextBox x:Name="priceTextbox"
+                        <TextBox
+                            x:Name="priceTextbox"
                             Grid.Row="1"
                             Grid.Column="1"
                             Height="25"
@@ -171,20 +175,27 @@
                             VerticalContentAlignment="Center"
                             ItemsSource="{Binding Path=RentMounthLengths}"
                             SelectedItem="{Binding Path=SelectedRentLength}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            Content="{Binding Path=SelectedUser.DiscountPercentage, Mode=OneWay, Converter={StaticResource discountConverter}}" />
 
                         <Grid
                             Grid.Row="2"
                             Grid.Column="1"
                             Grid.ColumnSpan="3">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="63*" />
-                                <ColumnDefinition Width="76*" />
-                                <ColumnDefinition Width="139*" />
+                                <ColumnDefinition Width="15*" />
+                                <ColumnDefinition Width="45*" />
+                                <ColumnDefinition Width="40*" />
                             </Grid.ColumnDefinitions>
                             <Label
-                                Grid.ColumnSpan="3"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="1"
                                 Height="25"
-                                Margin="48,5,0,5"
+                                Margin="0,5,0,5"
                                 HorizontalAlignment="Left">
                                 Итоговая цена
                             </Label>
@@ -196,28 +207,168 @@
                                 IsReadOnly="True"
                                 Text="{Binding Path=TotalCost}" />
                         </Grid>
-                        <Button
+                        <Grid
                             Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15*" />
+                                <ColumnDefinition Width="45*" />
+                                <ColumnDefinition Width="40*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="1"
+                                Height="25"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left">
+                                Аренда оплачена
+                            </Label>
+                            <CheckBox
+                                Grid.Column="2"
+                                Height="25"
+                                Margin="10,5,10,5"
+                                VerticalContentAlignment="Center"
+                                IsChecked="{Binding Path=IsPaid, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <Button
+                            Grid.Row="4"
                             Height="0.6cm"
                             Margin="10,0,10,0"
-                            Command="{Binding Path=RentItemCommand}">
+                            Command="{Binding Path=RentOutItemCommand}">
                             В ремонт
                         </Button>
 
 
-                        <Label
-                            Grid.Row="2"
+                        <TextBlock
+                            x:Name="statusLabel"
+                            Grid.Row="4"
                             Grid.Column="1"
-                            Height="30"
+                            Grid.ColumnSpan="3"
+                            Height="Auto"
+                            MinHeight="24"
+                            Margin="3"
                             HorizontalAlignment="Center"
-                            Content="{Binding Path=Text}"
-                            DataContext="{Binding Path=RepairOperationStatusInfo}"
+                            DataContext="{Binding Path=RentOutOperationStatusInfo}"
                             Foreground="{Binding Path=Color}"
+                            Text="{Binding Path=Text}"
+                            TextWrapping="Wrap"
                             Visibility="{Binding Path=Visibility}" />
 
                     </Grid>
 
                 </Grid>
+            </Grid>
+        </Border>
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="2.5,5,5,5"
+            BorderBrush="Black"
+            BorderThickness="1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1cm" />
+
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="0.8cm" />
+                    <RowDefinition Height="2cm" />
+
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        TextAlignment="Center">
+                        Находящееся в аренде
+                    </TextBlock>
+
+                </Border>
+
+                <DataGrid
+                    Grid.Row="1"
+                    AutoGenerateColumns="False"
+                    CanUserReorderColumns="False"
+                    IsReadOnly="true"
+                    ItemsSource="{Binding Path=RentItems}"
+                    SelectedItem="{Binding Path=SelectedRentItem}"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=ItemData.ItemID}"
+                            Header="ID" />
+
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=ItemData.ItemType.Name}"
+                            Header="Тип" />
+                        <DataGridTextColumn
+                            Width="2cm"
+                            Binding="{Binding Path=ItemData.Description}"
+                            Header="Описание" />
+                        <!--<DataGridCheckBoxColumn
+                            Width="Auto"
+                            Binding="{Binding Path=IsUnique}"
+                            Header="Уникальный номер" />-->
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Path=ItemData.UniqueID}"
+                            Header="Уник.номер" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3cm" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1cm" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Height="30"
+                        HorizontalAlignment="Center">
+                        Результат ремонта
+                    </Label>
+
+                    <Button
+                        Grid.Row="2"
+                        Height="0.6cm"
+                        Margin="10,0,10,0"
+                        Command="{Binding Path=AbortRepairItemCommand}">
+                        Завершить
+                    </Button>
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="10,0,10,0"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Path=RepairResultDescription}" />
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        Content="{Binding Path=Text}"
+                        DataContext="{Binding Path=AbortRepairOperationStatusInfo}"
+                        Foreground="{Binding Path=Color}"
+                        Visibility="{Binding Path=Visibility}" />
+
+                </Grid>
+                <Label Grid.Row="3" HorizontalAlignment="Center">Информация об элементе в ремонте</Label>
+                <TextBlock
+                    Grid.Row="4"
+                    Margin="20,0,20,0"
+                    Text="{Binding Path=SelectedRepairingItem.RepairingInfoData}" />
             </Grid>
         </Border>
 

@@ -160,14 +160,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             {
                 var manager = new DisabledInfoStorageManager(unitOfWork);
                 result = manager.Create(entity);
-
-                //var list = manager.GetDisabled();
-
-                //DisabledItems.Clear();
-                //foreach (var item in list)
-                //{
-                //    DisabledItems.Add(item);
-                //}
             }
 
             if(result ==1)

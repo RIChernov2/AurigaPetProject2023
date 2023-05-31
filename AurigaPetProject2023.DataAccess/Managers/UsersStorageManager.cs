@@ -20,13 +20,13 @@ namespace AurigaPetProject2023.DataAccess.Managers
         public async Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info) 
             => await _uow.UserRepository.GetUserForLoginAsync(info);
 
-        public List<IUserShortResponseInfo> GetUsersInfo()
+        public List<IUserWithDiscountInfo> GetUsersWithDiscountInfo()
         {
-            List<IUserShortResponseInfo> result = new List<IUserShortResponseInfo>();
+            List<IUserWithDiscountInfo> result = new List<IUserWithDiscountInfo>();
 
             Task resultTask = Task.Run(async () =>
             {
-                result = (await _uow.UserRepository.GetUsersInfoAsync()).ToList();
+                result = (await _uow.UserRepository.GetUsersWithDiscountInfoAsync()).ToList();
             });
             Task.WaitAll(resultTask);
 

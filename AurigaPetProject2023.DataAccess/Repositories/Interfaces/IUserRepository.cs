@@ -7,7 +7,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info);
-        Task<IReadOnlyList<IUserShortResponseInfo>> GetUsersInfoAsync();
+        Task<IReadOnlyList<IUserWithDiscountInfo>> GetUsersWithDiscountInfoAsync();
         //Task<User> GetAsync(int id);
     }
 }

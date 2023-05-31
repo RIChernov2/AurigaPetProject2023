@@ -1,17 +1,16 @@
-﻿using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace AurigaPetProject2023.UIviaWPF.Windows.Converters
 {
-    public class UserShortInfoConverter : IValueConverter
+    public class DiscountConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is IUserWithDiscountInfo typedValues)
+            if (value is byte doubleValue)
             {
-                return $"ID = {typedValues.UserID}, Login = {typedValues.LoginName ??= "none"}, Phone = {typedValues.Phone ??= "none"}";
+                return $"Скидка {doubleValue}%";
             }
 
             return null;

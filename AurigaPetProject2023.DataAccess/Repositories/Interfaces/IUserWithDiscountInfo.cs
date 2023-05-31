@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
 {
-    public interface IUserShortResponseInfo
+    public interface IUserWithDiscountInfo
     {
         int UserID { get; set; }
         public string LoginName { get; set; }
         public string Phone { get; set; }
+        byte DiscountPercentage { get; set; }
         string Print();
     }
 }

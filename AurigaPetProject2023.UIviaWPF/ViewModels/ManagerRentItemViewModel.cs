@@ -1,4 +1,5 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
+﻿using AurigaPetProject2023.DataAccess.Dto;
+using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
@@ -20,16 +21,25 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             LoadUsersCommand = new RelayCommand(_model.LoadUsers);
             RentOutItemCommand = new RelayCommand(_model.RentOutItem);
             PriceValidationFailingCommand = new RelayCommand(_model.ActionOnPriceValidationFailing);
+            LoadRentItemsCommand = new RelayCommand(_model.LoadRentItems);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
 
-        private static ManagerRentItemModel _model;
-
+        private ManagerRentItemModel _model;
+        public Item SelectedAvaliableItem
+        {
+            get { return _model.SelectedAvaliableItem; }
+            set
+            {
+                _model.SelectedAvaliableItem = value;
+                OnPropertyChanged(nameof(SelectedAvaliableItem));
+            }
+        }
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
 
-        public BindingList<IUserShortResponseInfo> Users => _model.Users;
-        public IUserShortResponseInfo SelectedUser
+        public BindingList<IUserWithDiscountInfo> Users => _model.Users;
+        public IUserWithDiscountInfo SelectedUser
         {
             get { return _model.SelectedUser; }
             set
@@ -78,9 +88,48 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(TotalCost));
             }
         }
+        public bool IsPaid
+        {
+            get { return _model.IsPaid; }
+            set
+            {
+                _model.IsPaid = value;
+                OnPropertyChanged(nameof(IsPaid));
+            }
+        }
+
+        public BindingList<ItemWithRentInfo> RentItems => _model.RentItems;
+        public ItemWithRentInfo SelectedRentItem
+        {
+            get { return _model.SelectedRentItem; }
+            set
+            {
+                _model.SelectedRentItem = value;
+                OnPropertyChanged(nameof(SelectedRentItem));
+            }
+        }
+        public bool RentItemIsLoaded
+        {
+            get { return _model.RentItemIsLoaded; }
+            set
+            {
+                _model.RentItemIsLoaded = value;
+                OnPropertyChanged(nameof(RentItemIsLoaded));
+            }
+        }
+        public LabelInfo RentOutOperationStatusInfo
+        {
+            get { return _model.RentOutOperationStatusInfo; }
+            set
+            {
+                _model.RentOutOperationStatusInfo = value;
+                OnPropertyChanged(nameof(RentOutOperationStatusInfo));
+            }
+        }
 
         public ICommand LoadUsersCommand { get; }
         public ICommand RentOutItemCommand { get; }
         public ICommand PriceValidationFailingCommand { get; }
+        public ICommand LoadRentItemsCommand { get; }
     }
 }
