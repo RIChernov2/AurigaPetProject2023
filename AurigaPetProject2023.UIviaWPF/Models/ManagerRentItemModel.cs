@@ -8,6 +8,7 @@ using AurigaPetProject2023.UIviaWPF.Windows.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,11 +20,20 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         private ManagerRentItemModel()
         {
             Users = new BindingList<IUserWithDiscountInfo>();
+            UsersWithRent = new BindingList<IUserWithDiscountInfo>();
             RentMounthLengths = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            RentItems = new BindingList<ItemWithRentInfo>();
+            _rentItems = new BindingList<ItemWithRentInfo>();
+            FilteredRentItems = new BindingList<ItemWithRentInfo>();
 
             RentOutOperationStatusInfo = new LabelInfo();
             RetuenFromRentOperationStatusInfo = new LabelInfo();
+
+            _rentItems.ListChanged += (o, e) => SetUsersInFilter();
+            _rentItems.ListChanged += (o, e) => SetFilteredRentItems();
+            this.PropertyChanged += (o, e) =>
+            {
+                if (e.PropertyName == "SelectedUserInFilter") SetFilteredRentItems();
+            };
         }
 
         private static ManagerRentItemModel _model;
@@ -41,8 +51,10 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
 
         public BindingList<IUserWithDiscountInfo> Users { get; set; }
+        public BindingList<IUserWithDiscountInfo> UsersWithRent { get; set; }
         public int[] RentMounthLengths { get; }
-        public BindingList<ItemWithRentInfo> RentItems;
+        private BindingList<ItemWithRentInfo> _rentItems;
+        public BindingList<ItemWithRentInfo> FilteredRentItems;
 
 
         public bool AvaliableItemsIsLoaded
@@ -215,14 +227,42 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 var manager = new ItemStorageManager(unitOfWork);
                 var list = manager.GetInRent();
 
-                //ProductTypes = new BindingList<ProductType>(list);
-                RentItems.Clear();
+                _rentItems.Clear();
                 foreach (var item in list)
                 {
-                    RentItems.Add(item);
+                    _rentItems.Add(item);
                 }
                 RentItemIsLoaded = true;
             }
+        }
+        private void SetUsersInFilter()
+        {
+            // запоминаем текущий выбор в фильтре, чтобы потом его восстановить
+            int selectedUserID = SelectedUserInFilter == null ? 0 : SelectedUserInFilter.UserID;
+            UsersWithRent.Clear();
+            //заполняем фильтр по юзеру только теми юзерами, у кого в аренде есть оборудование
+            var userIds = _rentItems.Select(x => x.RentInfo.UserID);
+            foreach (var item in Users)
+            {
+                if (userIds.Contains(item.UserID)) UsersWithRent.Add(item);
+            }
+
+            // восстанавливаем выбранного юзера в фильтре, если это еещ возможно
+            SelectedUserInFilter = UsersWithRent.FirstOrDefault(x => x.UserID == selectedUserID);
+
+        }
+        private void SetFilteredRentItems()
+        {
+            FilteredRentItems.Clear();
+            foreach (var item in _rentItems)
+            {
+                if (SelectedUserInFilter == null || item.RentInfo.UserID == SelectedUserInFilter.UserID) 
+                    FilteredRentItems.Add(item);
+            }
+        }
+        public void RemoveFilter()
+        {
+            SelectedUserInFilter = null;
         }
         public void ActionOnPriceValidationFailing()
         {

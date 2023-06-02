@@ -23,6 +23,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             PriceValidationFailingCommand = new RelayCommand(_model.ActionOnPriceValidationFailing);
             LoadRentItemsCommand = new RelayCommand(_model.LoadRentItems);
             ReturnFromRentCommand = new RelayCommand(_model.ReturnFromRent);
+            RemoveFilterCommand = new RelayCommand(_model.RemoveFilter);
 
             _model.PropertyChanged += OnMyModelPropertyChanged;
         }
@@ -39,6 +40,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         }
         public BindingList<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<IUserWithDiscountInfo> Users => _model.Users;
+        public BindingList<IUserWithDiscountInfo> UsersWithRent => _model.UsersWithRent;
 
         public bool UsersIsLoaded
         {
@@ -116,7 +118,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
-        public BindingList<ItemWithRentInfo> RentItems => _model.RentItems;
+        public BindingList<ItemWithRentInfo> FilteredRentItems => _model.FilteredRentItems;
         public bool RentItemIsLoaded
         {
             get { return _model.RentItemIsLoaded; }
@@ -149,5 +151,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
         public ICommand PriceValidationFailingCommand { get; }
         public ICommand LoadRentItemsCommand { get; }
         public ICommand ReturnFromRentCommand { get; }
+        public ICommand RemoveFilterCommand { get; }
     }
 }

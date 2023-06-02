@@ -293,7 +293,7 @@
                     AutoGenerateColumns="False"
                     CanUserReorderColumns="False"
                     IsReadOnly="true"
-                    ItemsSource="{Binding Path=RentItems}"
+                    ItemsSource="{Binding Path=FilteredRentItems}"
                     SelectedItem="{Binding Path=SelectedRentItem}"
                     SelectionMode="Single">
                     <DataGrid.Columns>
@@ -343,8 +343,7 @@
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Grid Grid.Row="2"
-                      Height="Auto">
+                <Grid Grid.Row="2" Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3cm" />
                         <ColumnDefinition />
@@ -362,23 +361,34 @@
                         HorizontalAlignment="Center">
                         Фильтр
                     </Label>
-                    <ComboBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="3"
-                        Height="25"
-                        Margin="10,5,10,5"
-                        VerticalContentAlignment="Center"
-                        ItemsSource="{Binding Path=Users}"
-                        MaxDropDownHeight="4cm"
-                        SelectedItem="{Binding Path=SelectedUserInFilter}"
-                        SelectionChanged="ComboBox_SelectionChanged">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            Grid.ColumnSpan="1"
+                            Height="25"
+                            Margin="10,5,10,5"
+                            VerticalContentAlignment="Center"
+                            ItemsSource="{Binding Path=UsersWithRent}"
+                            MaxDropDownHeight="4cm"
+                            SelectedItem="{Binding Path=SelectedUserInFilter}"
+                            SelectionChanged="ComboBox_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button
+                            Grid.Column="1"
+                            Height="0.6cm"
+                            Margin="10,0,10,0"
+                            Command="{Binding Path=RemoveFilterCommand}">
+                            Сбросить
+                        </Button>
+                    </Grid>
 
 
                     <Button
@@ -396,10 +406,10 @@
                         MinHeight="24"
                         Margin="3"
                         HorizontalAlignment="Center"
-                        TextWrapping="Wrap"
-                        Text="{Binding Path=Text}"
                         DataContext="{Binding Path=RetuenFromRentOperationStatusInfo}"
                         Foreground="{Binding Path=Color}"
+                        Text="{Binding Path=Text}"
+                        TextWrapping="Wrap"
                         Visibility="{Binding Path=Visibility}" />
 
                 </Grid>
