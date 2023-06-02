@@ -3,6 +3,7 @@ using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -86,7 +87,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(SelectedRepairingItem));
             }
         }
-        public BindingList<Item> AvaliableItems => _model.AvaliableItems;
+        public ObservableCollection<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<ItemWithRepairingInfoInfo> RepairingItems => _model.RepairingItems;
 
 

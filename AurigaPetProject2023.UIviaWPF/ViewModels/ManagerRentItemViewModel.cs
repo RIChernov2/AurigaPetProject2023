@@ -5,6 +5,7 @@ using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
 using AurigaPetProject2023.UIviaWPF.ValidationRules;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Controls;
@@ -38,7 +39,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(SelectedAvaliableItem));
             }
         }
-        public BindingList<Item> AvaliableItems => _model.AvaliableItems;
+        public ObservableCollection<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<IUserWithDiscountInfo> Users => _model.Users;
         public BindingList<IUserWithDiscountInfo> UsersWithRent => _model.UsersWithRent;
 
@@ -118,7 +119,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
             }
         }
 
-        public BindingList<ItemWithRentInfo> FilteredRentItems => _model.FilteredRentItems;
+        public ObservableCollection<ItemWithRentInfo> FilteredRentItems => _model.FilteredRentItems;
         public bool RentItemIsLoaded
         {
             get { return _model.RentItemIsLoaded; }

@@ -29,16 +29,6 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         {
             InitializeComponent();
 
-
-
-            var a = Validation.GetValidationAdornerSite(priceTextbox);
-            var b = Validation.GetValidationAdornerSiteFor(priceTextbox);
-
-            //priceTextbox.GetVa(Validation.ErrorEvent, OnPriceErrorEventHandler);
-            //Validation.AddErrorHandler(priceTextbox, PriceValidationErrorHandler);
-
-            //priceTextbox.
-
             PriceValidationRule validationRule = priceTextbox.GetBindingExpression(TextBox.TextProperty)?.ParentBinding.ValidationRules
                 .OfType<PriceValidationRule>()
                 .FirstOrDefault();
@@ -49,26 +39,6 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Controls
         private void SetZeroCost()
         {
             ((ManagerRentItemViewModel)this.DataContext).PriceValidationFailingCommand.Execute(null);
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (sender is not ComboBox cbox) return;
-            //if (cbox.SelectedItem is not IUserWithDiscountInfo itemWithRentInfo) return;
-
-            //ManagerRentItemViewModel model = (ManagerRentItemViewModel)this.DataContext;
-
-            //ICollectionView collectionView =  CollectionViewSource.GetDefaultView(model.RentItems);
-            ////collectionView.Filter = (item) =>
-            ////{
-            ////    //ItemWithRentInfo myItem = (ItemWithRentInfo)item;
-            ////    ItemWithRentInfo myItem = item as ItemWithRentInfo;
-
-            ////    return myItem.RentInfo.UserID == itemWithRentInfo.UserID;
-
-            ////};
-
-            //collectionView.Filter = (item) => true;
         }
     }
 }

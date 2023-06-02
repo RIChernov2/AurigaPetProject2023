@@ -4,6 +4,7 @@ using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Helpers;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -55,7 +56,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private Item _selectedAvaliableItem;
         private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
-        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+        public ObservableCollection<Item> AvaliableItems => _managerItemModel.AvaliableItems;
         public void LoadAvaliableItems() => _managerItemModel.LoadAvaliableItems();
         public bool AvaliableItemsIsLoaded
         {

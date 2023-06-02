@@ -3,6 +3,7 @@ using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.UIviaWPF.Entities;
 using AurigaPetProject2023.UIviaWPF.Models;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -68,7 +69,7 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 OnPropertyChanged(nameof(SelectedDisabledItem));
             }
         }
-        public BindingList<Item> AvaliableItems => _model.AvaliableItems;
+        public ObservableCollection<Item> AvaliableItems => _model.AvaliableItems;
         public BindingList<ItemWithDisableInfo> DisabledItems => _model.DisabledItems;
 
         public ICommand LoadDisableItemsCommand { get; }

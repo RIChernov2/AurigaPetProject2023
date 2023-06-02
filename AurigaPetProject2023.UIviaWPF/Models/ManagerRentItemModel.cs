@@ -7,6 +7,7 @@ using AurigaPetProject2023.UIviaWPF.Helpers;
 using AurigaPetProject2023.UIviaWPF.Windows.Converters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -22,14 +23,14 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             Users = new BindingList<IUserWithDiscountInfo>();
             UsersWithRent = new BindingList<IUserWithDiscountInfo>();
             RentMounthLengths = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            _rentItems = new BindingList<ItemWithRentInfo>();
-            FilteredRentItems = new BindingList<ItemWithRentInfo>();
+            _rentItems = new ObservableCollection<ItemWithRentInfo>();
+            FilteredRentItems = new ObservableCollection<ItemWithRentInfo>();
 
             RentOutOperationStatusInfo = new LabelInfo();
             RetuenFromRentOperationStatusInfo = new LabelInfo();
 
-            _rentItems.ListChanged += (o, e) => SetUsersInFilter();
-            _rentItems.ListChanged += (o, e) => SetFilteredRentItems();
+            _rentItems.CollectionChanged += (o, e) => SetUsersInFilter();
+            _rentItems.CollectionChanged += (o, e) => SetFilteredRentItems();
             this.PropertyChanged += (o, e) =>
             {
                 if (e.PropertyName == "SelectedUserInFilter") SetFilteredRentItems();
@@ -48,13 +49,13 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         private ManagerItemModel _managerItemModel => ManagerItemModel.GetInstance();
 
-        public BindingList<Item> AvaliableItems => _managerItemModel.AvaliableItems;
+        public ObservableCollection<Item> AvaliableItems => _managerItemModel.AvaliableItems;
 
         public BindingList<IUserWithDiscountInfo> Users { get; set; }
         public BindingList<IUserWithDiscountInfo> UsersWithRent { get; set; }
         public int[] RentMounthLengths { get; }
-        private BindingList<ItemWithRentInfo> _rentItems;
-        public BindingList<ItemWithRentInfo> FilteredRentItems;
+        private ObservableCollection<ItemWithRentInfo> _rentItems;
+        public ObservableCollection<ItemWithRentInfo> FilteredRentItems;
 
 
         public bool AvaliableItemsIsLoaded
@@ -238,7 +239,9 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         private void SetUsersInFilter()
         {
             // запоминаем текущий выбор в фильтре, чтобы потом его восстановить
-            int selectedUserID = SelectedUserInFilter == null ? 0 : SelectedUserInFilter.UserID;
+            // это пока не работает, так как коллекцию надо заворачивать в свой класс и создавать событие триггера после загрузки
+            //int selectedUserID = SelectedUserInFilter == null ? 0 : SelectedUserInFilter.UserID;
+
             UsersWithRent.Clear();
             //заполняем фильтр по юзеру только теми юзерами, у кого в аренде есть оборудование
             var userIds = _rentItems.Select(x => x.RentInfo.UserID);
@@ -248,7 +251,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             }
 
             // восстанавливаем выбранного юзера в фильтре, если это еещ возможно
-            SelectedUserInFilter = UsersWithRent.FirstOrDefault(x => x.UserID == selectedUserID);
+            //SelectedUserInFilter = UsersWithRent.FirstOrDefault(x => x.UserID == selectedUserID);
 
         }
         private void SetFilteredRentItems()
@@ -329,6 +332,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             {
                 SelectedAvaliableItem = null;
                 SelectedUser = null;
+                SelectedRentLength = null;
                 Price = 0;
                 IsPaid = false;
                 LoadAvaliableItems();

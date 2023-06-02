@@ -1,6 +1,7 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Managers;
 using AurigaPetProject2023.UIviaWPF.Entities;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace AurigaPetProject2023.UIviaWPF.Models
@@ -9,7 +10,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         public ManagerItemModel()
         {
-            AvaliableItems = new BindingList<Item>();
+            AvaliableItems = new ObservableCollection<Item>();
             AvaliableItemsIsLoaded = false;
         }
         private static ManagerItemModel _model;
@@ -34,7 +35,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         }
         public bool _itemsIsLoaded;
 
-        public BindingList<Item> AvaliableItems { get; private set; }
+        public ObservableCollection<Item> AvaliableItems { get; private set; }
         public void LoadAvaliableItems()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())

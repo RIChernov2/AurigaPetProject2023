@@ -374,7 +374,7 @@
                             ItemsSource="{Binding Path=UsersWithRent}"
                             MaxDropDownHeight="4cm"
                             SelectedItem="{Binding Path=SelectedUserInFilter}"
-                            SelectionChanged="ComboBox_SelectionChanged">
+                            >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />
@@ -396,7 +396,7 @@
                         Height="0.6cm"
                         Margin="10,0,10,0"
                         Command="{Binding Path=ReturnFromRentCommand}">
-                        Завершить
+                        Из аренды
                     </Button>
 
 
