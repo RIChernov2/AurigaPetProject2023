@@ -22,10 +22,5 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             await _dbSet.AddAsync(entity);
             return _context.SaveChanges();
         }
-
-        //public virtual async Task<IReadOnlyList<DisabledInfo>> GetAsync()
-        //{
-        //    return await _dbSet.ToListAsync();
-        //}
     }
 }

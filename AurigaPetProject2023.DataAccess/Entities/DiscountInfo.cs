@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AurigaPetProject2023.DataAccess.Entities
 {

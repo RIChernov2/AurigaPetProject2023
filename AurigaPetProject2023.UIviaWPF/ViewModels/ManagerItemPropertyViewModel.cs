@@ -13,10 +13,6 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
 {
     public class ManagerItemPropertyViewModel : BaseModel
     {
-        //public ManagerItemPropertyViewModel ()
-        //{
-        //    //_model = ManagerModel.GetInstance();
-        //}
         public ManagerItemPropertyViewModel ()
         {
             _model = ManagerItemTypeModel.GetInstance();

@@ -10,14 +10,6 @@ namespace AurigaPetProject2023.DataAccess.Entities
             UserID = user.UserID;
             LoginName = user.LoginName;
             Phone = user.Phone;
-            //if (discountInfo == null)
-            //{
-            //    DiscountPercentage = 0;
-            //}
-            //else
-            //{
-            //    DiscountPercentage = discountInfo.DiscountPercentage;
-            //}
 
             DiscountPercentage = discountInfo == null ? (byte)0: discountInfo.DiscountPercentage;
 

@@ -11,8 +11,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
         Task <IReadOnlyList<TEntity>> GetAsync();
         Task<TEntity> GetAsync(TArg id);
         Task<IReadOnlyList<TEntity>> GetByPredicateAsync(Expression<Func<TEntity, bool>> predicate);
-        //// ТЕСТ
-        //Task <IReadOnlyList<TEntity>> GetAsync(IEnumerable<TArg> ids);
         Task <int> UpdateAsync(TEntity entity);
         Task <int> DeleteAsync(TArg id);
     }

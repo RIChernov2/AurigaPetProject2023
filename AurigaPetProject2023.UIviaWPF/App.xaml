@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:AurigaPetProject2023.UIviaWPF.Windows"
     Startup="App_Startup"
-    StartupUri="Windows/ManagerWindow.xaml">
+    StartupUri="Windows/MainWindow.xaml">
     <Application.Resources />
 </Application>
 

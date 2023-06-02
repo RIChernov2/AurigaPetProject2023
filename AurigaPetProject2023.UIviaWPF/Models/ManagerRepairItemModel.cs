@@ -17,9 +17,7 @@ namespace AurigaPetProject2023.UIviaWPF.Models
         {
 
             RepairingItems = new BindingList<ItemWithRepairingInfoInfo>();
-            //ItemsIsLoaded = false;
 
-            //DisabledItems = new BindingList<ItemWithDisableInfo>();
             RepairOperationStatusInfo = new LabelInfo();
             AbortRepairOperationStatusInfo = new LabelInfo();
         }

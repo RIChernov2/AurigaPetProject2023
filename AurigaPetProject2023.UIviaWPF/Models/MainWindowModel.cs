@@ -29,7 +29,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
                 OnPropertyChanged(nameof(Password));
             }
         }
-
         public IUserResponseInfo Login()
         {
             IUserResponseInfo responseInfo;

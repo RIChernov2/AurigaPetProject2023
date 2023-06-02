@@ -57,7 +57,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
         private void ResetRepositories()
         {
             _usersRepository = null;
-            //_roleRepository = null;
             _itemTypeRepository = null;
             _itemRepository = null;
             _disabledInfoRepository = null;

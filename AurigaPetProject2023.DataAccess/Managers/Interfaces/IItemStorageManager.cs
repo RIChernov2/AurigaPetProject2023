@@ -10,12 +10,8 @@ namespace AurigaPetProject2023.DataAccess.Managers.Interfaces
         List<ItemWithDisableInfo> GetDisabled();
         List<ItemWithRepairingInfoInfo> GetRepairing();
         List<ItemWithRentInfo> GetInRent();
-        //List<Item> GetDisabled();
         List<Item> GetAvailiable();
         int Create(Item entity);
 
-        // зачем
-        //List<Item> GetAll();
-        //List<ItemWithStatus> GetItemsWithStatus();
     }
 }

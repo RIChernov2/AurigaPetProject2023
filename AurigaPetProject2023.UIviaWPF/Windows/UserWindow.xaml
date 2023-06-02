@@ -52,6 +52,7 @@
             <DataGrid
                 Grid.Row="1"
                 AutoGenerateColumns="False"
+                CanUserReorderColumns="False"
                 CellStyle="{StaticResource DataGridContentCellCentering}"
                 IsReadOnly="true"
                 ItemsSource="{Binding Path=ItemWithRentInfos}"

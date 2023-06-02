@@ -24,18 +24,10 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             await _dbSet.AddAsync(entity);
             return await _context.SaveChangesAsync();
         }
-
-
-
         public virtual async Task<IReadOnlyList<TEntity>> GetAsync()
         {
             return await _dbSet.ToListAsync();
         }
-
-
-
-
-
         public virtual async Task<TEntity> GetAsync(TArg id)
         {
             return await _dbSet.FindAsync(id);
@@ -45,15 +37,12 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
         {
             return await _dbSet.Where(predicate).ToListAsync();
         }
-
-
         public virtual async Task<int> UpdateAsync(TEntity entity)
         {
             _dbSet.Attach(entity); // про это еще стоит почитать, походу тут обновлять не будет
             _context.Entry(entity).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
-
         public virtual async Task<int> DeleteAsync(TArg id)
         {
             var entity = await _dbSet.FindAsync(id);

@@ -19,7 +19,7 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
             passwordBox.Password = "123";
 
             //loginTextBox.Text = "User1";
-            ////loginTextBox.Text = "+79267654321";
+            //loginTextBox.Text = "+79267654321";
             //passwordBox.Password = "111";
 
             statusLabel.Visibility = Visibility.Hidden;
@@ -33,7 +33,6 @@ namespace AurigaPetProject2023.UIviaWPF.Windows
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ((MainWindowViewModel)DataContext).ShowMouseUpCommand.Execute(null);
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

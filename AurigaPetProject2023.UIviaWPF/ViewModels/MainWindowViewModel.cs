@@ -83,14 +83,12 @@ namespace AurigaPetProject2023.UIviaWPF.ViewModels
                 throw new Exception("Ошибка определения ролей");
             }
         }
-
         private void MouseDown()
         {
             _window.passwordShowingTextBox.Text = _window.passwordBox.Password;
             _window.passwordBox.Visibility = Visibility.Hidden;
             _window.passwordShowingTextBox.Visibility = Visibility.Visible;
         }
-
         private void MouseUp()
         {
             _window.passwordShowingTextBox.Text = "";

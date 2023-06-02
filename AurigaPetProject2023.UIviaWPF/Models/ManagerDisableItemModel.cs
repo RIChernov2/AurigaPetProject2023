@@ -15,8 +15,6 @@ namespace AurigaPetProject2023.UIviaWPF.Models
     {
         private ManagerDisableItemModel()
         {
-
-            //AvaliableItems = new BindingList<Item>();
             DisabledItemsIsLoaded = false;
 
             DisabledItems = new BindingList<ItemWithDisableInfo>();

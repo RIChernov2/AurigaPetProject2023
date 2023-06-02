@@ -8,7 +8,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
     {
         Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info);
         Task<IReadOnlyList<IUserWithDiscountInfo>> GetUsersWithDiscountInfoAsync();
-        //Task<User> GetAsync(int id);
     }
 }
 

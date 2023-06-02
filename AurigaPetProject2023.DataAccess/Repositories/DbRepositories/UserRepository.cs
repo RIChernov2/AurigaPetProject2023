@@ -22,7 +22,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             _context = context;
             _dbSet = context.Set<User>();
         }
-
         public virtual async Task<IReadOnlyList<IUserWithDiscountInfo>> GetUsersWithDiscountInfoAsync()
         {
             return await (from user in _dbSet
@@ -48,7 +47,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             UserResponseInfo userResponseInfo = new UserResponseInfo(user);
             return userResponseInfo;                
         }
-
         private async Task<IReadOnlyList<User>> GetByPredicateAsync(Expression<Func<User, bool>> predicate)
         {
             var users = await _dbSet.Where(predicate).ToListAsync();

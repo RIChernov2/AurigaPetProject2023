@@ -21,25 +21,3 @@ namespace AurigaPetProject2023.UIviaWPF.Windows.Converters
     }
 }
 
-
-//public class WidthConverter : IMultiValueConverter
-//{
-//    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        if (values[0] == DependencyProperty.UnsetValue || values[1] == DependencyProperty.UnsetValue)
-//            return null;
-
-//        double parentWidth = (double)values[0];
-//        double newWidth = (double)values[1];
-
-//        if (newWidth > parentWidth)
-//            return parentWidth;
-//        else
-//            return newWidth;
-//    }
-
-//    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
