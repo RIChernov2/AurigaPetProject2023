@@ -36,10 +36,10 @@ namespace AurigaPetProject2023.UIviaWPF.Models
             {
                 UsersStorageManager repository = new UsersStorageManager(unitOfWork);
                 UserLoginInfo loginInfo = new UserLoginInfo(_loginName, _password);
-                var task = Task.Run(async () => await repository.GetUserForLoginAsync(loginInfo));
-                task.Wait();
-                responseInfo = task.Result;
-
+                //var task = Task.Run(async () => await repository.GetUserForLoginAsync(loginInfo));
+                //task.Wait();
+                //responseInfo = task.Result;
+                responseInfo = repository.GetUserForLogin(loginInfo);
             }
             return responseInfo;
         }
