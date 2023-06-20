@@ -342,6 +342,10 @@
                             </DataGridTextColumn.CellStyle>
 
                         </DataGridTextColumn>
+                        <DataGridCheckBoxColumn
+                            Binding="{Binding Path=RentInfo.IsPaid}"
+                            Header="Оплачено"
+                            IsReadOnly="True" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Row="2" Height="Auto">
@@ -374,8 +378,7 @@
                             VerticalContentAlignment="Center"
                             ItemsSource="{Binding Path=UsersWithRent}"
                             MaxDropDownHeight="4cm"
-                            SelectedItem="{Binding Path=SelectedUserInFilter}"
-                            >
+                            SelectedItem="{Binding Path=SelectedUserInFilter}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource userInfoConverter}}" />

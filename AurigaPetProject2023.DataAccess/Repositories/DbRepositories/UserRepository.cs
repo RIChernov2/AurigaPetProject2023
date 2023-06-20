@@ -39,7 +39,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             // переписываем, чтобы потренировать другой способ записаи LINQ
             var result = (await _context.Set<User>().Where(u =>
                         !_context.Set<BannedInfo>().Any(x => x.UserID == u.UserID) &&
-                        _context.Set<Role>().Where(x => x.RoleType == 3).Any(x => x.UserID == u.UserID)
+                        _context.Set<Role>().Where(x => x.RoleTypeID == 3).Any(x => x.UserID == u.UserID)
 
                         ).ToListAsync())// перемещаем со стороны БД на сторону клиента
                 .GroupJoin(_context.Set<DiscountInfo>(),
@@ -70,7 +70,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                .ToListAsync()) // перемещаем со стороны БД на сторону клиента
                .GroupBy(
                     x => x.User,
-                    x => x.Role.RoleType,
+                    x => x.Role.RoleTypeID,
                     (user, roles) => new { User = user, Roles = roles.ToList() }
                 ).FirstOrDefault();
 

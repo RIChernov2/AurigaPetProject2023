@@ -10,8 +10,8 @@
     xmlns:viewModels="clr-namespace:AurigaPetProject2023.UIviaWPF.ViewModels"
     x:Name="managerWindow"
     Title="ManagerWindow"
-    Width="1000"
-    Height="550"
+    Width="1400"
+    Height="650"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
