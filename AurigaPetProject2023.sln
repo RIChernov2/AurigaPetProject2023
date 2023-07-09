@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.UIviaWPF", "AurigaPetProject2023.UIviaWPF\AurigaPetProject2023.UIviaWPF.csproj", "{5D0D5175-05DC-4414-B06D-A01B268D2F16}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75969218-B122-4F64-AF0A-BD23257A14C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AurigaPetProject2023.DataAccess.Test", "AurigaPetProject2023.DataAccess.Test\AurigaPetProject2023.DataAccess.Test.csproj", "{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D0D5175-05DC-4414-B06D-A01B268D2F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDB06C5C-1B12-4CE8-B44C-D91B5E7DEF38} = {75969218-B122-4F64-AF0A-BD23257A14C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32C60F03-C49B-4663-8C31-230C9BC9D1E3}

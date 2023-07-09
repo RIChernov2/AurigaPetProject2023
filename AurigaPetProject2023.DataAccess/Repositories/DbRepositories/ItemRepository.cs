@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Xml;
 using AurigaPetProject2023.DataAccess.Dto;
+using System;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 {
@@ -22,6 +22,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         public virtual async Task<int> CreateAsync(Item entity)
         {
+            if (entity.ItemID != 0) throw new InvalidOperationException();
+
             await _dbSet.AddAsync(entity);
             return await _context.SaveChangesAsync();
         }

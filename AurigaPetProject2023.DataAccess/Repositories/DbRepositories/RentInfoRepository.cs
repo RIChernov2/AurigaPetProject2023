@@ -20,6 +20,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         public async Task<int> CreateAsync(RentInfo entity)
         {
+
             await _dbSet.AddAsync(entity);
             return _context.SaveChanges();
         }

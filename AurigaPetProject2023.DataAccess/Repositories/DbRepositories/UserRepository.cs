@@ -55,7 +55,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                 .ToList();
             return result;
         }
-
         public virtual async Task<IUserResponseInfo> GetUserForLoginAsync(IUserLoginInfo info)
         {
            

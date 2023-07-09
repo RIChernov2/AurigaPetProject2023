@@ -1,6 +1,7 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
@@ -19,6 +20,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
 
         public async Task<int> CreateAsync(RepairingInfo entity)
         {
+            if (entity.RepairingInfoID != 0) throw new InvalidOperationException();
+
             await _dbSet.AddAsync(entity);
             return _context.SaveChanges();
         }
