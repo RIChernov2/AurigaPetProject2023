@@ -68,7 +68,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             {
                 var entity = new DisabledInfo()
                 {
-                    //DisabledInfoID = index,
                     ItemID = index,
                     Date = DateTime.Now.AddDays(-index),
                     Reason = $"Reason {index}"
