@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.UIviaW
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75969218-B122-4F64-AF0A-BD23257A14C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AurigaPetProject2023.DataAccess.xUintTest", "AurigaPetProject2023.DataAccess.xUintTest\AurigaPetProject2023.DataAccess.xUintTest.csproj", "{83882F9F-292E-45C6-BE3D-419506821DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AurigaPetProject2023.DataAccess.xUintTest", "AurigaPetProject2023.DataAccess.xUintTest\AurigaPetProject2023.DataAccess.xUintTest.csproj", "{83882F9F-292E-45C6-BE3D-419506821DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AurigaPetProject2023.DataAccess.MSTest.NotMain", "AurigaPetProject2023.DataAccess.MSTest.NotMain\AurigaPetProject2023.DataAccess.MSTest.NotMain.csproj", "{2B848CFE-29C4-4D3A-A303-40DF2B4162A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AurigaPetProject2023.DataAccess.NUnitTest.NotMain", "AurigaPetProject2023.DataAccess.NUnitTest.NotMain\AurigaPetProject2023.DataAccess.NUnitTest.NotMain.csproj", "{FCE16470-F95E-4502-85A9-C01150433FBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +33,22 @@ Global
 		{83882F9F-292E-45C6-BE3D-419506821DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83882F9F-292E-45C6-BE3D-419506821DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83882F9F-292E-45C6-BE3D-419506821DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B848CFE-29C4-4D3A-A303-40DF2B4162A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B848CFE-29C4-4D3A-A303-40DF2B4162A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B848CFE-29C4-4D3A-A303-40DF2B4162A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B848CFE-29C4-4D3A-A303-40DF2B4162A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCE16470-F95E-4502-85A9-C01150433FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCE16470-F95E-4502-85A9-C01150433FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCE16470-F95E-4502-85A9-C01150433FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCE16470-F95E-4502-85A9-C01150433FBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{83882F9F-292E-45C6-BE3D-419506821DA1} = {75969218-B122-4F64-AF0A-BD23257A14C7}
+		{2B848CFE-29C4-4D3A-A303-40DF2B4162A7} = {75969218-B122-4F64-AF0A-BD23257A14C7}
+		{FCE16470-F95E-4502-85A9-C01150433FBB} = {75969218-B122-4F64-AF0A-BD23257A14C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32C60F03-C49B-4663-8C31-230C9BC9D1E3}
