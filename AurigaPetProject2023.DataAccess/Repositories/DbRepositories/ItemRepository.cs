@@ -39,7 +39,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             MyContext context = (MyContext)_context;
             return context.Items.Select(x => x.ItemID).OrderBy(x => x).Last();
 
-        }        
+        }
+
         public async Task<IReadOnlyList<Item>> GetAvailiableAsync()
         {
             return await (from item in _context.Set<Item>()
@@ -128,6 +129,16 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
                               },
                               RentInfo = rent
                           }).ToListAsync();
+        }
+
+        // методы для тестирования
+        public async Task<IReadOnlyList<Item>> GetAsync()
+        {
+            return await _dbSet.ToListAsync();
+        }
+        public async Task<ItemUniqueInfo> GetUniqueItemByIdAsync(int itemId)
+        {
+            return await _context.Set<ItemUniqueInfo>().FindAsync(itemId);
         }
 
     }

@@ -22,7 +22,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
                 .Options;
         }
 
-
         [Fact]
         public async Task CreateAsync_Success_Test()
         {
@@ -76,6 +75,7 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             // Assert
             Assert.Equal(3, entityList.First().ItemTypeID);
         }
+
         [Fact]
         public async Task GetByPredicateAsync2_Success_Test()
         {
@@ -95,13 +95,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             var entity = await repository.GetAsync(3);
             entity.Name = $"NewItem3";
             entity.IsUnique = true;
-
-            //var entity = new ItemType()
-            //{
-            //    ItemTypeID = 3,
-            //    Name = $"NewItem3",
-            //    IsUnique = true
-            //};
 
             // Act
             await repository.UpdateAsync(entity);
@@ -124,8 +117,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             var entityList = await repository.GetAsync();
             Assert.Equal(2, entityList.Count);
         }
-
-
 
         private async Task<ItemTypeRepositoryTest> CreateRepositoryAsync()
         {
