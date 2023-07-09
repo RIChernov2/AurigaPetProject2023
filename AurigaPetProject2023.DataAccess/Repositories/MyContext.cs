@@ -4,8 +4,14 @@ using AurigaPetProject2023.DataAccess.Helpers;
 
 namespace AurigaPetProject2023.DataAccess.Repositories
 {
-    public class NewContext : DbContext
+    public class MyContext : DbContext
     {
+        public MyContext() : base() { }
+        public MyContext(DbContextOptions<MyContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<BannedInfo> BannedInfos { get; set; } = null;
         public DbSet<ItemType> ItemTypes { get; set; } = null;
         public DbSet<Role> Roles { get; set; } = null;
@@ -100,24 +106,24 @@ namespace AurigaPetProject2023.DataAccess.Repositories
             modelBuilder.Entity<Role>().Property(x => x.RoleTypeID).HasColumnName("RoleType_ID");
             modelBuilder.Entity<Role>().HasNoKey();
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //Func<bool, byte> expression = (boolValue) =>
-        //    //{
-        //    //    return boolValue ? (byte)1 : (byte)0;
-        //    //};
-
-        //    // настравиваем маппинг bool в байт
-        //    modelBuilder.Entity<ProductType>()
-        //        .Property(p => p.IsUnique)
-        //        .HasConversion(x => x ? 1 : 0,
-        //            v => v == 1);
-
-        //            //      .HasConversion(
-        //            ////v => (byte)(v ? 1 : 0),
-        //            //v => (byte)(v ? 1 : 0),
-        //            //v => v == 1);
-        //}
     }
 }
+
+//protected override void OnModelCreating(ModelBuilder modelBuilder)
+//{
+//    //Func<bool, byte> expression = (boolValue) =>
+//    //{
+//    //    return boolValue ? (byte)1 : (byte)0;
+//    //};
+
+//    // настравиваем маппинг bool в байт
+//    modelBuilder.Entity<ProductType>()
+//        .Property(p => p.IsUnique)
+//        .HasConversion(x => x ? 1 : 0,
+//            v => v == 1);
+
+//            //      .HasConversion(
+//            ////v => (byte)(v ? 1 : 0),
+//            //v => (byte)(v ? 1 : 0),
+//            //v => v == 1);
+//}

@@ -21,7 +21,7 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
         public UnitOfWork()
         {
-            _context = new NewContext();
+            _context = new MyContext();
             _transaction = _context.Database.BeginTransaction();
         }
         // НЕ ЗАБУДЬ ДОБАВЛЯТЬ В ResetRepositories !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

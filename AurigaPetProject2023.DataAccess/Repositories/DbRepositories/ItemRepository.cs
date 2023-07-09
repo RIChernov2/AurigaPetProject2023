@@ -36,7 +36,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
         }
         public virtual int GetLastId()
         {
-            NewContext context = (NewContext)_context;
+            MyContext context = (MyContext)_context;
             return context.Items.Select(x => x.ItemID).OrderBy(x => x).Last();
 
         }        
