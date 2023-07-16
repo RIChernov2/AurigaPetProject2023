@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTest
+namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 {
     public class DisabledInfoRepositoryTest
     {

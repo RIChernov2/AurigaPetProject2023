@@ -1,6 +1,5 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories;
-using AurigaPetProject2023.DataAccess.Repositories.DbRepositories;
 using AurigaPetProject2023.DataAccess.xUintTest.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Linq;
 
-namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTest
+namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 {
     public class GenericRepositoryTest
     {
