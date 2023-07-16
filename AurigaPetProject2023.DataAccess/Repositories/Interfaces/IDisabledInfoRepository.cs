@@ -7,6 +7,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories.Interfaces
     public interface IDisabledInfoRepository
     {
         Task<int> CreateAsync(DisabledInfo entity);
+        // создаем метод для проведения тестов
         Task<IReadOnlyList<DisabledInfo>> GetAsync();
     }
 }

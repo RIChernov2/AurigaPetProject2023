@@ -1,6 +1,7 @@
 ﻿using AurigaPetProject2023.DataAccess.Entities;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -30,6 +31,13 @@ namespace AurigaPetProject2023.DataAccess.Repositories.DbRepositories
             _dbSet.Attach(entity); // про это еще стоит почитать, походу тут обновлять не будет
             _context.Entry(entity).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
+        }
+
+
+        // создаем метод для проведения тестов
+        public virtual async Task<IReadOnlyList<RentInfo>> GetAsync()
+        {
+            return await _dbSet.ToListAsync();
         }
     }
 }

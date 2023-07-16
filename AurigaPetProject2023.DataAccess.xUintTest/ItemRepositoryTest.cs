@@ -16,7 +16,7 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
 
         public ItemRepositoryTest()
         {
-            string dbName = $"DisabledInfoRepositoryDb_{DateTime.Now.ToFileTimeUtc()}";
+            string dbName = $"ItemRepositoryDb_{DateTime.Now.ToFileTimeUtc()}";
             _dbContextOptions = new DbContextOptionsBuilder<MyContext>()
                 .UseInMemoryDatabase(dbName)
                 .Options;
@@ -97,7 +97,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             Assert.True(result1);
             Assert.True(result2);
         }
-
         [Fact]
         public async Task GetDisabledAsync_Success_Test()
         {
@@ -141,17 +140,13 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             Assert.True(result1);
         }
 
-
         private async Task<ItemRepository> CreateItemRepositoryAsync()
         {
             MyContextCopyForTest context = new MyContextCopyForTest(_dbContextOptions);
             await PopulateDataAsync(context);
             return new ItemRepository(context);
         }
-
-
         private int _itemsCount = 5;
-
         private async Task PopulateDataAsync(MyContextCopyForTest context)
         {
             int index = 1;

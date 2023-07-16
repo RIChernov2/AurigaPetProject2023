@@ -1,7 +1,8 @@
-﻿using AurigaPetProject2023.DataAccess.Repositories;
+﻿using AurigaPetProject2023.DataAccess.Entities;
+using AurigaPetProject2023.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace AurigaPetProject2023.DataAccess.xUintTest
+namespace AurigaPetProject2023.DataAccess.xUintTest.Entities
 {
     public class MyContextCopyForTest : MyContext
     {
@@ -12,7 +13,11 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
         // чтобы не подключался к ловальной SQL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

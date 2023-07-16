@@ -13,7 +13,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
     public class GenericRepositoryTest
     {
         private DbContextOptions<MyContext> _dbContextOptions;
-
         public GenericRepositoryTest()
         {
             string dbName = $"GenericRepositoryDb_{DateTime.Now.ToFileTimeUtc()}";
@@ -39,7 +38,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             var entityList = await repository.GetAsync();
             Assert.Equal(4, entityList.Count);
         }
-
         [Fact]
         public async Task GetAsync_Success_Test()
         {
@@ -51,7 +49,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             // Assert
             Assert.Equal(3, entityList.Count);
         }
-
         [Fact]
         public async Task GetByIdAsync_Success_Test()
         {
@@ -63,7 +60,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             // Assert
             Assert.Equal(3, entityList.ItemTypeID);
         }
-
         [Fact]
         public async Task GetByPredicateAsync1_Success_Test()
         {
@@ -75,7 +71,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             // Assert
             Assert.Equal(3, entityList.First().ItemTypeID);
         }
-
         [Fact]
         public async Task GetByPredicateAsync2_Success_Test()
         {
@@ -87,7 +82,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             // Assert
             Assert.Equal(2, entityList.Count());
         }
-
         [Fact]
         public async Task UpdateAsync_Success_Test()
         {
@@ -104,7 +98,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             Assert.Equal("NewItem3", entity.Name);
             Assert.True(entity.IsUnique);
         }
-
         [Fact]
         public async Task DeleteAsync_Success_Test()
         {
@@ -124,7 +117,6 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             await PopulateDataAsync(context);
             return new ItemTypeRepositoryTest(context);
         }
-
         private async Task PopulateDataAsync(MyContextCopyForTest context)
         {
             int index = 1;
