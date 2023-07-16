@@ -9,7 +9,7 @@
 //using System.Threading.Tasks;
 //using Xunit;
 
-//namespace AurigaPetProject2023.DataAccess.xUintTest
+//namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTest
 //{
 //    public class UserRepositoryTest
 //    {

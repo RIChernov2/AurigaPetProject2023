@@ -8,14 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AurigaPetProject2023.DataAccess.xUintTest
+namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTest
 {
-    public class RepairingInfoRepositoryTest
+    public class RentInfoRepositoryTest
     {
         private DbContextOptions<MyContext> _dbContextOptions;
-        public RepairingInfoRepositoryTest()
+        public RentInfoRepositoryTest()
         {
-            string dbName = $"RepairingInfoRepositoryDb_{DateTime.Now.ToFileTimeUtc()}";
+            string dbName = $"RentInfoRepositoryDb_{DateTime.Now.ToFileTimeUtc()}";
             _dbContextOptions = new DbContextOptionsBuilder<MyContext>()
                 .UseInMemoryDatabase(dbName)
                 .Options;
@@ -28,13 +28,16 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
 
             int index = 4;
             // Act
-            await repository.CreateAsync(new RepairingInfo()
+            await repository.CreateAsync(new RentInfo()
             {
+                RentInfoID = index,
+                UserID = index,
                 ItemID = index,
                 StartDate = DateTime.Now.AddDays(-index),
+                ExpireDate = DateTime.Now.AddDays(index),
                 EndDate = null,
-                Reason = "Reason",
-                ResultDescription = null
+                Cost = 100,
+                IsPaid = true
             });
 
             // Assert
@@ -47,8 +50,8 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             var repository = await CreateRepositoryAsync();
             var entities = await repository.GetAsync();
             var entity = entities.Where(x => x.ItemID == 3).First();
-            entity.Reason = "NewReason";
-            entity.ResultDescription = "NewResultDescription";
+            entity.Cost = 1000;
+            entity.IsPaid = false;
 
             // Act
             await repository.UpdateAsync(entity);
@@ -56,8 +59,8 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
                 .Where(x => x.ItemID == 3).First();
 
             // Assert
-            Assert.Equal("NewReason", entity.Reason);
-            Assert.Equal("NewResultDescription", entity.ResultDescription);
+            Assert.Equal(1000, entity.Cost);
+            Assert.False(entity.IsPaid);
         }
         // проверяем и этот метод, коли его создали
         [Fact]
@@ -72,11 +75,11 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
             Assert.Equal(3, entityList.Count);
         }
 
-        private async Task<RepairingInfoRepository> CreateRepositoryAsync()
+        private async Task<RentInfoRepository> CreateRepositoryAsync()
         {
             MyContextCopyForTest context = new MyContextCopyForTest(_dbContextOptions);
             await PopulateDataAsync(context);
-            return new RepairingInfoRepository(context);
+            return new RentInfoRepository(context);
         }
         private async Task PopulateDataAsync(MyContextCopyForTest context)
         {
@@ -84,18 +87,20 @@ namespace AurigaPetProject2023.DataAccess.xUintTest
 
             while (index <= 3)
             {
-                var entity = new RepairingInfo()
+                var entity = new RentInfo()
                 {
-                    RepairingInfoID = index,
+                    RentInfoID = index,
+                    UserID = index,
                     ItemID = index,
                     StartDate = DateTime.Now.AddDays(-index),
+                    ExpireDate = DateTime.Now.AddDays(index),
                     EndDate = null,
-                    Reason = "Reason",
-                    ResultDescription = null
+                    Cost = 100,
+                    IsPaid = true
                 };
 
                 index++;
-                await context.RepairingInfos.AddAsync(entity);
+                await context.RentInfos.AddAsync(entity);
             }
 
             await context.SaveChangesAsync();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Linq;
 
-namespace AurigaPetProject2023.DataAccess.xUintTest
+namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTest
 {
     public class GenericRepositoryTest
     {
