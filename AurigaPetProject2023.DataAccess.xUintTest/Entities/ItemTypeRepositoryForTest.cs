@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AurigaPetProject2023.DataAccess.xUintTest.Entities
 {
-    public class ItemTypeRepositoryTest : GenericRepository<ItemType, int>, IItemTypeRepository
+    public class ItemTypeRepositoryForTest : GenericRepository<ItemType, int>, IItemTypeRepository
     {
-        public ItemTypeRepositoryTest(DbContext context) : base(context)
+        public ItemTypeRepositoryForTest(DbContext context) : base(context)
         {
         }
     }

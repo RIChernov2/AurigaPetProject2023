@@ -11,7 +11,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
     {
 
         private readonly IUnitOfWork _uow;
-
         public ItemStorageManager(IUnitOfWork uow)
         {
             _uow = uow;
@@ -87,8 +86,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result1 + result2;
         }
-
-
         public List<ItemWithDisableInfo> GetDisabled()
         {
             List<ItemWithDisableInfo> result = new List<ItemWithDisableInfo>();
@@ -101,7 +98,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-
         public List<ItemWithRepairingInfoInfo> GetRepairing()
         {
             List<ItemWithRepairingInfoInfo> result = new List<ItemWithRepairingInfoInfo>();
@@ -114,7 +110,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-
         public List<Item> GetAvailiable()
         {
             List<Item> result = new List<Item>();
@@ -127,7 +122,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-
         public List<ItemWithRentInfo> GetInRent()
         {
             List<ItemWithRentInfo> result = new List<ItemWithRentInfo>();
@@ -140,7 +134,5 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-
-
     }
 }

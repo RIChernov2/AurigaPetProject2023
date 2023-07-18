@@ -1,5 +1,4 @@
-﻿using AurigaPetProject2023.DataAccess.Entities;
-using AurigaPetProject2023.DataAccess.Managers.Interfaces;
+﻿using AurigaPetProject2023.DataAccess.Managers.Interfaces;
 using AurigaPetProject2023.DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +9,10 @@ namespace AurigaPetProject2023.DataAccess.Managers
     public class UsersStorageManager: IUsersStorageManager
     {
         private readonly IUnitOfWork _uow;
-
         public UsersStorageManager(IUnitOfWork uow)
         {
             _uow = uow;
         }
-
         public IUserResponseInfo GetUserForLogin(IUserLoginInfo info)
         {
             IUserResponseInfo result = null;
@@ -28,7 +25,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
 
             return result;
         }
-
         public List<IUserWithDiscountInfo> GetUsersWithDiscountInfo()
         {
             List<IUserWithDiscountInfo> result = new List<IUserWithDiscountInfo>();

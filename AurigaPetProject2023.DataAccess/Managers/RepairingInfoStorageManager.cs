@@ -7,12 +7,10 @@ namespace AurigaPetProject2023.DataAccess.Managers
     public class RepairingInfoStorageManager : IRepairingInfoStorageManager
     {
         private readonly IUnitOfWork _uow;
-
         public RepairingInfoStorageManager(IUnitOfWork uow)
         {
             _uow = uow;
         }
-
         public int Create(RepairingInfo entity)
         {
             int result = 0;

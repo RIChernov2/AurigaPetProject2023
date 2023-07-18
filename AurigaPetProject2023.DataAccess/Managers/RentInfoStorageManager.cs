@@ -7,7 +7,6 @@ namespace AurigaPetProject2023.DataAccess.Managers
     public class RentInfoStorageManager : IRentInfoStorageManager
     {
         private readonly IUnitOfWork _uow;
-
         public RentInfoStorageManager(IUnitOfWork uow)
         {
             _uow = uow;

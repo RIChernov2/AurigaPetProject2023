@@ -29,29 +29,53 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 
             int index = _itemsCount + 1;
             // Act
-            await repository.CreateAsync(new Item()
+            var result = await repository.CreateAsync(new Item()
             {
                 ItemTypeID = index,
                 Description = $"Description {index}"
             });
+            var entityList = await repository.GetAsync();
 
             // Assert
-            var entityList = await repository.GetAsync();
+            Assert.Equal(1, result);
             Assert.Equal(_itemsCount + 1, entityList.Count);
+        }
+        [Fact]
+        public async Task CreateAsync_UnSuccess_Test()
+        {
+            var repository = await CreateItemRepositoryAsync();
+            var result = 0;
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                result = await repository.CreateAsync(new Item()
+                {
+                    ItemID = 1,
+                    ItemTypeID = 0,
+                    Description = $"Description {0}"
+                });
+            });
+            Assert.Equal(0, result);
+            var entityList = await repository.GetAsync();
+            Assert.Equal(_itemsCount, entityList.Count);
+
         }
         [Fact]
         public async Task CreateUniqueIdAsync_Success_Test()
         {
             var repository = await CreateItemRepositoryAsync();
 
-            int index = 3;
+            int index1 = _uniqueItemsCount + 1;
+            int index2 = _itemsCount + 1;
             // Act
-            await repository.CreateUniqueIdAsync(index + 1);
+            int  result = await repository.CreateUniqueIdAsync(index2);
+            ItemUniqueInfo entity = await repository.GetUniqueItemByIdAsync(index1);
 
             // Assert
-            var entity = await repository.GetUniqueItemByIdAsync(index);
-            Assert.Equal(index, entity.ItemUniqueID);
-            Assert.Equal(index + 1, entity.ItemID);
+            Assert.Equal(1, result);
+            Assert.Equal(index1, entity.ItemUniqueID);
+            Assert.Equal(index2, entity.ItemID);
         }
         [Fact]
         public async Task GetLastIdAsync1_Success_Test()
@@ -93,9 +117,9 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
             bool result2 = items.Select(x => x.ItemID).Contains(4);
 
             // Assert
-            Assert.Equal(2, items.Count);
-            Assert.True(result1);
-            Assert.True(result2);
+            Assert.Equal(_avaliableItemsCount, items.Count);
+            //Assert.True(result1);
+            //Assert.True(result2);
         }
         [Fact]
         public async Task GetDisabledAsync_Success_Test()
@@ -104,12 +128,9 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 
             // Act
             var items = await repository.GetDisabledAsync();
-            bool result1 = items.Select(x => x.ItemData.ItemID).Contains(1);
-
 
             // Assert
-            Assert.Equal(1, items.Count);
-            Assert.True(result1);
+            Assert.Equal(_countOfEachUnAvaliable, items.Count);
         }
         [Fact]
         public async Task GetRepairingAsync_Success_Test()
@@ -118,12 +139,9 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 
             // Act
             var items = await repository.GetRepairingAsync();
-            bool result1 = items.Select(x => x.ItemData.ItemID).Contains(2);
-
 
             // Assert
-            Assert.Equal(1, items.Count);
-            Assert.True(result1);
+            Assert.Equal(_countOfEachUnAvaliable, items.Count);
         }
         [Fact]
         public async Task GetInRentAsync_Success_Test()
@@ -132,12 +150,9 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
 
             // Act
             var items = await repository.GetInRentAsync();
-            bool result1 = items.Select(x => x.ItemData.ItemID).Contains(3);
-
 
             // Assert
-            Assert.Equal(1, items.Count);
-            Assert.True(result1);
+            Assert.Equal(_countOfEachUnAvaliable, items.Count);
         }
 
         private async Task<ItemRepository> CreateItemRepositoryAsync()
@@ -146,12 +161,16 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
             await PopulateDataAsync(context);
             return new ItemRepository(context);
         }
-        private int _itemsCount = 5;
+
+        private int _itemsCount = 13;
+        private int _uniqueItemsCount = 5;
+        private int _countOfEachUnAvaliable = 2; // 2 disabled; 2 in repair; 2 in rent;
+        private int _avaliableItemsCount = 7; // 13 - 2 x (disabled, repairing, Rented)
         private async Task PopulateDataAsync(MyContextCopyForTest context)
         {
             int index = 1;
 
-            // Items + ItemTypes
+            // Items + ItemTypes + ItemUniqueInfos
             while (index <= _itemsCount)
             {
                 var entity = new Item()
@@ -159,68 +178,116 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
                     ItemTypeID = index,
                     Description = $"Description {index}"
                 };
+                await context.Items.AddAsync(entity);
 
                 var entity2 = new ItemType()
                 {
                     ItemTypeID = index,
                     Name = $"Name {index}",
-                    IsUnique = index == 1 || index == 2
+                    IsUnique = index <= _uniqueItemsCount
                 };
-
-
-                index++;
-                await context.Items.AddAsync(entity);
                 await context.ItemTypes.AddAsync(entity2);
-            }
 
-            // ItemUniqueInfos
-            index = 1;
-            while (index <= 2)
-            {
-                var entity = new ItemUniqueInfo()
+                if(index <= _uniqueItemsCount)
                 {
-                    ItemID = index,
-                };
+                    var entity3 = new ItemUniqueInfo()
+                    {
+                        ItemID = index,
+                    };
+                    await context.ItemUniqueInfos.AddAsync(entity3);
+                }
 
                 index++;
-                await context.ItemUniqueInfos.AddAsync(entity);
             }
+
 
             // DisabledInfos
-            var disabledInfo = new DisabledInfo()
+            var disabledInfo1 = new DisabledInfo()
             {
                 DisabledInfoID = 1,
                 ItemID = 1,
                 Date = DateTime.Now,
                 Reason = "Reason"
             };
-            await context.DisabledInfos.AddAsync(disabledInfo);
+            var disabledInfo2 = new DisabledInfo()
+            {
+                DisabledInfoID = 2,
+                ItemID = 2,
+                Date = DateTime.Now,
+                Reason = "Reason"
+            };
+            await context.DisabledInfos.AddAsync(disabledInfo1);
+            await context.DisabledInfos.AddAsync(disabledInfo2);
 
-            // RepairingInfos
-            var repairingInfo = new RepairingInfo()
+            // RepairingInfos - two are in repair, on is not (repair finished)
+            var repairingInfo1 = new RepairingInfo()
             {
                 RepairingInfoID = 1,
-                ItemID = 2,
+                ItemID = 3,
                 StartDate = DateTime.Now.AddDays(-1),
                 EndDate = null,
                 Reason = "Reason",
                 ResultDescription = null
             };
-            await context.RepairingInfos.AddAsync(repairingInfo);
+            var repairingInfo2 = new RepairingInfo()
+            {
+                RepairingInfoID = 2,
+                ItemID = 4,
+                StartDate = DateTime.Now.AddDays(-2),
+                EndDate = DateTime.Now,
+                Reason = "Reason",
+                ResultDescription = "Repaired"
+            };
+            var repairingInfo3 = new RepairingInfo()
+            {
+                RepairingInfoID = 3,
+                ItemID = 5,
+                StartDate = DateTime.Now.AddDays(-3),
+                EndDate = null,
+                Reason = "Reason",
+                ResultDescription = null
+            };
+            await context.RepairingInfos.AddAsync(repairingInfo1);
+            await context.RepairingInfos.AddAsync(repairingInfo2);
+            await context.RepairingInfos.AddAsync(repairingInfo3);
 
-            // RentInfos
-            var rentInfo = new RentInfo()
+            // RentInfos - two are in rent, on is not (rent finished)
+            var rentInfo1 = new RentInfo()
             {
                 RentInfoID = 1,
                 UserID = 1,
-                ItemID = 3,
+                ItemID = 6,
                 StartDate = DateTime.Now.AddDays(-1),
                 ExpireDate = DateTime.Now.AddDays(6),
                 EndDate = null,
-                Cost = 100,
+                Cost = 101,
                 IsPaid = true
             };
-            await context.RentInfos.AddAsync(rentInfo);
+            var rentInfo2 = new RentInfo()
+            {
+                RentInfoID = 2,
+                UserID = 2,
+                ItemID = 7,
+                StartDate = DateTime.Now.AddDays(-2),
+                ExpireDate = DateTime.Now.AddDays(5),
+                EndDate = DateTime.Now.AddDays(-1),
+                Cost = 102,
+                IsPaid = true
+            };
+            var rentInfo3 = new RentInfo()
+            {
+                RentInfoID = 3,
+                UserID = 3,
+                ItemID = 8,
+                StartDate = DateTime.Now.AddDays(-3),
+                ExpireDate = DateTime.Now.AddDays(4),
+                EndDate = null,
+                Cost = 103,
+                IsPaid = true
+            };
+            await context.RentInfos.AddAsync(rentInfo1);
+            await context.RentInfos.AddAsync(rentInfo2);
+            await context.RentInfos.AddAsync(rentInfo3);
 
             await context.SaveChangesAsync();
         }

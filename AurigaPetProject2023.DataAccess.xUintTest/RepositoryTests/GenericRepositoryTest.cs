@@ -110,11 +110,11 @@ namespace AurigaPetProject2023.DataAccess.xUintTest.RepositoryTests
             Assert.Equal(2, entityList.Count);
         }
 
-        private async Task<ItemTypeRepositoryTest> CreateRepositoryAsync()
+        private async Task<ItemTypeRepositoryForTest> CreateRepositoryAsync()
         {
             MyContextCopyForTest context = new MyContextCopyForTest(_dbContextOptions);
             await PopulateDataAsync(context);
-            return new ItemTypeRepositoryTest(context);
+            return new ItemTypeRepositoryForTest(context);
         }
         private async Task PopulateDataAsync(MyContextCopyForTest context)
         {

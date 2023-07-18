@@ -53,7 +53,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
             modelBuilder.Entity<User>().Property(x => x.LoginName).HasColumnName("Login_Name");
             modelBuilder.Entity<User>().Ignore(u => u.Roles);
 
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
         }
 
         private void SetBannedInfoSettings(ModelBuilder modelBuilder)
@@ -104,7 +104,8 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         {
             modelBuilder.Entity<Role>().Property(x => x.UserID).HasColumnName("User_ID");
             modelBuilder.Entity<Role>().Property(x => x.RoleTypeID).HasColumnName("RoleType_ID");
-            modelBuilder.Entity<Role>().HasNoKey();
+            //modelBuilder.Entity<Role>().HasNoKey();
+            modelBuilder.Entity<Role>().HasKey(x => new { x.UserID, x.RoleTypeID });
         }
     }
 }
