@@ -25,6 +25,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
                 .WithColumn("User_ID").AsInt32().NotNullable()
                 .WithColumn("RoleType_ID").AsInt32().NotNullable();
 
+            Create.PrimaryKey("PK_Roles").OnTable("Roles").Columns("User_ID", "RoleType_ID");
 
             Create.ForeignKey("FK_Roles_Users_User_ID")
                 .FromTable("Roles").ForeignColumn("User_ID")
