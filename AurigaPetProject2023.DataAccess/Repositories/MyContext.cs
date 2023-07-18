@@ -33,10 +33,7 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         {
             SetBannedInfoSettings(modelBuilder);
             SetDisabledInfoSettings(modelBuilder);
-
-            modelBuilder.Entity<DiscountInfo>().Property(x => x.UserID).HasColumnName("User_ID");
-            modelBuilder.Entity<DiscountInfo>().HasNoKey();
-
+            SetDiscountInfoSettings(modelBuilder);
             SetItemSettings(modelBuilder);
 
             modelBuilder.Entity<ItemType>().Property(x => x.ItemTypeID).HasColumnName("ItemType_ID");
@@ -55,7 +52,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories
 
             //base.OnModelCreating(modelBuilder);
         }
-
         private void SetBannedInfoSettings(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BannedInfo>().HasKey(x => x.BannedInfoID);
@@ -67,6 +63,12 @@ namespace AurigaPetProject2023.DataAccess.Repositories
             modelBuilder.Entity<DisabledInfo>().HasKey(x => x.DisabledInfoID);
             modelBuilder.Entity<DisabledInfo>().Property(x => x.DisabledInfoID).HasColumnName("DisabledInfo_ID");
             modelBuilder.Entity<DisabledInfo>().Property(x => x.ItemID).HasColumnName("Item_ID");
+        }
+        private void SetDiscountInfoSettings(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DiscountInfo>().HasKey(x => x.DiscountInfoID);
+            modelBuilder.Entity<DiscountInfo>().Property(x => x.DiscountInfoID).HasColumnName("DiscountInfo_ID");
+            modelBuilder.Entity<DiscountInfo>().Property(x => x.UserID).HasColumnName("User_ID");
         }
         private void SetItemSettings(ModelBuilder modelBuilder)
         {
@@ -104,7 +106,6 @@ namespace AurigaPetProject2023.DataAccess.Repositories
         {
             modelBuilder.Entity<Role>().Property(x => x.UserID).HasColumnName("User_ID");
             modelBuilder.Entity<Role>().Property(x => x.RoleTypeID).HasColumnName("RoleType_ID");
-            //modelBuilder.Entity<Role>().HasNoKey();
             modelBuilder.Entity<Role>().HasKey(x => new { x.UserID, x.RoleTypeID });
         }
     }

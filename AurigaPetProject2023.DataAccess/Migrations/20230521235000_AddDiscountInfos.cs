@@ -9,6 +9,7 @@ namespace AurigaPetProject2023.DataAccess.Migrations
         public override void Up()
         {
             Create.Table("DiscountInfos")
+                .WithColumn("DiscountInfo_ID").AsInt32().PrimaryKey().NotNullable().Identity()
                 .WithColumn("User_ID").AsInt32().NotNullable()
                 .ForeignKey("FK_DiscountInfos_Users_User_ID", "Users", "User_ID")
                 .OnDeleteOrUpdate(Rule.Cascade)
