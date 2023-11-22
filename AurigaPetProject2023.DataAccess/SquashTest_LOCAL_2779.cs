@@ -17,8 +17,6 @@ namespace AurigaPetProject2023.DataAccess
         // изм5
 
         // пришлось доделать
-
-        // пришлось еще доделать
         
     }
 }
