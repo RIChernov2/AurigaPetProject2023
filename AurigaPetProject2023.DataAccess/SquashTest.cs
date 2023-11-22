@@ -8,7 +8,13 @@ namespace AurigaPetProject2023.DataAccess
 {
     public class SquashTest
     {
-        //squash2
-        //squash3
+        //t1
+        //t2
+        //t3
+        //t4
+        //t5
+
+        // закончил работу
+        
     }
 }
